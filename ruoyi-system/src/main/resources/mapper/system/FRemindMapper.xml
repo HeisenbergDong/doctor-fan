@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FRemindMapper">
+    
+    <resultMap type="FRemind" id="FRemindResult">
+        <result property="id"    column="id"    />
+        <result property="remindDate"    column="remind_date"    />
+        <result property="remindContent"    column="remind_content"    />
+        <result property="patientId"    column="patient_id"    />
+        <result property="patientName"    column="patient_name"    />
+        <result property="patientPhone"    column="patient_phone"    />
+        <result property="patientIdCard"    column="patient_id_card"    />
+        <result property="docId"    column="doc_id"    />
+        <result property="docName"    column="doc_name"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFRemindVo">
+        select id, remind_date, remind_content, patient_id, patient_name, patient_phone, patient_id_card, doc_id, doc_name, del_flag, create_by, create_time, update_by, update_time, remark from f_remind
+    </sql>
+
+    <select id="selectFRemindList" parameterType="FRemind" resultMap="FRemindResult">
+        <include refid="selectFRemindVo"/>
+        <where>  
+            <if test="remindDate != null "> and remind_date = #{remindDate}</if>
+            <if test="remindContent != null  and remindContent != ''"> and remind_content = #{remindContent}</if>
+            <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="patientName != null  and patientName != ''"> and patient_name like concat('%', #{patientName}, '%')</if>
+            <if test="patientPhone != null  and patientPhone != ''"> and patient_phone = #{patientPhone}</if>
+            <if test="patientIdCard != null  and patientIdCard != ''"> and patient_id_card = #{patientIdCard}</if>
+            <if test="docId != null "> and doc_id = #{docId}</if>
+            <if test="docName != null  and docName != ''"> and doc_name like concat('%', #{docName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectFRemindById" parameterType="Long" resultMap="FRemindResult">
+        <include refid="selectFRemindVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFRemind" parameterType="FRemind">
+        insert into f_remind
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="remindDate != null">remind_date,</if>
+            <if test="remindContent != null">remind_content,</if>
+            <if test="patientId != null">patient_id,</if>
+            <if test="patientName != null">patient_name,</if>
+            <if test="patientPhone != null">patient_phone,</if>
+            <if test="patientIdCard != null">patient_id_card,</if>
+            <if test="docId != null">doc_id,</if>
+            <if test="docName != null">doc_name,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="remindDate != null">#{remindDate},</if>
+            <if test="remindContent != null">#{remindContent},</if>
+            <if test="patientId != null">#{patientId},</if>
+            <if test="patientName != null">#{patientName},</if>
+            <if test="patientPhone != null">#{patientPhone},</if>
+            <if test="patientIdCard != null">#{patientIdCard},</if>
+            <if test="docId != null">#{docId},</if>
+            <if test="docName != null">#{docName},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFRemind" parameterType="FRemind">
+        update f_remind
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="remindDate != null">remind_date = #{remindDate},</if>
+            <if test="remindContent != null">remind_content = #{remindContent},</if>
+            <if test="patientId != null">patient_id = #{patientId},</if>
+            <if test="patientName != null">patient_name = #{patientName},</if>
+            <if test="patientPhone != null">patient_phone = #{patientPhone},</if>
+            <if test="patientIdCard != null">patient_id_card = #{patientIdCard},</if>
+            <if test="docId != null">doc_id = #{docId},</if>
+            <if test="docName != null">doc_name = #{docName},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFRemindById" parameterType="Long">
+        delete from f_remind where id = #{id}
+    </delete>
+
+    <delete id="deleteFRemindByIds" parameterType="String">
+        delete from f_remind where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FRoomMapper">
+    
+    <resultMap type="FRoom" id="FRoomResult">
+        <result property="id"    column="id"    />
+        <result property="room"    column="room"    />
+        <result property="roomName"    column="room_name"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFRoomVo">
+        select id, room, room_name, del_flag, create_by, create_time, update_by, update_time, remark from f_room
+    </sql>
+
+    <select id="selectFRoomList" parameterType="FRoom" resultMap="FRoomResult">
+        <include refid="selectFRoomVo"/>
+        <where>  
+            <if test="room != null  and room != ''"> and room = #{room}</if>
+            <if test="roomName != null  and roomName != ''"> and room_name like concat('%', #{roomName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectFRoomById" parameterType="Long" resultMap="FRoomResult">
+        <include refid="selectFRoomVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFRoom" parameterType="FRoom">
+        insert into f_room
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="room != null and room != ''">room,</if>
+            <if test="roomName != null and roomName != ''">room_name,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="room != null and room != ''">#{room},</if>
+            <if test="roomName != null and roomName != ''">#{roomName},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFRoom" parameterType="FRoom">
+        update f_room
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="room != null and room != ''">room = #{room},</if>
+            <if test="roomName != null and roomName != ''">room_name = #{roomName},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFRoomById" parameterType="Long">
+        delete from f_room where id = #{id}
+    </delete>
+
+    <delete id="deleteFRoomByIds" parameterType="String">
+        delete from f_room where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

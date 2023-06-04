@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FFormFileMapper">
+    
+    <resultMap type="FFormFile" id="FFormFileResult">
+        <result property="id"    column="id"    />
+        <result property="formId"    column="form_id"    />
+        <result property="fileId"    column="file_id"    />
+    </resultMap>
+
+    <sql id="selectFFormFileVo">
+        select id, form_id, file_id from f_form_file
+    </sql>
+
+    <select id="selectFFormFileList" parameterType="FFormFile" resultMap="FFormFileResult">
+        <include refid="selectFFormFileVo"/>
+        <where>  
+            <if test="formId != null "> and form_id = #{formId}</if>
+            <if test="fileId != null "> and file_id = #{fileId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFFormFileById" parameterType="Long" resultMap="FFormFileResult">
+        <include refid="selectFFormFileVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFFormFile" parameterType="FFormFile">
+        insert into f_form_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="formId != null">form_id,</if>
+            <if test="fileId != null">file_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="formId != null">#{formId},</if>
+            <if test="fileId != null">#{fileId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFFormFile" parameterType="FFormFile">
+        update f_form_file
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="formId != null">form_id = #{formId},</if>
+            <if test="fileId != null">file_id = #{fileId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFFormFileById" parameterType="Long">
+        delete from f_form_file where id = #{id}
+    </delete>
+
+    <delete id="deleteFFormFileByIds" parameterType="String">
+        delete from f_form_file where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

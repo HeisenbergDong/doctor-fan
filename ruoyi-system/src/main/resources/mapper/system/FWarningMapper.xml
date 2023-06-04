@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FWarningMapper">
+    
+    <resultMap type="FWarning" id="FWarningResult">
+        <result property="id"    column="id"    />
+        <result property="warningType"    column="warning_type"    />
+        <result property="num"    column="num"    />
+        <result property="warningDate"    column="warning_date"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFWarningVo">
+        select id, warning_type, num, warning_date, del_flag, create_by, create_time, update_by, update_time, remark from f_warning
+    </sql>
+
+    <select id="selectFWarningList" parameterType="FWarning" resultMap="FWarningResult">
+        <include refid="selectFWarningVo"/>
+        <where>  
+            <if test="warningType != null  and warningType != ''"> and warning_type = #{warningType}</if>
+            <if test="num != null "> and num = #{num}</if>
+            <if test="warningDate != null "> and warning_date = #{warningDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectFWarningById" parameterType="Long" resultMap="FWarningResult">
+        <include refid="selectFWarningVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFWarning" parameterType="FWarning">
+        insert into f_warning
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="warningType != null and warningType != ''">warning_type,</if>
+            <if test="num != null">num,</if>
+            <if test="warningDate != null">warning_date,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="warningType != null and warningType != ''">#{warningType},</if>
+            <if test="num != null">#{num},</if>
+            <if test="warningDate != null">#{warningDate},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFWarning" parameterType="FWarning">
+        update f_warning
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="warningType != null and warningType != ''">warning_type = #{warningType},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="warningDate != null">warning_date = #{warningDate},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFWarningById" parameterType="Long">
+        delete from f_warning where id = #{id}
+    </delete>
+
+    <delete id="deleteFWarningByIds" parameterType="String">
+        delete from f_warning where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

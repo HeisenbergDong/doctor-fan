@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FWaitMapper">
+    
+    <resultMap type="FWait" id="FWaitResult">
+        <result property="id"    column="id"    />
+        <result property="regNo"    column="reg_no"    />
+        <result property="patientId"    column="patient_id"    />
+        <result property="patientName"    column="patient_name"    />
+        <result property="patientPhone"    column="patient_phone"    />
+        <result property="patientStatus"    column="patient_status"    />
+        <result property="waitTime"    column="wait_time"    />
+        <result property="room"    column="room"    />
+        <result property="adjustTime"    column="adjust_time"    />
+        <result property="adjustDocId"    column="adjust_doc_id"    />
+        <result property="adjustDocName"    column="adjust_doc_name"    />
+        <result property="receptionDocId"    column="reception_doc_id"    />
+        <result property="receptionDocName"    column="reception_doc_name"    />
+        <result property="assignDocId"    column="assign_doc_id"    />
+        <result property="assignDocName"    column="assign_doc_name"    />
+        <result property="assignContent"    column="assign_content"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFWaitVo">
+        select id, reg_no, patient_id, patient_name, patient_phone, patient_status, wait_time, room, adjust_time, adjust_doc_id, adjust_doc_name, reception_doc_id, reception_doc_name, assign_doc_id, assign_doc_name, assign_content, parent_id, del_flag, create_by, create_time, update_by, update_time, remark from f_wait
+    </sql>
+
+    <select id="selectFWaitList" parameterType="FWait" resultMap="FWaitResult">
+        <include refid="selectFWaitVo"/>
+        <where>
+            <if test="regNo != null  and regNo != ''"> and reg_no = #{regNo}</if>
+            <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="patientName != null  and patientName != ''"> and patient_name like concat('%', #{patientName}, '%')</if>
+            <if test="patientPhone != null  and patientPhone != ''"> and patient_phone = #{patientPhone}</if>
+            <if test="patientStatus != null  and patientStatus != ''"> and patient_status = #{patientStatus}</if>
+            <if test="waitTime != null "> and wait_time = #{waitTime}</if>
+            <if test="room != null  and room != ''"> and room = #{room}</if>
+            <if test="adjustTime != null "> and adjust_time = #{adjustTime}</if>
+            <if test="adjustDocId != null "> and adjust_doc_id = #{adjustDocId}</if>
+            <if test="adjustDocName != null  and adjustDocName != ''"> and adjust_doc_name like concat('%', #{adjustDocName}, '%')</if>
+            <if test="receptionDocId != null "> and reception_doc_id = #{receptionDocId}</if>
+            <if test="receptionDocName != null  and receptionDocName != ''"> and reception_doc_name like concat('%', #{receptionDocName}, '%')</if>
+            <if test="assignDocId != null "> and assign_doc_id = #{assignDocId}</if>
+            <if test="assignDocName != null  and assignDocName != ''"> and assign_doc_name like concat('%', #{assignDocName}, '%')</if>
+            <if test="assignContent != null  and assignContent != ''"> and assign_content = #{assignContent}</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFWaitById" parameterType="Long" resultMap="FWaitResult">
+        <include refid="selectFWaitVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFWait" parameterType="FWait" keyProperty="id" useGeneratedKeys="true" keyColumn="id">
+        insert into f_wait
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="regNo != null and regNo != ''">reg_no,</if>
+            <if test="id != null">id,</if>
+            <if test="patientId != null">patient_id,</if>
+            <if test="patientName != null">patient_name,</if>
+            <if test="patientPhone != null">patient_phone,</if>
+            <if test="patientStatus != null and patientStatus != ''">patient_status,</if>
+            <if test="waitTime != null">wait_time,</if>
+            <if test="room != null and room != ''">room,</if>
+            <if test="adjustTime != null">adjust_time,</if>
+            <if test="adjustDocId != null">adjust_doc_id,</if>
+            <if test="adjustDocName != null">adjust_doc_name,</if>
+            <if test="receptionDocId != null">reception_doc_id,</if>
+            <if test="receptionDocName != null">reception_doc_name,</if>
+            <if test="assignDocId != null">assign_doc_id,</if>
+            <if test="assignDocName != null">assign_doc_name,</if>
+            <if test="assignContent != null">assign_content,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="regNo != null and regNo != ''">#{regNo},</if>
+            <if test="id != null">#{id},</if>
+            <if test="patientId != null">#{patientId},</if>
+            <if test="patientName != null">#{patientName},</if>
+            <if test="patientPhone != null">#{patientPhone},</if>
+            <if test="patientStatus != null and patientStatus != ''">#{patientStatus},</if>
+            <if test="waitTime != null">#{waitTime},</if>
+            <if test="room != null and room != ''">#{room},</if>
+            <if test="adjustTime != null">#{adjustTime},</if>
+            <if test="adjustDocId != null">#{adjustDocId},</if>
+            <if test="adjustDocName != null">#{adjustDocName},</if>
+            <if test="receptionDocId != null">#{receptionDocId},</if>
+            <if test="receptionDocName != null">#{receptionDocName},</if>
+            <if test="assignDocId != null">#{assignDocId},</if>
+            <if test="assignDocName != null">#{assignDocName},</if>
+            <if test="assignContent != null">#{assignContent},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFWait" parameterType="FWait">
+        update f_wait
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="regNo != null and regNo != ''">reg_no = #{regNo},</if>
+            <if test="patientId != null">patient_id = #{patientId},</if>
+            <if test="patientName != null">patient_name = #{patientName},</if>
+            <if test="patientPhone != null">patient_phone = #{patientPhone},</if>
+            <if test="patientStatus != null and patientStatus != ''">patient_status = #{patientStatus},</if>
+            <if test="waitTime != null">wait_time = #{waitTime},</if>
+            <if test="room != null and room != ''">room = #{room},</if>
+            <if test="adjustTime != null">adjust_time = #{adjustTime},</if>
+            <if test="adjustDocId != null">adjust_doc_id = #{adjustDocId},</if>
+            <if test="adjustDocName != null">adjust_doc_name = #{adjustDocName},</if>
+            <if test="receptionDocId != null">reception_doc_id = #{receptionDocId},</if>
+            <if test="receptionDocName != null">reception_doc_name = #{receptionDocName},</if>
+            <if test="assignDocId != null">assign_doc_id = #{assignDocId},</if>
+            <if test="assignDocName != null">assign_doc_name = #{assignDocName},</if>
+            <if test="assignContent != null">assign_content = #{assignContent},</if>
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFWaitById" parameterType="Long">
+        delete from f_wait where id = #{id}
+    </delete>
+
+    <delete id="deleteFWaitByIds" parameterType="String">
+        delete from f_wait where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

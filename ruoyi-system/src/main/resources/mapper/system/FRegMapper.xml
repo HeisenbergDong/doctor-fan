@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FRegMapper">
+    
+    <resultMap type="FReg" id="FRegResult">
+        <result property="id"    column="id"    />
+        <result property="regNo"    column="reg_no"    />
+        <result property="name"    column="name"    />
+        <result property="phone"    column="phone"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="regDate"    column="reg_date"    />
+        <result property="regFee"    column="reg_fee"    />
+        <result property="checkFee"    column="check_fee"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFRegVo">
+        select id, reg_no, name, phone, id_card, reg_date, reg_fee, check_fee, del_flag, create_by, create_time, update_by, update_time, remark from f_reg
+    </sql>
+
+    <select id="selectFRegList" parameterType="FReg" resultMap="FRegResult">
+        <include refid="selectFRegVo"/>
+        <where>  
+            <if test="regNo != null  and regNo != ''"> and reg_no = #{regNo}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="regDate != null "> and reg_date = #{regDate}</if>
+            <if test="regFee != null "> and reg_fee = #{regFee}</if>
+            <if test="checkFee != null "> and check_fee = #{checkFee}</if>
+        </where>
+    </select>
+    
+    <select id="selectFRegById" parameterType="Long" resultMap="FRegResult">
+        <include refid="selectFRegVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFReg" parameterType="FReg" keyProperty="id" useGeneratedKeys="true" keyColumn="id">
+        insert into f_reg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="regNo != null and regNo != ''">reg_no,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="regDate != null">reg_date,</if>
+            <if test="regFee != null">reg_fee,</if>
+            <if test="checkFee != null">check_fee,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="regNo != null and regNo != ''">#{regNo},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="regDate != null">#{regDate},</if>
+            <if test="regFee != null">#{regFee},</if>
+            <if test="checkFee != null">#{checkFee},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFReg" parameterType="FReg">
+        update f_reg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="regNo != null and regNo != ''">reg_no = #{regNo},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="regDate != null">reg_date = #{regDate},</if>
+            <if test="regFee != null">reg_fee = #{regFee},</if>
+            <if test="checkFee != null">check_fee = #{checkFee},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFRegById" parameterType="Long">
+        delete from f_reg where id = #{id}
+    </delete>
+
+    <delete id="deleteFRegByIds" parameterType="String">
+        delete from f_reg where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectRegByMaxNo" resultMap="FRegResult">
+        select reg_no from f_reg order by id desc limit 1
+    </select>
+</mapper>

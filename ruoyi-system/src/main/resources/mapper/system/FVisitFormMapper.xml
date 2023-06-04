@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FVisitFormMapper">
+    
+    <resultMap type="FVisitForm" id="FVisitFormResult">
+        <result property="id"    column="id"    />
+        <result property="visitId"    column="visit_id"    />
+        <result property="formId"    column="form_id"    />
+    </resultMap>
+
+    <sql id="selectFVisitFormVo">
+        select id, visit_id, form_id from f_visit_form
+    </sql>
+
+    <select id="selectFVisitFormList" parameterType="FVisitForm" resultMap="FVisitFormResult">
+        <include refid="selectFVisitFormVo"/>
+        <where>  
+            <if test="visitId != null "> and visit_id = #{visitId}</if>
+            <if test="formId != null "> and form_id = #{formId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFVisitFormById" parameterType="Long" resultMap="FVisitFormResult">
+        <include refid="selectFVisitFormVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFVisitForm" parameterType="FVisitForm">
+        insert into f_visit_form
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="visitId != null">visit_id,</if>
+            <if test="formId != null">form_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="visitId != null">#{visitId},</if>
+            <if test="formId != null">#{formId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFVisitForm" parameterType="FVisitForm">
+        update f_visit_form
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="visitId != null">visit_id = #{visitId},</if>
+            <if test="formId != null">form_id = #{formId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFVisitFormById" parameterType="Long">
+        delete from f_visit_form where id = #{id}
+    </delete>
+
+    <delete id="deleteFVisitFormByIds" parameterType="String">
+        delete from f_visit_form where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FFormMapper">
+    
+    <resultMap type="FForm" id="FFormResult">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="patientId"    column="patient_id"    />
+        <result property="patientName"    column="patient_name"    />
+        <result property="patientPhone"    column="patient_phone"    />
+        <result property="patientIdCard"    column="patient_id_card"    />
+        <result property="docId"    column="doc_id"    />
+        <result property="docName"    column="doc_name"    />
+        <result property="formTime"    column="form_time"    />
+        <result property="formContent"    column="form_content"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFFormVo">
+        select id, type, patient_id, patient_name, patient_phone, patient_id_card, doc_id, doc_name, form_time, form_content, del_flag, create_by, create_time, update_by, update_time, remark from f_form
+    </sql>
+
+    <select id="selectFFormList" parameterType="FForm" resultMap="FFormResult">
+        <include refid="selectFFormVo"/>
+        <where>  
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="patientName != null  and patientName != ''"> and patient_name like concat('%', #{patientName}, '%')</if>
+            <if test="patientPhone != null  and patientPhone != ''"> and patient_phone = #{patientPhone}</if>
+            <if test="patientIdCard != null  and patientIdCard != ''"> and patient_id_card = #{patientIdCard}</if>
+            <if test="docId != null "> and doc_id = #{docId}</if>
+            <if test="docName != null  and docName != ''"> and doc_name like concat('%', #{docName}, '%')</if>
+            <if test="formTime != null "> and form_time = #{formTime}</if>
+            <if test="formContent != null  and formContent != ''"> and form_content = #{formContent}</if>
+        </where>
+    </select>
+    
+    <select id="selectFFormById" parameterType="Long" resultMap="FFormResult">
+        <include refid="selectFFormVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFForm" parameterType="FForm">
+        insert into f_form
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="type != null and type != ''">type,</if>
+            <if test="patientId != null">patient_id,</if>
+            <if test="patientName != null">patient_name,</if>
+            <if test="patientPhone != null">patient_phone,</if>
+            <if test="patientIdCard != null">patient_id_card,</if>
+            <if test="docId != null">doc_id,</if>
+            <if test="docName != null">doc_name,</if>
+            <if test="formTime != null">form_time,</if>
+            <if test="formContent != null">form_content,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="patientId != null">#{patientId},</if>
+            <if test="patientName != null">#{patientName},</if>
+            <if test="patientPhone != null">#{patientPhone},</if>
+            <if test="patientIdCard != null">#{patientIdCard},</if>
+            <if test="docId != null">#{docId},</if>
+            <if test="docName != null">#{docName},</if>
+            <if test="formTime != null">#{formTime},</if>
+            <if test="formContent != null">#{formContent},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFForm" parameterType="FForm">
+        update f_form
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="patientId != null">patient_id = #{patientId},</if>
+            <if test="patientName != null">patient_name = #{patientName},</if>
+            <if test="patientPhone != null">patient_phone = #{patientPhone},</if>
+            <if test="patientIdCard != null">patient_id_card = #{patientIdCard},</if>
+            <if test="docId != null">doc_id = #{docId},</if>
+            <if test="docName != null">doc_name = #{docName},</if>
+            <if test="formTime != null">form_time = #{formTime},</if>
+            <if test="formContent != null">form_content = #{formContent},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFFormById" parameterType="Long">
+        delete from f_form where id = #{id}
+    </delete>
+
+    <delete id="deleteFFormByIds" parameterType="String">
+        delete from f_form where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

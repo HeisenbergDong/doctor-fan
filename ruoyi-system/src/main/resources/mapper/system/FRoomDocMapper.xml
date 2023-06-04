@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FRoomDocMapper">
+    
+    <resultMap type="FRoomDoc" id="FRoomDocResult">
+        <result property="id"    column="id"    />
+        <result property="room"    column="room"    />
+        <result property="docId"    column="doc_id"    />
+    </resultMap>
+
+    <sql id="selectFRoomDocVo">
+        select id, room, doc_id from f_room_doc
+    </sql>
+
+    <select id="selectFRoomDocList" parameterType="FRoomDoc" resultMap="FRoomDocResult">
+        <include refid="selectFRoomDocVo"/>
+        <where>  
+            <if test="room != null  and room != ''"> and room = #{room}</if>
+            <if test="docId != null "> and doc_id = #{docId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFRoomDocById" parameterType="Long" resultMap="FRoomDocResult">
+        <include refid="selectFRoomDocVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFRoomDoc" parameterType="FRoomDoc">
+        insert into f_room_doc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="room != null and room != ''">room,</if>
+            <if test="docId != null">doc_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="room != null and room != ''">#{room},</if>
+            <if test="docId != null">#{docId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFRoomDoc" parameterType="FRoomDoc">
+        update f_room_doc
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="room != null and room != ''">room = #{room},</if>
+            <if test="docId != null">doc_id = #{docId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFRoomDocById" parameterType="Long">
+        delete from f_room_doc where id = #{id}
+    </delete>
+
+    <delete id="deleteFRoomDocByIds" parameterType="String">
+        delete from f_room_doc where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
