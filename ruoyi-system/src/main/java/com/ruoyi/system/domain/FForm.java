@@ -11,7 +11,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 单对象 f_form
  * 
  * @author ruoyi
- * @date 2023-05-23
+ * @date 2023-06-04
  */
 public class FForm extends BaseEntity
 {
@@ -19,6 +19,10 @@ public class FForm extends BaseEntity
 
     /** 表单id */
     private Long id;
+
+    /** 挂号号码 */
+    @Excel(name = "挂号号码")
+    private String regNo;
 
     /** 表单类型 */
     @Excel(name = "表单类型")
@@ -40,6 +44,10 @@ public class FForm extends BaseEntity
     @Excel(name = "患者证件号")
     private String patientIdCard;
 
+    /** 诊室 */
+    @Excel(name = "诊室")
+    private String room;
+
     /** 医生id */
     @Excel(name = "医生id")
     private Long docId;
@@ -49,8 +57,8 @@ public class FForm extends BaseEntity
     private String docName;
 
     /** 表单日期 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Excel(name = "表单日期", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "表单日期", width = 30, dateFormat = "yyyy-MM-dd")
     private Date formTime;
 
     /** 表单内容 */
@@ -68,6 +76,15 @@ public class FForm extends BaseEntity
     public Long getId() 
     {
         return id;
+    }
+    public void setRegNo(String regNo) 
+    {
+        this.regNo = regNo;
+    }
+
+    public String getRegNo() 
+    {
+        return regNo;
     }
     public void setType(String type) 
     {
@@ -113,6 +130,15 @@ public class FForm extends BaseEntity
     public String getPatientIdCard() 
     {
         return patientIdCard;
+    }
+    public void setRoom(String room) 
+    {
+        this.room = room;
+    }
+
+    public String getRoom() 
+    {
+        return room;
     }
     public void setDocId(Long docId) 
     {
@@ -164,11 +190,13 @@ public class FForm extends BaseEntity
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
+            .append("regNo", getRegNo())
             .append("type", getType())
             .append("patientId", getPatientId())
             .append("patientName", getPatientName())
             .append("patientPhone", getPatientPhone())
             .append("patientIdCard", getPatientIdCard())
+            .append("room", getRoom())
             .append("docId", getDocId())
             .append("docName", getDocName())
             .append("formTime", getFormTime())

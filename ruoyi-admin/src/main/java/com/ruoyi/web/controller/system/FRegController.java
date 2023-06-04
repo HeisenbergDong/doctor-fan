@@ -38,7 +38,7 @@ public class FRegController extends BaseController
     /**
      * 查询挂号列表
      */
-    @PreAuthorize("@ss.hasPermi('system:reg:list')")
+    @PreAuthorize("@ss.hasPermi('doc:reg:list')")
     @GetMapping("/list")
     public TableDataInfo list(FReg fReg)
     {
@@ -50,7 +50,7 @@ public class FRegController extends BaseController
     /**
      * 导出挂号列表
      */
-    @PreAuthorize("@ss.hasPermi('system:reg:export')")
+    @PreAuthorize("@ss.hasPermi('doc:reg:export')")
     @Log(title = "挂号", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FReg fReg)
@@ -63,7 +63,7 @@ public class FRegController extends BaseController
     /**
      * 获取挂号详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:reg:query')")
+    @PreAuthorize("@ss.hasPermi('doc:reg:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -73,7 +73,7 @@ public class FRegController extends BaseController
     /**
      * 新增挂号
      */
-    @PreAuthorize("@ss.hasPermi('system:reg:add')")
+    @PreAuthorize("@ss.hasPermi('doc:reg:add')")
     @Log(title = "挂号", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody @Validated FReg fReg)
@@ -86,7 +86,7 @@ public class FRegController extends BaseController
     /**
      * 修改挂号
      */
-    @PreAuthorize("@ss.hasPermi('system:reg:edit')")
+    @PreAuthorize("@ss.hasPermi('doc:reg:edit')")
     @Log(title = "挂号", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FReg fReg)
@@ -97,7 +97,7 @@ public class FRegController extends BaseController
     /**
      * 删除挂号
      */
-    @PreAuthorize("@ss.hasPermi('system:reg:remove')")
+    @PreAuthorize("@ss.hasPermi('doc:reg:remove')")
     @Log(title = "挂号", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

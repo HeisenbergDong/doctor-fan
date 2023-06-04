@@ -38,7 +38,7 @@ public class FWarningController extends BaseController
     /**
      * 查询提醒列表
      */
-    @PreAuthorize("@ss.hasPermi('system:warning:list')")
+    @PreAuthorize("@ss.hasPermi('doc:warning:list')")
     @GetMapping("/list")
     public TableDataInfo list(FWarning fWarning)
     {
@@ -50,7 +50,7 @@ public class FWarningController extends BaseController
     /**
      * 导出提醒列表
      */
-    @PreAuthorize("@ss.hasPermi('system:warning:export')")
+    @PreAuthorize("@ss.hasPermi('doc:warning:export')")
     @Log(title = "提醒", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FWarning fWarning)
@@ -63,7 +63,7 @@ public class FWarningController extends BaseController
     /**
      * 获取提醒详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:warning:query')")
+    @PreAuthorize("@ss.hasPermi('doc:warning:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -73,7 +73,7 @@ public class FWarningController extends BaseController
     /**
      * 新增提醒
      */
-    @PreAuthorize("@ss.hasPermi('system:warning:add')")
+    @PreAuthorize("@ss.hasPermi('doc:warning:add')")
     @Log(title = "提醒", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody @Validated FWarning fWarning) {
@@ -85,7 +85,7 @@ public class FWarningController extends BaseController
     /**
      * 修改提醒
      */
-    @PreAuthorize("@ss.hasPermi('system:warning:edit')")
+    @PreAuthorize("@ss.hasPermi('doc:warning:edit')")
     @Log(title = "提醒", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FWarning fWarning) {
@@ -96,7 +96,7 @@ public class FWarningController extends BaseController
     /**
      * 删除提醒
      */
-    @PreAuthorize("@ss.hasPermi('system:warning:remove')")
+    @PreAuthorize("@ss.hasPermi('doc:warning:remove')")
     @Log(title = "提醒", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

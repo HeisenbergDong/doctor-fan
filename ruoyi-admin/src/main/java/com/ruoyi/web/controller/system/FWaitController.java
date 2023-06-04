@@ -41,7 +41,7 @@ public class FWaitController extends BaseController
     /**
      * 查询排队列表
      */
-    @PreAuthorize("@ss.hasPermi('system:wait:list')")
+    @PreAuthorize("@ss.hasPermi('doc:wait:list')")
     @GetMapping("/list")
     public TableDataInfo list(FWait fWait)
     {
@@ -53,7 +53,7 @@ public class FWaitController extends BaseController
     /**
      * 导出排队列表
      */
-    @PreAuthorize("@ss.hasPermi('system:wait:export')")
+    @PreAuthorize("@ss.hasPermi('doc:wait:export')")
     @Log(title = "排队", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FWait fWait)
@@ -66,7 +66,7 @@ public class FWaitController extends BaseController
     /**
      * 获取排队详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:wait:query')")
+    @PreAuthorize("@ss.hasPermi('doc:wait:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -76,7 +76,7 @@ public class FWaitController extends BaseController
     /**
      * 新增排队
      */
-    @PreAuthorize("@ss.hasPermi('system:wait:add')")
+    @PreAuthorize("@ss.hasPermi('doc:wait:add')")
     @Log(title = "指派", businessType = BusinessType.INSERT)
     @PostMapping("/dispatch")
     public AjaxResult dispatch(@RequestBody @Validated FWait fWait){
@@ -88,7 +88,7 @@ public class FWaitController extends BaseController
     /**
      * 修改排队
      */
-    @PreAuthorize("@ss.hasPermi('system:wait:edit')")
+    @PreAuthorize("@ss.hasPermi('doc:wait:edit')")
     @Log(title = "叫号", businessType = BusinessType.UPDATE)
     @PostMapping("/call")
     public AjaxResult call(@RequestBody @Validated FWait fWait){
@@ -103,7 +103,7 @@ public class FWaitController extends BaseController
     /**
      * 删除排队
      */
-    @PreAuthorize("@ss.hasPermi('system:wait:remove')")
+    @PreAuthorize("@ss.hasPermi('doc:wait:remove')")
     @Log(title = "排队", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

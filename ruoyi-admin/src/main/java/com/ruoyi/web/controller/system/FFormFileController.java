@@ -37,7 +37,7 @@ public class FFormFileController extends BaseController
     /**
      * 查询单和文件关联关系列表
      */
-    @PreAuthorize("@ss.hasPermi('system:file:list')")
+    @PreAuthorize("@ss.hasPermi('doc:file:list')")
     @GetMapping("/list")
     public TableDataInfo list(FFormFile fFormFile)
     {
@@ -49,7 +49,7 @@ public class FFormFileController extends BaseController
     /**
      * 导出单和文件关联关系列表
      */
-    @PreAuthorize("@ss.hasPermi('system:file:export')")
+    @PreAuthorize("@ss.hasPermi('doc:file:export')")
     @Log(title = "单和文件关联关系", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FFormFile fFormFile)
@@ -62,7 +62,7 @@ public class FFormFileController extends BaseController
     /**
      * 获取单和文件关联关系详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:file:query')")
+    @PreAuthorize("@ss.hasPermi('doc:file:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +72,7 @@ public class FFormFileController extends BaseController
     /**
      * 新增单和文件关联关系
      */
-    @PreAuthorize("@ss.hasPermi('system:file:add')")
+    @PreAuthorize("@ss.hasPermi('doc:file:add')")
     @Log(title = "单和文件关联关系", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FFormFile fFormFile)
@@ -83,7 +83,7 @@ public class FFormFileController extends BaseController
     /**
      * 修改单和文件关联关系
      */
-    @PreAuthorize("@ss.hasPermi('system:file:edit')")
+    @PreAuthorize("@ss.hasPermi('doc:file:edit')")
     @Log(title = "单和文件关联关系", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FFormFile fFormFile)
@@ -94,7 +94,7 @@ public class FFormFileController extends BaseController
     /**
      * 删除单和文件关联关系
      */
-    @PreAuthorize("@ss.hasPermi('system:file:remove')")
+    @PreAuthorize("@ss.hasPermi('doc:file:remove')")
     @Log(title = "单和文件关联关系", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

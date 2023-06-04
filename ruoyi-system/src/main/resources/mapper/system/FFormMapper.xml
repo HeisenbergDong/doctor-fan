@@ -6,11 +6,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="FForm" id="FFormResult">
         <result property="id"    column="id"    />
+        <result property="regNo"    column="reg_no"    />
         <result property="type"    column="type"    />
         <result property="patientId"    column="patient_id"    />
         <result property="patientName"    column="patient_name"    />
         <result property="patientPhone"    column="patient_phone"    />
         <result property="patientIdCard"    column="patient_id_card"    />
+        <result property="room"    column="room"    />
         <result property="docId"    column="doc_id"    />
         <result property="docName"    column="doc_name"    />
         <result property="formTime"    column="form_time"    />
@@ -24,17 +26,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectFFormVo">
-        select id, type, patient_id, patient_name, patient_phone, patient_id_card, doc_id, doc_name, form_time, form_content, del_flag, create_by, create_time, update_by, update_time, remark from f_form
+        select id, reg_no, type, patient_id, patient_name, patient_phone, patient_id_card, room, doc_id, doc_name, form_time, form_content, del_flag, create_by, create_time, update_by, update_time, remark from f_form
     </sql>
 
     <select id="selectFFormList" parameterType="FForm" resultMap="FFormResult">
         <include refid="selectFFormVo"/>
         <where>  
+            <if test="regNo != null  and regNo != ''"> and reg_no = #{regNo}</if>
             <if test="type != null  and type != ''"> and type = #{type}</if>
             <if test="patientId != null "> and patient_id = #{patientId}</if>
             <if test="patientName != null  and patientName != ''"> and patient_name like concat('%', #{patientName}, '%')</if>
             <if test="patientPhone != null  and patientPhone != ''"> and patient_phone = #{patientPhone}</if>
             <if test="patientIdCard != null  and patientIdCard != ''"> and patient_id_card = #{patientIdCard}</if>
+            <if test="room != null  and room != ''"> and room = #{room}</if>
             <if test="docId != null "> and doc_id = #{docId}</if>
             <if test="docName != null  and docName != ''"> and doc_name like concat('%', #{docName}, '%')</if>
             <if test="formTime != null "> and form_time = #{formTime}</if>
@@ -47,15 +51,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
         
-    <insert id="insertFForm" parameterType="FForm">
+    <insert id="insertFForm" parameterType="FForm" useGeneratedKeys="true" keyProperty="id">
         insert into f_form
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
+            <if test="regNo != null and regNo != ''">reg_no,</if>
             <if test="type != null and type != ''">type,</if>
             <if test="patientId != null">patient_id,</if>
             <if test="patientName != null">patient_name,</if>
             <if test="patientPhone != null">patient_phone,</if>
             <if test="patientIdCard != null">patient_id_card,</if>
+            <if test="room != null and room != ''">room,</if>
             <if test="docId != null">doc_id,</if>
             <if test="docName != null">doc_name,</if>
             <if test="formTime != null">form_time,</if>
@@ -68,12 +73,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">remark,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
+            <if test="regNo != null and regNo != ''">#{regNo},</if>
             <if test="type != null and type != ''">#{type},</if>
             <if test="patientId != null">#{patientId},</if>
             <if test="patientName != null">#{patientName},</if>
             <if test="patientPhone != null">#{patientPhone},</if>
             <if test="patientIdCard != null">#{patientIdCard},</if>
+            <if test="room != null and room != ''">#{room},</if>
             <if test="docId != null">#{docId},</if>
             <if test="docName != null">#{docName},</if>
             <if test="formTime != null">#{formTime},</if>
@@ -90,11 +96,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateFForm" parameterType="FForm">
         update f_form
         <trim prefix="SET" suffixOverrides=",">
+            <if test="regNo != null and regNo != ''">reg_no = #{regNo},</if>
             <if test="type != null and type != ''">type = #{type},</if>
             <if test="patientId != null">patient_id = #{patientId},</if>
             <if test="patientName != null">patient_name = #{patientName},</if>
             <if test="patientPhone != null">patient_phone = #{patientPhone},</if>
             <if test="patientIdCard != null">patient_id_card = #{patientIdCard},</if>
+            <if test="room != null and room != ''">room = #{room},</if>
             <if test="docId != null">doc_id = #{docId},</if>
             <if test="docName != null">doc_name = #{docName},</if>
             <if test="formTime != null">form_time = #{formTime},</if>

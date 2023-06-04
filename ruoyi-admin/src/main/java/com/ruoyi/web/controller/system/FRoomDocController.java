@@ -37,7 +37,7 @@ public class FRoomDocController extends BaseController
     /**
      * 查询【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:doc:list')")
+    @PreAuthorize("@ss.hasPermi('doc:doc:list')")
     @GetMapping("/list")
     public TableDataInfo list(FRoomDoc fRoomDoc)
     {
@@ -49,7 +49,7 @@ public class FRoomDocController extends BaseController
     /**
      * 导出【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:doc:export')")
+    @PreAuthorize("@ss.hasPermi('doc:doc:export')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FRoomDoc fRoomDoc)
@@ -62,7 +62,7 @@ public class FRoomDocController extends BaseController
     /**
      * 获取【请填写功能名称】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:doc:query')")
+    @PreAuthorize("@ss.hasPermi('doc:doc:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +72,7 @@ public class FRoomDocController extends BaseController
     /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:doc:add')")
+    @PreAuthorize("@ss.hasPermi('doc:doc:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FRoomDoc fRoomDoc)
@@ -83,7 +83,7 @@ public class FRoomDocController extends BaseController
     /**
      * 修改【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:doc:edit')")
+    @PreAuthorize("@ss.hasPermi('doc:doc:edit')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FRoomDoc fRoomDoc)
@@ -94,7 +94,7 @@ public class FRoomDocController extends BaseController
     /**
      * 删除【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:doc:remove')")
+    @PreAuthorize("@ss.hasPermi('doc:doc:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

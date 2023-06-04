@@ -25,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 单Controller
  * 
  * @author ruoyi
- * @date 2023-05-23
+ * @date 2023-06-04
  */
 @RestController
 @RequestMapping("/doc/form")
@@ -37,7 +37,7 @@ public class FFormController extends BaseController
     /**
      * 查询单列表
      */
-    @PreAuthorize("@ss.hasPermi('system:form:list')")
+    @PreAuthorize("@ss.hasPermi('doc:form:list')")
     @GetMapping("/list")
     public TableDataInfo list(FForm fForm)
     {
@@ -49,7 +49,7 @@ public class FFormController extends BaseController
     /**
      * 导出单列表
      */
-    @PreAuthorize("@ss.hasPermi('system:form:export')")
+    @PreAuthorize("@ss.hasPermi('doc:form:export')")
     @Log(title = "单", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FForm fForm)
@@ -62,7 +62,7 @@ public class FFormController extends BaseController
     /**
      * 获取单详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:form:query')")
+    @PreAuthorize("@ss.hasPermi('doc:form:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +72,7 @@ public class FFormController extends BaseController
     /**
      * 新增单
      */
-    @PreAuthorize("@ss.hasPermi('system:form:add')")
+    @PreAuthorize("@ss.hasPermi('doc:form:add')")
     @Log(title = "单", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FForm fForm)
@@ -83,7 +83,7 @@ public class FFormController extends BaseController
     /**
      * 修改单
      */
-    @PreAuthorize("@ss.hasPermi('system:form:edit')")
+    @PreAuthorize("@ss.hasPermi('doc:form:edit')")
     @Log(title = "单", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FForm fForm)
@@ -94,7 +94,7 @@ public class FFormController extends BaseController
     /**
      * 删除单
      */
-    @PreAuthorize("@ss.hasPermi('system:form:remove')")
+    @PreAuthorize("@ss.hasPermi('doc:form:remove')")
     @Log(title = "单", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
