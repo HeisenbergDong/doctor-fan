@@ -25,10 +25,10 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 文件Controller
  * 
  * @author ruoyi
- * @date 2023-05-23
+ * @date 2023-06-04
  */
 @RestController
-@RequestMapping("/doc/file")
+@RequestMapping("/system/file")
 public class FFileController extends BaseController
 {
     @Autowired
@@ -37,7 +37,7 @@ public class FFileController extends BaseController
     /**
      * 查询文件列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:file:list')")
+    @PreAuthorize("@ss.hasPermi('system:file:list')")
     @GetMapping("/list")
     public TableDataInfo list(FFile fFile)
     {
@@ -49,7 +49,7 @@ public class FFileController extends BaseController
     /**
      * 导出文件列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:file:export')")
+    @PreAuthorize("@ss.hasPermi('system:file:export')")
     @Log(title = "文件", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FFile fFile)
@@ -62,7 +62,7 @@ public class FFileController extends BaseController
     /**
      * 获取文件详细信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:file:query')")
+    @PreAuthorize("@ss.hasPermi('system:file:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +72,7 @@ public class FFileController extends BaseController
     /**
      * 新增文件
      */
-    @PreAuthorize("@ss.hasPermi('doc:file:add')")
+    @PreAuthorize("@ss.hasPermi('system:file:add')")
     @Log(title = "文件", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FFile fFile)
@@ -83,7 +83,7 @@ public class FFileController extends BaseController
     /**
      * 修改文件
      */
-    @PreAuthorize("@ss.hasPermi('doc:file:edit')")
+    @PreAuthorize("@ss.hasPermi('system:file:edit')")
     @Log(title = "文件", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FFile fFile)
@@ -94,7 +94,7 @@ public class FFileController extends BaseController
     /**
      * 删除文件
      */
-    @PreAuthorize("@ss.hasPermi('doc:file:remove')")
+    @PreAuthorize("@ss.hasPermi('system:file:remove')")
     @Log(title = "文件", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

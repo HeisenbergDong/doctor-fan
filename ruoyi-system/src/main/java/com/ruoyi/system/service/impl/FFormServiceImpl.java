@@ -15,8 +15,7 @@ import com.ruoyi.system.service.IFFormService;
  * @date 2023-06-04
  */
 @Service
-public class FFormServiceImpl implements IFFormService 
-{
+public class FFormServiceImpl implements IFFormService {
     @Autowired
     private FFormMapper fFormMapper;
 
@@ -51,9 +50,9 @@ public class FFormServiceImpl implements IFFormService
      * @return 结果
      */
     @Override
-    public int insertFForm(FForm fForm)
-    {
+    public int insertFForm(FForm fForm) {
         fForm.setCreateTime(DateUtils.getNowDate());
+        fForm.setUpdateTime(DateUtils.getNowDate());
         return fFormMapper.insertFForm(fForm);
     }
 
@@ -64,8 +63,7 @@ public class FFormServiceImpl implements IFFormService
      * @return 结果
      */
     @Override
-    public int updateFForm(FForm fForm)
-    {
+    public int updateFForm(FForm fForm) {
         fForm.setUpdateTime(DateUtils.getNowDate());
         return fFormMapper.updateFForm(fForm);
     }

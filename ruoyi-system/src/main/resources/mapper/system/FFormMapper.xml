@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="docName"    column="doc_name"    />
         <result property="formTime"    column="form_time"    />
         <result property="formContent"    column="form_content"    />
+        <result property="fileUrl"    column="file_url"    />
         <result property="delFlag"    column="del_flag"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
@@ -26,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectFFormVo">
-        select id, reg_no, type, patient_id, patient_name, patient_phone, patient_id_card, room, doc_id, doc_name, form_time, form_content, del_flag, create_by, create_time, update_by, update_time, remark from f_form
+        select id, reg_no, type, patient_id, patient_name, patient_phone, patient_id_card, room, doc_id, doc_name, form_time, form_content, file_url, del_flag, create_by, create_time, update_by, update_time, remark from f_form
     </sql>
 
     <select id="selectFFormList" parameterType="FForm" resultMap="FFormResult">
@@ -43,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="docName != null  and docName != ''"> and doc_name like concat('%', #{docName}, '%')</if>
             <if test="formTime != null "> and form_time = #{formTime}</if>
             <if test="formContent != null  and formContent != ''"> and form_content = #{formContent}</if>
+            <if test="fileUrl != null  and fileUrl != ''"> and file_url = #{fileUrl}</if>
         </where>
     </select>
     
@@ -65,6 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="docName != null">doc_name,</if>
             <if test="formTime != null">form_time,</if>
             <if test="formContent != null">form_content,</if>
+            <if test="fileUrl != null">file_url,</if>
             <if test="delFlag != null">del_flag,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
@@ -84,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="docName != null">#{docName},</if>
             <if test="formTime != null">#{formTime},</if>
             <if test="formContent != null">#{formContent},</if>
+            <if test="fileUrl != null">#{fileUrl},</if>
             <if test="delFlag != null">#{delFlag},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -107,6 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="docName != null">doc_name = #{docName},</if>
             <if test="formTime != null">form_time = #{formTime},</if>
             <if test="formContent != null">form_content = #{formContent},</if>
+            <if test="fileUrl != null">file_url = #{fileUrl},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>

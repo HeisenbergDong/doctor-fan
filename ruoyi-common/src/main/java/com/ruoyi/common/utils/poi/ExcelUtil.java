@@ -324,16 +324,7 @@ public class ExcelUtil<T>
         {
             throw new IOException("文件sheet不存在");
         }
-        boolean isXSSFWorkbook = !(wb instanceof HSSFWorkbook);
-        Map<String, PictureData> pictures;
-        if (isXSSFWorkbook)
-        {
-            pictures = getSheetPictures07((XSSFSheet) sheet, (XSSFWorkbook) wb);
-        }
-        else
-        {
-            pictures = getSheetPictures03((HSSFSheet) sheet, (HSSFWorkbook) wb);
-        }
+
         // 获取最后一个非空行的行下标，比如总行数为n，则返回的为n-1
         int rows = sheet.getLastRowNum();
 
@@ -455,26 +446,9 @@ public class ExcelUtil<T>
                         {
                             val = reverseByExp(Convert.toStr(val), attr.readConverterExp(), attr.separator());
                         }
-                        else if (StringUtils.isNotEmpty(attr.dictType()))
-                        {
-                            val = reverseDictByExp(Convert.toStr(val), attr.dictType(), attr.separator());
-                        }
                         else if (!attr.handler().equals(ExcelHandlerAdapter.class))
                         {
                             val = dataFormatHandlerAdapter(val, attr);
-                        }
-                        else if (ColumnType.IMAGE == attr.cellType() && StringUtils.isNotEmpty(pictures))
-                        {
-                            PictureData image = pictures.get(row.getRowNum() + "_" + entry.getKey());
-                            if (image == null)
-                            {
-                                val = "";
-                            }
-                            else
-                            {
-                                byte[] data = image.getData();
-                                val = FileUtils.writeImportBytes(data);
-                            }
                         }
                         ReflectUtils.invokeSetter(entity, propertyName, val);
                     }

@@ -129,3 +129,12 @@ xss:
   excludes: /system/notice
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+# fastDFS文件上传配置
+fdfs:
+  domain: http://47.93.58.109
+  soTimeout: 3000
+  connectTimeout: 2000
+  trackerList: 47.93.58.109:22122
+
+

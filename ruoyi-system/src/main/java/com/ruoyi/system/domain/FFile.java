@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 文件对象 f_file
  * 
  * @author ruoyi
- * @date 2023-05-23
+ * @date 2023-06-04
  */
 public class FFile extends BaseEntity
 {

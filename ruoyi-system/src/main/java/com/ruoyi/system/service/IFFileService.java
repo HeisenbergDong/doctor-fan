@@ -7,7 +7,7 @@ import com.ruoyi.system.domain.FFile;
  * 文件Service接口
  * 
  * @author ruoyi
- * @date 2023-05-23
+ * @date 2023-06-04
  */
 public interface IFFileService 
 {

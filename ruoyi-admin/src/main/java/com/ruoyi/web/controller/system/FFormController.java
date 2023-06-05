@@ -39,8 +39,7 @@ public class FFormController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('doc:form:list')")
     @GetMapping("/list")
-    public TableDataInfo list(FForm fForm)
-    {
+    public TableDataInfo list(FForm fForm) {
         startPage();
         List<FForm> list = fFormService.selectFFormList(fForm);
         return getDataTable(list);
@@ -52,8 +51,7 @@ public class FFormController extends BaseController
     @PreAuthorize("@ss.hasPermi('doc:form:export')")
     @Log(title = "单", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, FForm fForm)
-    {
+    public void export(HttpServletResponse response, FForm fForm) {
         List<FForm> list = fFormService.selectFFormList(fForm);
         ExcelUtil<FForm> util = new ExcelUtil<FForm>(FForm.class);
         util.exportExcel(response, list, "单数据");
@@ -64,8 +62,7 @@ public class FFormController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('doc:form:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(fFormService.selectFFormById(id));
     }
 
@@ -75,8 +72,9 @@ public class FFormController extends BaseController
     @PreAuthorize("@ss.hasPermi('doc:form:add')")
     @Log(title = "单", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody FForm fForm)
-    {
+    public AjaxResult add(@RequestBody FForm fForm) {
+        fForm.setCreateBy(getUserId().toString());
+        fForm.setUpdateBy(getUserId().toString());
         return toAjax(fFormService.insertFForm(fForm));
     }
 
@@ -86,8 +84,8 @@ public class FFormController extends BaseController
     @PreAuthorize("@ss.hasPermi('doc:form:edit')")
     @Log(title = "单", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody FForm fForm)
-    {
+    public AjaxResult edit(@RequestBody FForm fForm) {
+        fForm.setUpdateBy(getUserId().toString());
         return toAjax(fFormService.updateFForm(fForm));
     }
 
@@ -97,8 +95,7 @@ public class FFormController extends BaseController
     @PreAuthorize("@ss.hasPermi('doc:form:remove')")
     @Log(title = "单", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
+    public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(fFormService.deleteFFormByIds(ids));
     }
 }
