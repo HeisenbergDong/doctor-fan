@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * 文件对象 f_file
  * 
@@ -20,10 +22,12 @@ public class FFile extends BaseEntity
 
     /** 附件地址 */
     @Excel(name = "附件地址")
+    @NotBlank(message = "附件地址不能为空")
     private String fileUrl;
 
     /** 附件名称 */
     @Excel(name = "附件名称")
+    @NotBlank(message = "附件名称不能为空")
     private String fileName;
 
     /** 删除标志（0代表存在 */
