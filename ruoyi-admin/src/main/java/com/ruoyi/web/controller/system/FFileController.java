@@ -75,8 +75,9 @@ public class FFileController extends BaseController
     @PreAuthorize("@ss.hasPermi('doc:file:add')")
     @Log(title = "文件", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody FFile fFile)
-    {
+    public AjaxResult add(@RequestBody FFile fFile) {
+        fFile.setCreateBy(getUserId().toString());
+        fFile.setUpdateBy(getUserId().toString());
         return toAjax(fFileService.insertFFile(fFile));
     }
 
@@ -86,8 +87,8 @@ public class FFileController extends BaseController
     @PreAuthorize("@ss.hasPermi('doc:file:edit')")
     @Log(title = "文件", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody FFile fFile)
-    {
+    public AjaxResult edit(@RequestBody FFile fFile) {
+        fFile.setUpdateBy(getUserId().toString());
         return toAjax(fFileService.updateFFile(fFile));
     }
 
