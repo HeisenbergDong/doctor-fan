@@ -73,6 +73,15 @@ public class FWaitServiceImpl implements IFWaitService
         return fWaitMapper.insertFWait(fWait);
     }
 
+    @Override
+    public int adjust(FWait fWait){
+        FWait wait = new FWait();
+        wait.setId(fWait.getId());
+        wait.setWaitTime(fWait.getWaitTime());
+        wait.setUpdateTime(DateUtils.getNowDate());
+        return fWaitMapper.updateFWait(wait);
+    }
+
     /**
      * 指派
      *
@@ -105,7 +114,7 @@ public class FWaitServiceImpl implements IFWaitService
         fWait.setId(null);
         int result = fWaitMapper.insertFWait(fWait);
         if(0 != result){
-            socketMessageService.sendBroadcast(fWait.getRoom(),"/topic/game_chat",fWaitMapper.selectFWaitById(fWait.getId()));
+            socketMessageService.sendBroadcast(fWait.getRoom(),"/topic/dispatch",fWaitMapper.selectFWaitById(fWait.getId()));
         }
         return result;
     }
@@ -128,30 +137,30 @@ public class FWaitServiceImpl implements IFWaitService
         if(!CollectionUtils.isEmpty(waits)){
             throw new ServiceException("请检查你名下是否有客人未指派！");
         }
-        /** 查询患者是否是新诊患者，方便后期统计 */
-        FPatient fPatient = patientService.selectFPatientById(fWait.getPatientId());
-        /** 将患者加入到就诊表 */
-        FVisit fVisit = new FVisit();
-        BeanUtils.copyProperties(fWait,fVisit);
-        fVisit.setId(null);
-        fVisit.setDocId(fWait.getReceptionDocId());
-        fVisit.setDocName(fWait.getReceptionDocName());
-        fVisit.setNewPatient(fPatient.getNewPatient());
-        fVisit.setVisitTime(DateUtils.getNowDate());
-        visitService.insertFVisit(fVisit);
-        /** 只可以更新患者状态、排队时间；即只能叫号和调整排队顺序 */
+        /** 只可以更新患者状态；即只能叫号 */
         FWait wait = new FWait();
         BeanUtils.copyProperties(fWait,wait);
         wait.setId(fWait.getId());
         wait.setPatientStatus(DipatchStatus.ONE.getCode());
-        wait.setWaitTime(fWait.getWaitTime());
         wait.setUpdateBy(fWait.getUpdateBy());
         wait.setUpdateTime(DateUtils.getNowDate());
         int result = fWaitMapper.updateFWait(wait);
         if(0 == result){
             throw new ServiceException("列表中患者不存在，或者已被其他医生接待！");
         }else{
-            socketMessageService.sendBroadcast("1","/queue/1",wait);
+            /** 查询患者是否是新诊患者，方便后期统计 */
+            FPatient fPatient = patientService.selectFPatientById(fWait.getPatientId());
+            /** 将患者加入到就诊表 */
+            FVisit fVisit = new FVisit();
+            BeanUtils.copyProperties(fWait,fVisit);
+            fVisit.setId(null);
+            fVisit.setDocId(fWait.getReceptionDocId());
+            fVisit.setDocName(fWait.getReceptionDocName());
+            fVisit.setNewPatient(fPatient.getNewPatient());
+            fVisit.setVisitTime(DateUtils.getNowDate());
+            visitService.insertFVisit(fVisit);
+            /** 发送websocket消息 */
+            socketMessageService.sendBroadcast(fWait.getRoom(),"/topic/call",fWaitMapper.selectFWaitById(fWait.getId()));
         }
         return result;
     }

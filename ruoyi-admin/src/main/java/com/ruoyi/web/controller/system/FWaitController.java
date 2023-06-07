@@ -74,9 +74,24 @@ public class FWaitController extends BaseController
     }
 
     /**
-     * 新增排队
+     * 调整排队顺序
      */
-    @PreAuthorize("@ss.hasPermi('doc:wait:add')")
+    @PreAuthorize("@ss.hasPermi('doc:wait:adjust')")
+    @Log(title = "调整排队顺序", businessType = BusinessType.INSERT)
+    @PostMapping("/adjust")
+    public AjaxResult adjust(@RequestBody @Validated FWait fWait){
+        /** 只有队列中的患者才可以调整顺序 */
+        if(!fWait.getPatientStatus().equals(DipatchStatus.ZERO.getCode())){
+            throw new ServiceException("客人不是排队中的状态，请确认！");
+        }
+        fWait.setUpdateBy(getUserId().toString());
+        return toAjax(fWaitService.adjust(fWait));
+    }
+
+    /**
+     * 指派
+     */
+    @PreAuthorize("@ss.hasPermi('doc:wait:dispatch')")
     @Log(title = "指派", businessType = BusinessType.INSERT)
     @PostMapping("/dispatch")
     public AjaxResult dispatch(@RequestBody @Validated FWait fWait){
@@ -86,9 +101,9 @@ public class FWaitController extends BaseController
     }
 
     /**
-     * 修改排队
+     * 叫号
      */
-    @PreAuthorize("@ss.hasPermi('doc:wait:edit')")
+    @PreAuthorize("@ss.hasPermi('doc:wait:call')")
     @Log(title = "叫号", businessType = BusinessType.UPDATE)
     @PostMapping("/call")
     public AjaxResult call(@RequestBody @Validated FWait fWait){

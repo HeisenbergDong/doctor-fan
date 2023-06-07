@@ -35,6 +35,14 @@ public interface IFWaitService {
     int insertFWait(FWait fWait);
 
     /**
+     * 调整排队顺序
+     *
+     * @param fWait 排队
+     * @return 结果
+     */
+    int adjust(FWait fWait);
+
+    /**
      * 指派
      * 
      * @param fWait 排队
