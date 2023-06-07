@@ -51,9 +51,9 @@ public class FFileServiceImpl implements IFFileService
      * @return 结果
      */
     @Override
-    public int insertFFile(FFile fFile)
-    {
+    public int insertFFile(FFile fFile) {
         fFile.setCreateTime(DateUtils.getNowDate());
+        fFile.setUpdateTime(DateUtils.getNowDate());
         return fFileMapper.insertFFile(fFile);
     }
 
