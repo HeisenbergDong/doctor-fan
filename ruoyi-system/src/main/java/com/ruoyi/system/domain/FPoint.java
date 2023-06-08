@@ -63,7 +63,6 @@ public class FPoint extends BaseEntity {
 
     /** 被推荐人id */
     @Excel(name = "被推荐人id")
-    @NotNull(message = "被推荐人id不能为空")
     private Long newPatientId;
 
     /** 被推荐人姓名 */
