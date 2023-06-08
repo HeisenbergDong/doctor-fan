@@ -125,11 +125,6 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-generator</artifactId>
-            <version>3.8.5</version>
-        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
