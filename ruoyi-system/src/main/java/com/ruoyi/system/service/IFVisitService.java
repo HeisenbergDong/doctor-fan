@@ -9,7 +9,7 @@ import com.ruoyi.system.domain.FVisit;
  * @author ruoyi
  * @date 2023-05-23
  */
-public interface IFVisitService 
+public interface IFVisitService
 {
     /**
      * 查询就诊
@@ -17,7 +17,7 @@ public interface IFVisitService
      * @param id 就诊主键
      * @return 就诊
      */
-    public FVisit selectFVisitById(Long id);
+    FVisit selectFVisitById(Long id);
 
     /**
      * 查询就诊列表
@@ -25,7 +25,7 @@ public interface IFVisitService
      * @param fVisit 就诊
      * @return 就诊集合
      */
-    public List<FVisit> selectFVisitList(FVisit fVisit);
+    List<FVisit> selectFVisitList(FVisit fVisit);
 
     /**
      * 新增就诊
@@ -33,7 +33,7 @@ public interface IFVisitService
      * @param fVisit 就诊
      * @return 结果
      */
-    public int insertFVisit(FVisit fVisit);
+    int insertFVisit(FVisit fVisit);
 
     /**
      * 修改就诊
@@ -41,7 +41,7 @@ public interface IFVisitService
      * @param fVisit 就诊
      * @return 结果
      */
-    public int updateFVisit(FVisit fVisit);
+    int updateFVisit(FVisit fVisit);
 
     /**
      * 批量删除就诊
@@ -49,7 +49,7 @@ public interface IFVisitService
      * @param ids 需要删除的就诊主键集合
      * @return 结果
      */
-    public int deleteFVisitByIds(Long[] ids);
+    int deleteFVisitByIds(Long[] ids);
 
     /**
      * 删除就诊信息
@@ -57,5 +57,5 @@ public interface IFVisitService
      * @param id 就诊主键
      * @return 结果
      */
-    public int deleteFVisitById(Long id);
+    int deleteFVisitById(Long id);
 }
