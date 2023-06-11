@@ -83,7 +83,8 @@ public class FPointServiceImpl implements IFPointService {
 
     private void checkPatient(FPoint fPoint) {
         /** 推荐人和被推荐人不能是同一个人 */
-        if(fPoint.getNewPatientPhone().equals(fPoint.getPointPatientPhone()) || fPoint.getNewPatientId().equals(fPoint.getPointPatientId())){
+        if(fPoint.getNewPatientPhone().equals(fPoint.getPointPatientPhone()) ||
+                (!ObjectUtils.isEmpty(fPoint.getNewPatientId())) && fPoint.getNewPatientId().equals(fPoint.getPointPatientId())){
             throw new ServiceException("不能推荐自己！");
         }
         /** 检查被推荐人信息 */
