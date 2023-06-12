@@ -38,13 +38,14 @@ public class FStatisticsController  extends BaseController {
      */
     @PreAuthorize("@ss.hasPermi('doc:statistics:list')")
     @GetMapping("/list")
-    public AjaxResult statistics() {
+    public AjaxResult statistics(FVisit fVisit) {
         List<SysUser> userList = userService.selectUserList(new SysUser());
         List<User> users = new ArrayList<>();
         if(CollectionUtils.isNotEmpty(userList)){
             for(SysUser u:userList){
                 FVisit v = new FVisit();
                 v.setDocId(u.getUserId());
+                v.setVisitTime(fVisit.getVisitTime());
                 List<FVisit> visitList = visitService.selectFVisitList(v);
                 User user = new User();
                 BeanUtils.copyProperties(u,user);

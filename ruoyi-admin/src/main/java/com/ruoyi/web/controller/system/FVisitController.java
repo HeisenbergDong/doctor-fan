@@ -47,6 +47,16 @@ public class FVisitController extends BaseController
     }
 
     /**
+     * 统计就诊信息
+     */
+    @PreAuthorize("@ss.hasPermi('doc:visit:statistics')")
+    @GetMapping("/statistics")
+    public AjaxResult statistics(FVisit fVisit) {
+        List<FVisit> list = fVisitService.selectFVisitList(fVisit);
+        return AjaxResult.success(list);
+    }
+
+    /**
      * 导出就诊列表
      */
     @PreAuthorize("@ss.hasPermi('doc:visit:export')")

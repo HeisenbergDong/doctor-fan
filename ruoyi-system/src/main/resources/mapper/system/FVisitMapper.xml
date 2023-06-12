@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="patientIdCard != null  and patientIdCard != ''"> and patient_id_card = #{patientIdCard}</if>
             <if test="newPatient != null  and newPatient != ''"> and new_patient = #{newPatient}</if>
             <if test="regNo != null  and regNo != ''"> and reg_no = #{regNo}</if>
-            <if test="visitTime != null "> and visit_time = #{visitTime}</if>
+            <if test="visitTime != null "> and visit_time like concat(#{visitTime}, '%')</if>
         </where>
     </select>
     
