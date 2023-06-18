@@ -37,7 +37,7 @@ public class FRoomController extends BaseController
     /**
      * 查询诊室列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:room:list')")
+    //@PreAuthorize("@ss.hasPermi('doc:room:list')")
     @GetMapping("/list")
     public TableDataInfo list(FRoom fRoom)
     {
@@ -49,7 +49,7 @@ public class FRoomController extends BaseController
     /**
      * 导出诊室列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:room:export')")
+    //@PreAuthorize("@ss.hasPermi('doc:room:export')")
     @Log(title = "诊室", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FRoom fRoom)
@@ -62,7 +62,7 @@ public class FRoomController extends BaseController
     /**
      * 获取诊室详细信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:room:query')")
+    //@PreAuthorize("@ss.hasPermi('doc:room:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +72,7 @@ public class FRoomController extends BaseController
     /**
      * 新增诊室
      */
-    @PreAuthorize("@ss.hasPermi('doc:room:add')")
+    //@PreAuthorize("@ss.hasPermi('doc:room:add')")
     @Log(title = "诊室", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FRoom fRoom)
@@ -83,7 +83,7 @@ public class FRoomController extends BaseController
     /**
      * 修改诊室
      */
-    @PreAuthorize("@ss.hasPermi('doc:room:edit')")
+    //@PreAuthorize("@ss.hasPermi('doc:room:edit')")
     @Log(title = "诊室", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FRoom fRoom)
@@ -94,7 +94,7 @@ public class FRoomController extends BaseController
     /**
      * 删除诊室
      */
-    @PreAuthorize("@ss.hasPermi('doc:room:remove')")
+    //@PreAuthorize("@ss.hasPermi('doc:room:remove')")
     @Log(title = "诊室", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

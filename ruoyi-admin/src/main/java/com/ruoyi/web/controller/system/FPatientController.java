@@ -36,7 +36,7 @@ public class FPatientController extends BaseController {
     /**
      * 查询患者信息列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:patient:list')")
+    //@PreAuthorize("@ss.hasPermi('doc:patient:list')")
     @GetMapping("/list")
     public TableDataInfo list(FPatient fPatient) {
         startPage();
@@ -47,7 +47,7 @@ public class FPatientController extends BaseController {
     /**
      * 导出患者信息列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:patient:export')")
+    //@PreAuthorize("@ss.hasPermi('doc:patient:export')")
     @Log(title = "患者信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FPatient fPatient)
@@ -60,7 +60,7 @@ public class FPatientController extends BaseController {
     /**
      * 获取患者信息详细信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:patient:query')")
+    //@PreAuthorize("@ss.hasPermi('doc:patient:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(fPatientService.selectFPatientById(id));
@@ -69,7 +69,7 @@ public class FPatientController extends BaseController {
     /**
      * 新增患者信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:patient:add')")
+    //@PreAuthorize("@ss.hasPermi('doc:patient:add')")
     @Log(title = "患者信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FPatient fPatient) {
@@ -79,7 +79,7 @@ public class FPatientController extends BaseController {
     /**
      * 修改患者信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:patient:edit')")
+    //@PreAuthorize("@ss.hasPermi('doc:patient:edit')")
     @Log(title = "患者信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FPatient fPatient)
@@ -90,7 +90,7 @@ public class FPatientController extends BaseController {
     /**
      * 删除患者信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:patient:remove')")
+    //@PreAuthorize("@ss.hasPermi('doc:patient:remove')")
     @Log(title = "患者信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

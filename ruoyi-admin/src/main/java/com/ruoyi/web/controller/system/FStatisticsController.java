@@ -36,7 +36,7 @@ public class FStatisticsController  extends BaseController {
     /**
      * 查询文件列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:statistics:list')")
+    //@PreAuthorize("@ss.hasPermi('doc:statistics:list')")
     @GetMapping("/list")
     public AjaxResult statistics(FVisit fVisit) {
         List<SysUser> userList = userService.selectUserList(new SysUser());

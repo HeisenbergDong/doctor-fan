@@ -38,7 +38,7 @@ public class FReservationController extends BaseController
     /**
      * 查询预约列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:reservation:list')")
+    //@PreAuthorize("@ss.hasPermi('doc:reservation:list')")
     @GetMapping("/list")
     public TableDataInfo list(FReservation fReservation)
     {
@@ -50,7 +50,7 @@ public class FReservationController extends BaseController
     /**
      * 导出预约列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:reservation:export')")
+    //@PreAuthorize("@ss.hasPermi('doc:reservation:export')")
     @Log(title = "预约", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FReservation fReservation)
@@ -63,7 +63,7 @@ public class FReservationController extends BaseController
     /**
      * 获取预约详细信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:reservation:query')")
+    //@PreAuthorize("@ss.hasPermi('doc:reservation:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -73,7 +73,7 @@ public class FReservationController extends BaseController
     /**
      * 新增预约
      */
-    @PreAuthorize("@ss.hasPermi('doc:reservation:add')")
+    //@PreAuthorize("@ss.hasPermi('doc:reservation:add')")
     @Log(title = "预约", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody @Validated FReservation fReservation){
@@ -85,7 +85,7 @@ public class FReservationController extends BaseController
     /**
      * 修改预约
      */
-    @PreAuthorize("@ss.hasPermi('doc:reservation:edit')")
+    //@PreAuthorize("@ss.hasPermi('doc:reservation:edit')")
     @Log(title = "预约", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody @Validated FReservation fReservation){
@@ -96,7 +96,7 @@ public class FReservationController extends BaseController
     /**
      * 删除预约
      */
-    @PreAuthorize("@ss.hasPermi('doc:reservation:remove')")
+    //@PreAuthorize("@ss.hasPermi('doc:reservation:remove')")
     @Log(title = "预约", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

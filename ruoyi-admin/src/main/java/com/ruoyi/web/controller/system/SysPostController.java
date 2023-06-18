@@ -37,7 +37,7 @@ public class SysPostController extends BaseController
     /**
      * 获取岗位列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:post:list')")
+    //@PreAuthorize("@ss.hasPermi('doc:post:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysPost post)
     {
@@ -47,7 +47,7 @@ public class SysPostController extends BaseController
     }
     
     @Log(title = "岗位管理", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('doc:post:export')")
+    //@PreAuthorize("@ss.hasPermi('doc:post:export')")
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysPost post)
     {
@@ -59,7 +59,7 @@ public class SysPostController extends BaseController
     /**
      * 根据岗位编号获取详细信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:post:query')")
+    //@PreAuthorize("@ss.hasPermi('doc:post:query')")
     @GetMapping(value = "/{postId}")
     public AjaxResult getInfo(@PathVariable Long postId)
     {
@@ -69,7 +69,7 @@ public class SysPostController extends BaseController
     /**
      * 新增岗位
      */
-    @PreAuthorize("@ss.hasPermi('doc:post:add')")
+    //@PreAuthorize("@ss.hasPermi('doc:post:add')")
     @Log(title = "岗位管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysPost post)
@@ -89,7 +89,7 @@ public class SysPostController extends BaseController
     /**
      * 修改岗位
      */
-    @PreAuthorize("@ss.hasPermi('doc:post:edit')")
+    //@PreAuthorize("@ss.hasPermi('doc:post:edit')")
     @Log(title = "岗位管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysPost post)
@@ -109,7 +109,7 @@ public class SysPostController extends BaseController
     /**
      * 删除岗位
      */
-    @PreAuthorize("@ss.hasPermi('doc:post:remove')")
+    //@PreAuthorize("@ss.hasPermi('doc:post:remove')")
     @Log(title = "岗位管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{postIds}")
     public AjaxResult remove(@PathVariable Long[] postIds)

@@ -38,7 +38,7 @@ public class FPointController extends BaseController
     /**
      * 查询推荐人折扣积分列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:point:list')")
+    //@PreAuthorize("@ss.hasPermi('doc:point:list')")
     @GetMapping("/list")
     public TableDataInfo list(FPoint fPoint)
     {
@@ -50,7 +50,7 @@ public class FPointController extends BaseController
     /**
      * 导出推荐人折扣积分列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:point:export')")
+    //@PreAuthorize("@ss.hasPermi('doc:point:export')")
     @Log(title = "推荐人折扣积分", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FPoint fPoint)
@@ -63,7 +63,7 @@ public class FPointController extends BaseController
     /**
      * 获取推荐人折扣积分详细信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:point:query')")
+    //@PreAuthorize("@ss.hasPermi('doc:point:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -73,7 +73,7 @@ public class FPointController extends BaseController
     /**
      * 新增推荐人折扣积分
      */
-    @PreAuthorize("@ss.hasPermi('doc:point:add')")
+    //@PreAuthorize("@ss.hasPermi('doc:point:add')")
     @Log(title = "推荐人折扣积分", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody @Validated FPoint fPoint) {
@@ -85,7 +85,7 @@ public class FPointController extends BaseController
     /**
      * 修改推荐人折扣积分
      */
-    @PreAuthorize("@ss.hasPermi('doc:point:edit')")
+    //@PreAuthorize("@ss.hasPermi('doc:point:edit')")
     @Log(title = "推荐人折扣积分", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FPoint fPoint) {
@@ -96,7 +96,7 @@ public class FPointController extends BaseController
     /**
      * 删除推荐人折扣积分
      */
-    @PreAuthorize("@ss.hasPermi('doc:point:remove')")
+    //@PreAuthorize("@ss.hasPermi('doc:point:remove')")
     @Log(title = "推荐人折扣积分", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

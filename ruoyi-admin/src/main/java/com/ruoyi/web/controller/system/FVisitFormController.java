@@ -37,7 +37,7 @@ public class FVisitFormController extends BaseController
     /**
      * 查询问诊单关联列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:form:list')")
+    //@PreAuthorize("@ss.hasPermi('doc:form:list')")
     @GetMapping("/list")
     public TableDataInfo list(FVisitForm fVisitForm)
     {
@@ -49,7 +49,7 @@ public class FVisitFormController extends BaseController
     /**
      * 导出问诊单关联列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:form:export')")
+    //@PreAuthorize("@ss.hasPermi('doc:form:export')")
     @Log(title = "问诊单关联", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FVisitForm fVisitForm)
@@ -62,7 +62,7 @@ public class FVisitFormController extends BaseController
     /**
      * 获取问诊单关联详细信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:form:query')")
+    //@PreAuthorize("@ss.hasPermi('doc:form:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +72,7 @@ public class FVisitFormController extends BaseController
     /**
      * 新增问诊单关联
      */
-    @PreAuthorize("@ss.hasPermi('doc:form:add')")
+    //@PreAuthorize("@ss.hasPermi('doc:form:add')")
     @Log(title = "问诊单关联", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FVisitForm fVisitForm)
@@ -83,7 +83,7 @@ public class FVisitFormController extends BaseController
     /**
      * 修改问诊单关联
      */
-    @PreAuthorize("@ss.hasPermi('doc:form:edit')")
+    //@PreAuthorize("@ss.hasPermi('doc:form:edit')")
     @Log(title = "问诊单关联", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FVisitForm fVisitForm)
@@ -94,7 +94,7 @@ public class FVisitFormController extends BaseController
     /**
      * 删除问诊单关联
      */
-    @PreAuthorize("@ss.hasPermi('doc:form:remove')")
+    //@PreAuthorize("@ss.hasPermi('doc:form:remove')")
     @Log(title = "问诊单关联", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

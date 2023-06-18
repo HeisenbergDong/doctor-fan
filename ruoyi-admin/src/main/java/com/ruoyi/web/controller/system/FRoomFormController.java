@@ -37,7 +37,7 @@ public class FRoomFormController extends BaseController
     /**
      * 查询诊室和单类型关联关系列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:form:list')")
+    //@PreAuthorize("@ss.hasPermi('doc:form:list')")
     @GetMapping("/list")
     public TableDataInfo list(FRoomForm fRoomForm)
     {
@@ -49,7 +49,7 @@ public class FRoomFormController extends BaseController
     /**
      * 导出诊室和单类型关联关系列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:form:export')")
+    //@PreAuthorize("@ss.hasPermi('doc:form:export')")
     @Log(title = "诊室和单类型关联关系", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FRoomForm fRoomForm)
@@ -62,7 +62,7 @@ public class FRoomFormController extends BaseController
     /**
      * 获取诊室和单类型关联关系详细信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:form:query')")
+    //@PreAuthorize("@ss.hasPermi('doc:form:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +72,7 @@ public class FRoomFormController extends BaseController
     /**
      * 新增诊室和单类型关联关系
      */
-    @PreAuthorize("@ss.hasPermi('doc:form:add')")
+    //@PreAuthorize("@ss.hasPermi('doc:form:add')")
     @Log(title = "诊室和单类型关联关系", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FRoomForm fRoomForm) {
@@ -84,7 +84,7 @@ public class FRoomFormController extends BaseController
     /**
      * 修改诊室和单类型关联关系
      */
-    @PreAuthorize("@ss.hasPermi('doc:form:edit')")
+    //@PreAuthorize("@ss.hasPermi('doc:form:edit')")
     @Log(title = "诊室和单类型关联关系", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FRoomForm fRoomForm) {
@@ -95,7 +95,7 @@ public class FRoomFormController extends BaseController
     /**
      * 删除诊室和单类型关联关系
      */
-    @PreAuthorize("@ss.hasPermi('doc:form:remove')")
+    //@PreAuthorize("@ss.hasPermi('doc:form:remove')")
     @Log(title = "诊室和单类型关联关系", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

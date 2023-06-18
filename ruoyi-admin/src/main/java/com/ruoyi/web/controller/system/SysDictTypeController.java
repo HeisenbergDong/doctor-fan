@@ -34,7 +34,7 @@ public class SysDictTypeController extends BaseController
     @Autowired
     private ISysDictTypeService dictTypeService;
 
-    @PreAuthorize("@ss.hasPermi('doc:dict:list')")
+    //@PreAuthorize("@ss.hasPermi('doc:dict:list')")
     @GetMapping("/list")
     public TableDataInfo list(SysDictType dictType)
     {
@@ -44,7 +44,7 @@ public class SysDictTypeController extends BaseController
     }
 
     @Log(title = "字典类型", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('doc:dict:export')")
+    //@PreAuthorize("@ss.hasPermi('doc:dict:export')")
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysDictType dictType)
     {
@@ -56,7 +56,7 @@ public class SysDictTypeController extends BaseController
     /**
      * 查询字典类型详细
      */
-    @PreAuthorize("@ss.hasPermi('doc:dict:query')")
+    //@PreAuthorize("@ss.hasPermi('doc:dict:query')")
     @GetMapping(value = "/{dictId}")
     public AjaxResult getInfo(@PathVariable Long dictId)
     {
@@ -66,7 +66,7 @@ public class SysDictTypeController extends BaseController
     /**
      * 新增字典类型
      */
-    @PreAuthorize("@ss.hasPermi('doc:dict:add')")
+    //@PreAuthorize("@ss.hasPermi('doc:dict:add')")
     @Log(title = "字典类型", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysDictType dict)
@@ -82,7 +82,7 @@ public class SysDictTypeController extends BaseController
     /**
      * 修改字典类型
      */
-    @PreAuthorize("@ss.hasPermi('doc:dict:edit')")
+    //@PreAuthorize("@ss.hasPermi('doc:dict:edit')")
     @Log(title = "字典类型", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysDictType dict)
@@ -98,7 +98,7 @@ public class SysDictTypeController extends BaseController
     /**
      * 删除字典类型
      */
-    @PreAuthorize("@ss.hasPermi('doc:dict:remove')")
+    //@PreAuthorize("@ss.hasPermi('doc:dict:remove')")
     @Log(title = "字典类型", businessType = BusinessType.DELETE)
     @DeleteMapping("/{dictIds}")
     public AjaxResult remove(@PathVariable Long[] dictIds)
@@ -110,7 +110,7 @@ public class SysDictTypeController extends BaseController
     /**
      * 刷新字典缓存
      */
-    @PreAuthorize("@ss.hasPermi('doc:dict:remove')")
+    //@PreAuthorize("@ss.hasPermi('doc:dict:remove')")
     @Log(title = "字典类型", businessType = BusinessType.CLEAN)
     @DeleteMapping("/refreshCache")
     public AjaxResult refreshCache()

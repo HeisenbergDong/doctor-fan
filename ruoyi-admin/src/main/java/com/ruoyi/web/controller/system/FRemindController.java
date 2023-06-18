@@ -38,7 +38,7 @@ public class FRemindController extends BaseController
     /**
      * 查询提醒列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:remind:list')")
+    //@PreAuthorize("@ss.hasPermi('doc:remind:list')")
     @GetMapping("/list")
     public TableDataInfo list(FRemind fRemind)
     {
@@ -50,7 +50,7 @@ public class FRemindController extends BaseController
     /**
      * 导出提醒列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:remind:export')")
+    //@PreAuthorize("@ss.hasPermi('doc:remind:export')")
     @Log(title = "提醒", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FRemind fRemind)
@@ -63,7 +63,7 @@ public class FRemindController extends BaseController
     /**
      * 获取提醒详细信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:remind:query')")
+    //@PreAuthorize("@ss.hasPermi('doc:remind:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -73,7 +73,7 @@ public class FRemindController extends BaseController
     /**
      * 新增提醒
      */
-    @PreAuthorize("@ss.hasPermi('doc:remind:add')")
+    //@PreAuthorize("@ss.hasPermi('doc:remind:add')")
     @Log(title = "提醒", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody @Validated FRemind fRemind) {
@@ -85,7 +85,7 @@ public class FRemindController extends BaseController
     /**
      * 修改提醒
      */
-    @PreAuthorize("@ss.hasPermi('doc:remind:edit')")
+    //@PreAuthorize("@ss.hasPermi('doc:remind:edit')")
     @Log(title = "提醒", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody @Validated FRemind fRemind) {
@@ -96,7 +96,7 @@ public class FRemindController extends BaseController
     /**
      * 删除提醒
      */
-    @PreAuthorize("@ss.hasPermi('doc:remind:remove')")
+    //@PreAuthorize("@ss.hasPermi('doc:remind:remove')")
     @Log(title = "提醒", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

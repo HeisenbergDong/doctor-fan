@@ -41,7 +41,7 @@ public class FWaitController extends BaseController
     /**
      * 查询排队列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:wait:list')")
+    //@PreAuthorize("@ss.hasPermi('doc:wait:list')")
     @GetMapping("/list")
     public TableDataInfo list(FWait fWait)
     {
@@ -53,7 +53,7 @@ public class FWaitController extends BaseController
     /**
      * 导出排队列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:wait:export')")
+    //@PreAuthorize("@ss.hasPermi('doc:wait:export')")
     @Log(title = "排队", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FWait fWait)
@@ -66,7 +66,7 @@ public class FWaitController extends BaseController
     /**
      * 获取排队详细信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:wait:query')")
+    //@PreAuthorize("@ss.hasPermi('doc:wait:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -76,7 +76,7 @@ public class FWaitController extends BaseController
     /**
      * 调整排队顺序
      */
-    @PreAuthorize("@ss.hasPermi('doc:wait:adjust')")
+    //@PreAuthorize("@ss.hasPermi('doc:wait:adjust')")
     @Log(title = "调整排队顺序", businessType = BusinessType.INSERT)
     @PostMapping("/adjust")
     public AjaxResult adjust(@RequestBody @Validated FWait fWait){
@@ -91,7 +91,7 @@ public class FWaitController extends BaseController
     /**
      * 指派
      */
-    @PreAuthorize("@ss.hasPermi('doc:wait:dispatch')")
+    //@PreAuthorize("@ss.hasPermi('doc:wait:dispatch')")
     @Log(title = "指派", businessType = BusinessType.INSERT)
     @PostMapping("/dispatch")
     public AjaxResult dispatch(@RequestBody @Validated FWait fWait){
@@ -103,7 +103,7 @@ public class FWaitController extends BaseController
     /**
      * 叫号
      */
-    @PreAuthorize("@ss.hasPermi('doc:wait:call')")
+    //@PreAuthorize("@ss.hasPermi('doc:wait:call')")
     @Log(title = "叫号", businessType = BusinessType.UPDATE)
     @PostMapping("/call")
     public AjaxResult call(@RequestBody @Validated FWait fWait){
@@ -118,7 +118,7 @@ public class FWaitController extends BaseController
     /**
      * 删除排队
      */
-    @PreAuthorize("@ss.hasPermi('doc:wait:remove')")
+    //@PreAuthorize("@ss.hasPermi('doc:wait:remove')")
     @Log(title = "排队", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

@@ -37,7 +37,7 @@ public class FVisitController extends BaseController
     /**
      * 查询就诊列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:visit:list')")
+    //@PreAuthorize("@ss.hasPermi('doc:visit:list')")
     @GetMapping("/list")
     public TableDataInfo list(FVisit fVisit)
     {
@@ -49,7 +49,7 @@ public class FVisitController extends BaseController
     /**
      * 统计就诊信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:visit:statistics')")
+    //@PreAuthorize("@ss.hasPermi('doc:visit:statistics')")
     @GetMapping("/statistics")
     public AjaxResult statistics(FVisit fVisit) {
         List<FVisit> list = fVisitService.selectFVisitList(fVisit);
@@ -59,7 +59,7 @@ public class FVisitController extends BaseController
     /**
      * 导出就诊列表
      */
-    @PreAuthorize("@ss.hasPermi('doc:visit:export')")
+    //@PreAuthorize("@ss.hasPermi('doc:visit:export')")
     @Log(title = "就诊", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, FVisit fVisit)
@@ -72,7 +72,7 @@ public class FVisitController extends BaseController
     /**
      * 获取就诊详细信息
      */
-    @PreAuthorize("@ss.hasPermi('doc:visit:query')")
+    //@PreAuthorize("@ss.hasPermi('doc:visit:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -82,7 +82,7 @@ public class FVisitController extends BaseController
     /**
      * 新增就诊
      */
-    @PreAuthorize("@ss.hasPermi('doc:visit:add')")
+    //@PreAuthorize("@ss.hasPermi('doc:visit:add')")
     @Log(title = "就诊", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody FVisit fVisit) {
@@ -94,7 +94,7 @@ public class FVisitController extends BaseController
     /**
      * 修改就诊
      */
-    @PreAuthorize("@ss.hasPermi('doc:visit:edit')")
+    //@PreAuthorize("@ss.hasPermi('doc:visit:edit')")
     @Log(title = "就诊", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody FVisit fVisit) {
@@ -105,7 +105,7 @@ public class FVisitController extends BaseController
     /**
      * 删除就诊
      */
-    @PreAuthorize("@ss.hasPermi('doc:visit:remove')")
+    //@PreAuthorize("@ss.hasPermi('doc:visit:remove')")
     @Log(title = "就诊", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
