@@ -42,9 +42,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="patientName != null  and patientName != ''"> and patient_name like concat('%', #{patientName}, '%')</if>
             <if test="patientPhone != null  and patientPhone != ''"> and patient_phone = #{patientPhone}</if>
             <if test="patientStatus != null  and patientStatus != ''"> and patient_status = #{patientStatus}</if>
-            <if test="waitTime != null "> and wait_time = #{waitTime}</if>
+            <if test="waitTime != null "> and wait_time like concat(#{waitTime}, '%')</if>
             <if test="room != null  and room != ''"> and room = #{room}</if>
-            <if test="adjustTime != null "> and adjust_time = #{adjustTime}</if>
+            <if test="adjustTime != null "> and adjust_time like concat(#{adjustTime}, '%')</if>
             <if test="adjustDocId != null "> and adjust_doc_id = #{adjustDocId}</if>
             <if test="adjustDocName != null  and adjustDocName != ''"> and adjust_doc_name like concat('%', #{adjustDocName}, '%')</if>
             <if test="receptionDocId != null "> and reception_doc_id = #{receptionDocId}</if>
@@ -54,6 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="assignContent != null  and assignContent != ''"> and assign_content = #{assignContent}</if>
             <if test="parentId != null "> and parent_id = #{parentId}</if>
         </where>
+        order by id
     </select>
     
     <select id="selectFWaitById" parameterType="Long" resultMap="FWaitResult">

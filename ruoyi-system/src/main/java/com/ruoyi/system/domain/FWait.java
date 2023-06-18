@@ -49,9 +49,8 @@ public class FWait extends BaseEntity {
     private String patientStatus;
 
     /** 进入队列时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Excel(name = "进入队列时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
-    private Date waitTime;
+    @Excel(name = "进入队列时间", width = 30)
+    private String waitTime;
 
     /** 诊室： */
     @Excel(name = "诊室：")
@@ -59,9 +58,8 @@ public class FWait extends BaseEntity {
     private String room;
 
     /** 调整队列时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Excel(name = "调整队列时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
-    private Date adjustTime;
+    @Excel(name = "调整队列时间", width = 30)
+    private String adjustTime;
 
     /** 调整队列的医生id */
     @Excel(name = "调整队列的医生id")
@@ -98,185 +96,4 @@ public class FWait extends BaseEntity {
     /** 删除标志（0代表存在 */
     private String delFlag;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
-
-    public Long getId() 
-    {
-        return id;
-    }
-    public void setPatientId(Long patientId) 
-    {
-        this.patientId = patientId;
-    }
-
-    public Long getPatientId() 
-    {
-        return patientId;
-    }
-    public void setPatientName(String patientName) 
-    {
-        this.patientName = patientName;
-    }
-
-    public String getPatientName() 
-    {
-        return patientName;
-    }
-    public void setPatientPhone(String patientPhone) 
-    {
-        this.patientPhone = patientPhone;
-    }
-
-    public String getPatientPhone() 
-    {
-        return patientPhone;
-    }
-    public void setPatientStatus(String patientStatus) 
-    {
-        this.patientStatus = patientStatus;
-    }
-
-    public String getPatientStatus() 
-    {
-        return patientStatus;
-    }
-    public void setWaitTime(Date waitTime) 
-    {
-        this.waitTime = waitTime;
-    }
-
-    public Date getWaitTime() 
-    {
-        return waitTime;
-    }
-    public void setRoom(String room) 
-    {
-        this.room = room;
-    }
-
-    public String getRoom() 
-    {
-        return room;
-    }
-    public void setAdjustTime(Date adjustTime) 
-    {
-        this.adjustTime = adjustTime;
-    }
-
-    public Date getAdjustTime() 
-    {
-        return adjustTime;
-    }
-    public void setAdjustDocId(Long adjustDocId) 
-    {
-        this.adjustDocId = adjustDocId;
-    }
-
-    public Long getAdjustDocId() 
-    {
-        return adjustDocId;
-    }
-    public void setAdjustDocName(String adjustDocName) 
-    {
-        this.adjustDocName = adjustDocName;
-    }
-
-    public String getAdjustDocName() 
-    {
-        return adjustDocName;
-    }
-    public void setReceptionDocId(Long receptionDocId) 
-    {
-        this.receptionDocId = receptionDocId;
-    }
-
-    public Long getReceptionDocId() 
-    {
-        return receptionDocId;
-    }
-    public void setReceptionDocName(String receptionDocName) 
-    {
-        this.receptionDocName = receptionDocName;
-    }
-
-    public String getReceptionDocName() 
-    {
-        return receptionDocName;
-    }
-    public void setAssignDocId(Long assignDocId) 
-    {
-        this.assignDocId = assignDocId;
-    }
-
-    public Long getAssignDocId() 
-    {
-        return assignDocId;
-    }
-    public void setAssignDocName(String assignDocName) 
-    {
-        this.assignDocName = assignDocName;
-    }
-
-    public String getAssignDocName() 
-    {
-        return assignDocName;
-    }
-    public void setAssignContent(String assignContent) 
-    {
-        this.assignContent = assignContent;
-    }
-
-    public String getAssignContent() 
-    {
-        return assignContent;
-    }
-    public void setParentId(Long parentId) 
-    {
-        this.parentId = parentId;
-    }
-
-    public Long getParentId() 
-    {
-        return parentId;
-    }
-    public void setDelFlag(String delFlag) 
-    {
-        this.delFlag = delFlag;
-    }
-
-    public String getDelFlag() 
-    {
-        return delFlag;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("patientId", getPatientId())
-            .append("patientName", getPatientName())
-            .append("patientPhone", getPatientPhone())
-            .append("patientStatus", getPatientStatus())
-            .append("waitTime", getWaitTime())
-            .append("room", getRoom())
-            .append("adjustTime", getAdjustTime())
-            .append("adjustDocId", getAdjustDocId())
-            .append("adjustDocName", getAdjustDocName())
-            .append("receptionDocId", getReceptionDocId())
-            .append("receptionDocName", getReceptionDocName())
-            .append("assignDocId", getAssignDocId())
-            .append("assignDocName", getAssignDocName())
-            .append("assignContent", getAssignContent())
-            .append("parentId", getParentId())
-            .append("delFlag", getDelFlag())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("remark", getRemark())
-            .toString();
-    }
 }
