@@ -67,6 +67,28 @@ public class FWaitServiceImpl implements IFWaitService
         return waits;
     }
 
+    /**
+     * 分诊室的医生查询队列
+     * @param fWait 排队
+     * @return
+     */
+    @Override
+    public List<FWait> findFWaitList(FWait fWait) {
+        List<FWait> waits = fWaitMapper.findFWaitList(fWait);
+        return waits;
+    }
+
+    /**
+     * 分诊室之外的医生查询队列
+     * @param fWait 排队
+     * @return
+     */
+    @Override
+    public List<FWait> getFWaitList(FWait fWait) {
+        List<FWait> waits = fWaitMapper.getFWaitList(fWait);
+        return waits;
+    }
+
     public int insertFWait(FWait fWait){
         fWait.setCreateTime(DateUtils.getNowDate());
         fWait.setUpdateTime(DateUtils.getNowDate());

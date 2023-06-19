@@ -27,6 +27,22 @@ public interface IFWaitService {
     List<FWait> selectFWaitList(FWait fWait);
 
     /**
+     * 分诊室的医生查询队列
+     *
+     * @param fWait 排队
+     * @return 排队集合
+     */
+    List<FWait> findFWaitList(FWait fWait);
+
+    /**
+     * 分诊室之外的医生查询队列
+     *
+     * @param fWait 排队
+     * @return 排队集合
+     */
+    List<FWait> getFWaitList(FWait fWait);
+
+    /**
      * 新增排队
      *
      * @param fWait 排队

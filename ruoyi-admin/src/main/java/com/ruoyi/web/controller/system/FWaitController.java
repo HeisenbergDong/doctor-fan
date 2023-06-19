@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.common.enums.DipatchStatus;
 import com.ruoyi.common.exception.ServiceException;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -43,11 +44,38 @@ public class FWaitController extends BaseController
      */
     //@PreAuthorize("@ss.hasPermi('doc:wait:list')")
     @GetMapping("/list")
-    public TableDataInfo list(FWait fWait)
-    {
+    public TableDataInfo list(FWait fWait) {
         startPage();
         List<FWait> list = fWaitService.selectFWaitList(fWait);
         return getDataTable(list);
+    }
+
+    /**
+     * 分诊室之外的医生查询队列
+     */
+    //@PreAuthorize("@ss.hasPermi('doc:wait:list')")
+    @GetMapping("/dispatch/list")
+    public AjaxResult findFWaitList(FWait fWait) {
+        List<FWait> list = fWaitService.findFWaitList(fWait);
+        return AjaxResult.success(list);
+    }
+
+    /**
+     * 分诊室之外的医生查询队列
+     */
+    //@PreAuthorize("@ss.hasPermi('doc:wait:list')")
+    @GetMapping("/all")
+    public AjaxResult getFWaitList(FWait fWait) {
+        /** 检查指派诊室不能为空 */
+        if(ObjectUtils.isEmpty(fWait.getRoom())){
+            throw new ServiceException("诊室不能为空！");
+        }
+        /** 不能查询指派给其他医生的患者 */
+        if(ObjectUtils.isNotEmpty(fWait.getReceptionDocId()) && !fWait.getReceptionDocId().equals(getUserId())){
+            fWait.setReceptionDocId(null);
+        }
+        List<FWait> list = fWaitService.getFWaitList(fWait);
+        return AjaxResult.success(list);
     }
 
     /**
