@@ -179,7 +179,7 @@ public class FWaitServiceImpl implements IFWaitService
             fVisit.setDocId(fWait.getReceptionDocId());
             fVisit.setDocName(fWait.getReceptionDocName());
             fVisit.setNewPatient(fPatient.getNewPatient());
-            fVisit.setVisitTime(DateUtils.getNowDate().toString());
+            fVisit.setVisitTime(DateUtils.getTime());
             visitService.insertFVisit(fVisit);
             /** 发送websocket消息 */
             socketMessageService.sendBroadcast(fWait.getRoom(),"/topic/call",fWaitMapper.selectFWaitById(fWait.getId()));

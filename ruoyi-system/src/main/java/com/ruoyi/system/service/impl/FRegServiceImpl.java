@@ -124,7 +124,7 @@ public class FRegServiceImpl implements IFRegService
         fWait.setPatientPhone(patient.getPhone());
         fWait.setRoom(RoomNo.DISPATCH_1.getInfo());
         fWait.setPatientStatus(DipatchStatus.ZERO.getCode());
-        fWait.setWaitTime(DateUtils.getNowDate().toString());
+        fWait.setWaitTime(DateUtils.getTime());
         fWait.setCreateBy(reg.getCreateBy());
         fWait.setUpdateBy(reg.getUpdateBy());
         fWait.setUpdateTime(DateUtils.getNowDate());
