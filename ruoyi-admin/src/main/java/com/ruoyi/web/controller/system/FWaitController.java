@@ -125,6 +125,8 @@ public class FWaitController extends BaseController
     public AjaxResult dispatch(@RequestBody @Validated FWait fWait){
         fWait.setCreateBy(getUserId().toString());
         fWait.setUpdateBy(getUserId().toString());
+        fWait.setAssignDocId(getUserId());
+        fWait.setAssignDocName(getUsername());
         return toAjax(fWaitService.dispatch(fWait));
     }
 
@@ -141,6 +143,7 @@ public class FWaitController extends BaseController
         }
         fWait.setUpdateBy(getUserId().toString());
         fWait.setReceptionDocId(getUserId());
+        fWait.setReceptionDocName(getUsername());
         return toAjax(fWaitService.call(fWait));
     }
 

@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -72,7 +73,7 @@ public class FFormController extends BaseController
     //@PreAuthorize("@ss.hasPermi('doc:form:add')")
     @Log(title = "单", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody FForm fForm) {
+    public AjaxResult add(@RequestBody @Validated FForm fForm) {
         fForm.setCreateBy(getUserId().toString());
         fForm.setUpdateBy(getUserId().toString());
         return toAjax(fFormService.insertFForm(fForm));
@@ -84,7 +85,7 @@ public class FFormController extends BaseController
     //@PreAuthorize("@ss.hasPermi('doc:form:edit')")
     @Log(title = "单", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody FForm fForm) {
+    public AjaxResult edit(@RequestBody @Validated FForm fForm) {
         fForm.setUpdateBy(getUserId().toString());
         return toAjax(fFormService.updateFForm(fForm));
     }
