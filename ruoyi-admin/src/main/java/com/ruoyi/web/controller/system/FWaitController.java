@@ -140,6 +140,7 @@ public class FWaitController extends BaseController
             throw new ServiceException("客人不是排队中的状态，请确认！");
         }
         fWait.setUpdateBy(getUserId().toString());
+        fWait.setReceptionDocId(getUserId());
         return toAjax(fWaitService.call(fWait));
     }
 
