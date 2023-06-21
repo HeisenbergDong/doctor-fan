@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="findFWaitList" parameterType="FWait" resultMap="FWaitResult">
         <include refid="selectFWaitVo"/>
         <where>
-            patient_status != 2
+            patient_status != 2  and room != '结束'
             <if test="regNo != null  and regNo != ''"> and reg_no = #{regNo}</if>
             <if test="patientId != null "> and patient_id = #{patientId}</if>
             <if test="patientName != null  and patientName != ''"> and patient_name like concat('%', #{patientName}, '%')</if>
