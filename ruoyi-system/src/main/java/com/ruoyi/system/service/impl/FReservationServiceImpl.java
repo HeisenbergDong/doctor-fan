@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.FReservationMapper;
 import com.ruoyi.system.domain.FReservation;
 import com.ruoyi.system.service.IFReservationService;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 /**
@@ -66,10 +67,23 @@ public class FReservationServiceImpl implements IFReservationService
     public int insertFReservation(FReservation fReservation){
         /** 校验患者信息和医生信息 */
         checkUser(fReservation);
+        /** 校验是否重复预约 */
+        checkRepeat(fReservation);
 
         fReservation.setCreateTime(DateUtils.getNowDate());
         fReservation.setUpdateTime(DateUtils.getNowDate());
         return fReservationMapper.insertFReservation(fReservation);
+    }
+
+    private void checkRepeat(FReservation fReservation){
+        /** 校验患者信息是否正确 */
+        FReservation reservation = new FReservation();
+        reservation.setPatientId(fReservation.getPatientId());
+        reservation.setPreDate(fReservation.getPreDate());
+        List<FReservation> reservationList = fReservationMapper.selectFReservationList(reservation);
+        if(CollectionUtils.isEmpty(reservationList)){
+            throw new ServiceException("不能重复预约！");
+        }
     }
 
     private void checkUser(FReservation fReservation){

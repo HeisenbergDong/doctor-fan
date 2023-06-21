@@ -61,8 +61,7 @@ public class FWarningServiceImpl implements IFWarningService
      * @return 结果
      */
     @Override
-    public int insertFWarning(FWarning fWarning)
-    {
+    public int insertFWarning(FWarning fWarning) {
         fWarning.setCreateTime(DateUtils.getNowDate());
         fWarning.setUpdateTime(DateUtils.getNowDate());
         return fWarningMapper.insertFWarning(fWarning);
