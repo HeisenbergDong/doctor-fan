@@ -6,6 +6,7 @@ import java.util.List;
 import com.ruoyi.common.enums.DipatchStatus;
 import com.ruoyi.common.enums.RoomNo;
 import com.ruoyi.common.enums.YesOrNo;
+import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.FPatient;
 import com.ruoyi.system.domain.FReservation;
@@ -124,6 +125,11 @@ public class FRegServiceImpl implements IFRegService
         fWait.setPatientPhone(patient.getPhone());
         fWait.setRoom(RoomNo.DISPATCH_1.getInfo());
         fWait.setPatientStatus(DipatchStatus.ZERO.getCode());
+        fWait.setWaitTime(DateUtils.getDate());
+        List<FWait> waitList = waitService.selectFWaitList(fWait);
+        if(!CollectionUtils.isEmpty(waitList)){
+            throw new ServiceException("不能重复挂号！");
+        }
         fWait.setWaitTime(DateUtils.getTime());
         fWait.setCreateBy(reg.getCreateBy());
         fWait.setUpdateBy(reg.getUpdateBy());
