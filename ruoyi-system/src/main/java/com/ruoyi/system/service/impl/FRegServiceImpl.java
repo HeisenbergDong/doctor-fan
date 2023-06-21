@@ -118,8 +118,6 @@ public class FRegServiceImpl implements IFRegService
         FReg reg = fRegMapper.selectFRegById(fReg.getId());
         /** 挂号成功将患者自动放入分诊队列 */
         FWait fWait = new FWait();
-        fWait.setRegNo(fReg.getRegNo());
-        fWait.setAssignDocId(Long.parseLong(reg.getCreateBy()));
         fWait.setPatientId(patient.getId());
         fWait.setPatientName(patient.getName());
         fWait.setPatientPhone(patient.getPhone());
@@ -130,6 +128,8 @@ public class FRegServiceImpl implements IFRegService
         if(!CollectionUtils.isEmpty(waitList)){
             throw new ServiceException("不能重复挂号！");
         }
+        fWait.setRegNo(fReg.getRegNo());
+        fWait.setAssignDocId(Long.parseLong(reg.getCreateBy()));
         fWait.setWaitTime(DateUtils.getTime());
         fWait.setCreateBy(reg.getCreateBy());
         fWait.setUpdateBy(reg.getUpdateBy());
