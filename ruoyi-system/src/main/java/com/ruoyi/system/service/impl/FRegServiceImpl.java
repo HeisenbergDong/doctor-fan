@@ -112,6 +112,7 @@ public class FRegServiceImpl implements IFRegService
         }
         /** 生成编号 日期+5位顺序号 + 前端输入的内容 */
         fReg.setRegNo(generatorRegNo(fReg.getRegNo()));
+        fReg.setRegDate(DateUtils.getNowDate());
         fReg.setCreateTime(DateUtils.getNowDate());
         fReg.setUpdateTime(DateUtils.getNowDate());
         fRegMapper.insertFReg(fReg);

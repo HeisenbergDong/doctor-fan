@@ -81,7 +81,7 @@ public class FReservationServiceImpl implements IFReservationService
         reservation.setPatientId(fReservation.getPatientId());
         reservation.setPreDate(fReservation.getPreDate());
         List<FReservation> reservationList = fReservationMapper.selectFReservationList(reservation);
-        if(CollectionUtils.isEmpty(reservationList)){
+        if(!CollectionUtils.isEmpty(reservationList)){
             throw new ServiceException("不能重复预约！");
         }
     }
