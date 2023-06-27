@@ -65,7 +65,7 @@ public class FWaitController extends BaseController
      */
     //@PreAuthorize("@ss.hasPermi('doc:wait:list')")
     @GetMapping("/all")
-    public AjaxResult getFWaitList(FWait fWait) {
+    public TableDataInfo getFWaitList(FWait fWait) {
         /** 检查指派诊室不能为空 */
         if(ObjectUtils.isEmpty(fWait.getRoom())){
             throw new ServiceException("诊室不能为空！");
@@ -74,8 +74,9 @@ public class FWaitController extends BaseController
         if(ObjectUtils.isNotEmpty(fWait.getReceptionDocId()) && !fWait.getReceptionDocId().equals(getUserId())){
             fWait.setReceptionDocId(null);
         }
+        startPage();
         List<FWait> list = fWaitService.getFWaitList(fWait);
-        return AjaxResult.success(list);
+        return getDataTable(list);
     }
 
     /**
