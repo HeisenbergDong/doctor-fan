@@ -31,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
             <if test="black != null  and black != ''"> and black = #{black}</if>
             <if test="newPatient != null  and newPatient != ''"> and new_patient = #{newPatient}</if>
+            <if test="start != null and end != null "> and create_time BETWEEN #{start} and #{end}</if>
         </where>
     </select>
     
