@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.annotation.IdentityCardNumber;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -20,8 +21,8 @@ import javax.validation.constraints.Pattern;
  * @author ruoyi
  * @date 2023-05-23
  */
-public class FReg extends BaseEntity
-{
+@Data
+public class FReg extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 挂号id */
@@ -68,105 +69,11 @@ public class FReg extends BaseEntity
     /** 删除标志（0代表存在 */
     private String delFlag;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date start;
 
-    public Long getId() 
-    {
-        return id;
-    }
-    public void setRegNo(String regNo) 
-    {
-        this.regNo = regNo;
-    }
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date end;
 
-    public String getRegNo() 
-    {
-        return regNo;
-    }
-    public void setName(String name) 
-    {
-        this.name = name;
-    }
 
-    public String getName() 
-    {
-        return name;
-    }
-    public void setPhone(String phone) 
-    {
-        this.phone = phone;
-    }
-
-    public String getPhone() 
-    {
-        return phone;
-    }
-    public void setIdCard(String idCard) 
-    {
-        this.idCard = idCard;
-    }
-
-    public String getIdCard() 
-    {
-        return idCard;
-    }
-    public void setRegDate(Date regDate) 
-    {
-        this.regDate = regDate;
-    }
-
-    public Date getRegDate() 
-    {
-        return regDate;
-    }
-    public void setRegFee(BigDecimal regFee) 
-    {
-        this.regFee = regFee;
-    }
-
-    public BigDecimal getRegFee() 
-    {
-        return regFee;
-    }
-    public void setCheckFee(BigDecimal checkFee) 
-    {
-        this.checkFee = checkFee;
-    }
-
-    public BigDecimal getCheckFee() 
-    {
-        return checkFee;
-    }
-    public void setDelFlag(String delFlag) 
-    {
-        this.delFlag = delFlag;
-    }
-
-    public String getDelFlag() 
-    {
-        return delFlag;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("regNo", getRegNo())
-            .append("name", getName())
-            .append("phone", getPhone())
-            .append("idCard", getIdCard())
-            .append("regDate", getRegDate())
-            .append("regFee", getRegFee())
-            .append("checkFee", getCheckFee())
-            .append("delFlag", getDelFlag())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("remark", getRemark())
-            .toString();
-    }
 }

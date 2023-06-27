@@ -35,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="regDate != null "> and reg_date = #{regDate}</if>
             <if test="regFee != null "> and reg_fee = #{regFee}</if>
             <if test="checkFee != null "> and check_fee = #{checkFee}</if>
+            <if test="start != null and end != null "> and reg_date BETWEEN #{start} and #{end}</if>
         </where>
     </select>
     
