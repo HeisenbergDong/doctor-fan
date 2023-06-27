@@ -36,7 +36,7 @@ public class SysFileController extends BaseController {
     /**
      * 文件上传请求
      */
-    @PostMapping("upload")
+    @PostMapping("/upload")
     public R<FFile> upload(MultipartFile file)
     {
         try

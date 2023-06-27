@@ -6,6 +6,7 @@ import java.util.List;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.service.IFPatientService;
+import com.ruoyi.system.service.ISocketMessageService;
 import com.ruoyi.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,9 @@ public class FReservationServiceImpl implements IFReservationService
 
     @Autowired
     private ISysUserService userService;
+
+    @Autowired
+    private ISocketMessageService socketMessageService;
 
     /**
      * 查询预约
@@ -72,7 +76,11 @@ public class FReservationServiceImpl implements IFReservationService
 
         fReservation.setCreateTime(DateUtils.getNowDate());
         fReservation.setUpdateTime(DateUtils.getNowDate());
-        return fReservationMapper.insertFReservation(fReservation);
+        int result = fReservationMapper.insertFReservation(fReservation);
+        if(0 != result){
+            socketMessageService.sendBroadcast(fReservation.getDocName(),"/topic/reservation",fReservationMapper.selectFReservationById(fReservation.getId()));
+        }
+        return result;
     }
 
     private void checkRepeat(FReservation fReservation){

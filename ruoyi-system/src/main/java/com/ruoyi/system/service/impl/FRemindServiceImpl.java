@@ -7,6 +7,7 @@ import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.FReservation;
 import com.ruoyi.system.service.IFPatientService;
+import com.ruoyi.system.service.ISocketMessageService;
 import com.ruoyi.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,9 @@ public class FRemindServiceImpl implements IFRemindService
 
     @Autowired
     private ISysUserService userService;
+
+    @Autowired
+    private ISocketMessageService socketMessageService;
 
     /**
      * 查询提醒
@@ -70,7 +74,11 @@ public class FRemindServiceImpl implements IFRemindService
 
         fRemind.setCreateTime(DateUtils.getNowDate());
         fRemind.setUpdateTime(DateUtils.getNowDate());
-        return fRemindMapper.insertFRemind(fRemind);
+        int result = fRemindMapper.insertFRemind(fRemind);
+        if(0 != result){
+            socketMessageService.sendBroadcast(fRemind.getDocName(),"/topic/remind",fRemindMapper.selectFRemindById(fRemind.getId()));
+        }
+        return result;
     }
 
     private void checkUser(FRemind fRemind){
