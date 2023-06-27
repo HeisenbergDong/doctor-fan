@@ -70,6 +70,11 @@ public class FRemindController extends BaseController
         return success(fRemindService.selectFRemindById(id));
     }
 
+    @GetMapping(value = "/setup")
+    public AjaxResult setUp(FRemind fRemind){
+        return success(fRemindService.setUp(fRemind));
+    }
+
     /**
      * 新增提醒
      */

@@ -6,14 +6,12 @@ import java.util.List;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.FReservation;
-import com.ruoyi.system.service.IFPatientService;
-import com.ruoyi.system.service.ISocketMessageService;
-import com.ruoyi.system.service.ISysUserService;
+import com.ruoyi.system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.FRemindMapper;
 import com.ruoyi.system.domain.FRemind;
-import com.ruoyi.system.service.IFRemindService;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 /**
@@ -23,8 +21,7 @@ import org.springframework.util.ObjectUtils;
  * @date 2023-05-23
  */
 @Service
-public class FRemindServiceImpl implements IFRemindService 
-{
+public class FRemindServiceImpl implements IFRemindService {
     @Autowired
     private FRemindMapper fRemindMapper;
 
@@ -33,6 +30,9 @@ public class FRemindServiceImpl implements IFRemindService
 
     @Autowired
     private ISysUserService userService;
+
+    @Autowired
+    private IFReservationService reservationService;
 
     @Autowired
     private ISocketMessageService socketMessageService;
@@ -59,6 +59,16 @@ public class FRemindServiceImpl implements IFRemindService
     public List<FRemind> selectFRemindList(FRemind fRemind)
     {
         return fRemindMapper.selectFRemindList(fRemind);
+    }
+
+    @Override
+    public boolean setUp(FRemind fRemind) {
+        List<FRemind> reminds = fRemindMapper.selectFRemindList(fRemind);
+        FReservation reservation = new FReservation();
+        reservation.setPatientId(fRemind.getPatientId());
+        reservation.setPreDate(fRemind.getRemindDate());
+        List<FReservation> reservations = reservationService.selectFReservationList(reservation);
+        return CollectionUtils.isEmpty(reminds) && CollectionUtils.isEmpty(reservations);
     }
 
     /**
