@@ -33,6 +33,17 @@ public class FPatient extends BaseEntity
     @Excel(name = "患者身份证")
     private String idCard;
 
+    @Excel(name = "患者年龄")
+    private Long age;
+
+    /** 患者性别 */
+    @Excel(name = "患者性别")
+    private String sex;
+
+    /** 准者住址 */
+    @Excel(name = "准者住址")
+    private String address;
+
     /** 是否黑名单0-否1-是 */
     @Excel(name = "是否黑名单0-否1-是")
     private String black;

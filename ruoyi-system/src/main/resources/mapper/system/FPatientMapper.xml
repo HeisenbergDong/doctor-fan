@@ -9,6 +9,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="name"    column="name"    />
         <result property="phone"    column="phone"    />
         <result property="idCard"    column="id_card"    />
+        <result property="age"    column="age"    />
+        <result property="sex"    column="sex"    />
+        <result property="address"    column="address"    />
         <result property="black"    column="black"    />
         <result property="newPatient"    column="new_patient"    />
         <result property="delFlag"    column="del_flag"    />
@@ -20,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectFPatientVo">
-        select id, name, phone, id_card, black, new_patient, del_flag, create_by, create_time, update_by, update_time, remark from f_patient
+        select id, name, phone, id_card, age, sex, address, black, new_patient, del_flag, create_by, create_time, update_by, update_time, remark from f_patient
     </sql>
 
     <select id="selectFPatientList" parameterType="FPatient" resultMap="FPatientResult">
@@ -29,6 +32,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
             <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="age != null "> and age = #{age}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
             <if test="black != null  and black != ''"> and black = #{black}</if>
             <if test="newPatient != null  and newPatient != ''"> and new_patient = #{newPatient}</if>
             <if test="start != null and end != null "> and create_time BETWEEN #{start} and #{end}</if>
@@ -47,6 +53,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null and name != ''">name,</if>
             <if test="phone != null and phone != ''">phone,</if>
             <if test="idCard != null">id_card,</if>
+            <if test="age != null">age,</if>
+            <if test="sex != null">sex,</if>
+            <if test="address != null">address,</if>
             <if test="black != null and black != ''">black,</if>
             <if test="newPatient != null and newPatient != ''">new_patient,</if>
             <if test="delFlag != null">del_flag,</if>
@@ -61,6 +70,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null and name != ''">#{name},</if>
             <if test="phone != null and phone != ''">#{phone},</if>
             <if test="idCard != null">#{idCard},</if>
+            <if test="age != null">#{age},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="address != null">#{address},</if>
             <if test="black != null and black != ''">#{black},</if>
             <if test="newPatient != null and newPatient != ''">#{newPatient},</if>
             <if test="delFlag != null">#{delFlag},</if>
@@ -78,6 +90,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null and name != ''">name = #{name},</if>
             <if test="phone != null and phone != ''">phone = #{phone},</if>
             <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="address != null">address = #{address},</if>
             <if test="black != null and black != ''">black = #{black},</if>
             <if test="newPatient != null and newPatient != ''">new_patient = #{newPatient},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
