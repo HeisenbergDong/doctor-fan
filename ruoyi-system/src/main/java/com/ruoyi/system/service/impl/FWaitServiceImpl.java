@@ -172,6 +172,9 @@ public class FWaitServiceImpl implements IFWaitService
         }else{
             /** 查询患者是否是新诊患者，方便后期统计 */
             FPatient fPatient = patientService.selectFPatientById(fWait.getPatientId());
+            if(ObjectUtils.isEmpty(fPatient)){
+                throw new ServiceException("系统中已检测不到该患者信息！");
+            }
             /** 将患者加入到就诊表 */
             FVisit fVisit = new FVisit();
             BeanUtils.copyProperties(fWait,fVisit);
@@ -179,6 +182,9 @@ public class FWaitServiceImpl implements IFWaitService
             fVisit.setDocId(fWait.getReceptionDocId());
             fVisit.setDocName(fWait.getReceptionDocName());
             fVisit.setNewPatient(fPatient.getNewPatient());
+            fVisit.setPatientName(fPatient.getName());
+            fVisit.setPatientIdCard(fPatient.getIdCard());
+            fVisit.setPatientPhone(fPatient.getPhone());
             fVisit.setVisitTime(DateUtils.getTime());
             visitService.insertFVisit(fVisit);
             /** 发送websocket消息 */
