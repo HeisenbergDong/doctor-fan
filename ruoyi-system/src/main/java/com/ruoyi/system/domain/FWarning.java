@@ -9,6 +9,8 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * 提醒对象 f_warning
@@ -25,18 +27,26 @@ public class FWarning extends BaseEntity {
 
     /** 阈值类型0-预约阈值1-提醒阈值 */
     @Excel(name = "阈值类型0-预约阈值1-提醒阈值")
+    @NotBlank(message = "阈值类型不能为空")
     private String warningType;
 
     private String warningTypeName;
 
     /** 阈值大小 */
     @Excel(name = "阈值大小")
+    @NotNull(message = "阈值不能为空")
     private Long num;
 
     /** 阈值适用日期，空适用于全部未设置日期 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "阈值适用日期，空适用于全部未设置日期", width = 30, dateFormat = "yyyy-MM-dd")
     private Date warningDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date startDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date endDate;
 
     /** 删除标志（0代表存在 */
     private String delFlag;

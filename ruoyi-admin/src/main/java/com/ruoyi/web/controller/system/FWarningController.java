@@ -83,6 +83,18 @@ public class FWarningController extends BaseController
     }
 
     /**
+     * 新增提醒
+     */
+    //@PreAuthorize("@ss.hasPermi('doc:warning:add')")
+    @Log(title = "提醒", businessType = BusinessType.INSERT)
+    @PostMapping("/batch")
+    public AjaxResult batchFWarning(@RequestBody @Validated FWarning fWarning) {
+        fWarning.setCreateBy(getUserId().toString());
+        fWarning.setUpdateBy(getUserId().toString());
+        return toAjax(fWarningService.batchFWarning(fWarning));
+    }
+
+    /**
      * 修改提醒
      */
     //@PreAuthorize("@ss.hasPermi('doc:warning:edit')")
