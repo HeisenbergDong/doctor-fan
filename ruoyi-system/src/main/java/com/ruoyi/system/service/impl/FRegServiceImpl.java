@@ -147,7 +147,7 @@ public class FRegServiceImpl implements IFRegService
     private String generatorRegNo(String no){
         FReg fReg = fRegMapper.selectRegByMaxNo();
         String regNo = fReg==null||fReg.getRegNo()==null?DateUtils.getDate()+"00001":DateUtils.getDate() + String.format("%05d",Long.parseLong(fReg.getRegNo().substring(10,15)) + 1);
-        return regNo + no;
+        return regNo.replace("-","") + no;
     }
 
     /**
