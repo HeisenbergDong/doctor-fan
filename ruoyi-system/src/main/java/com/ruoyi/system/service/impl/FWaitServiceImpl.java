@@ -149,7 +149,7 @@ public class FWaitServiceImpl implements IFWaitService
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int call(FWait fWait){
+    public Long call(FWait fWait){
         /** 检查医生名下患者是否还有进行中的患者，如果有，不能叫号 */
         FWait w = new FWait();
         w.setReceptionDocId(fWait.getReceptionDocId());
@@ -189,8 +189,8 @@ public class FWaitServiceImpl implements IFWaitService
             visitService.insertFVisit(fVisit);
             /** 发送websocket消息 */
             socketMessageService.sendBroadcast(fWait.getRoom(),"/topic/call",fWaitMapper.selectFWaitById(fWait.getId()));
+            return fVisit.getId();
         }
-        return result;
     }
 
     /**

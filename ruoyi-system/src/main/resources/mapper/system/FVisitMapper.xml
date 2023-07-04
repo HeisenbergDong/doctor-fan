@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
         
-    <insert id="insertFVisit" parameterType="FVisit">
+    <insert id="insertFVisit" parameterType="FVisit" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         insert into f_visit
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>

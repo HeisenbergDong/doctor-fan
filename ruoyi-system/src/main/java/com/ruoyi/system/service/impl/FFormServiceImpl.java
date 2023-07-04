@@ -2,11 +2,15 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.FVisitForm;
+import com.ruoyi.system.mapper.FVisitFormMapper;
+import com.ruoyi.system.service.IFVisitFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.FFormMapper;
 import com.ruoyi.system.domain.FForm;
 import com.ruoyi.system.service.IFFormService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 单Service业务层处理
@@ -18,6 +22,9 @@ import com.ruoyi.system.service.IFFormService;
 public class FFormServiceImpl implements IFFormService {
     @Autowired
     private FFormMapper fFormMapper;
+
+    @Autowired
+    private IFVisitFormService visitFormService;
 
     /**
      * 查询单
@@ -50,10 +57,17 @@ public class FFormServiceImpl implements IFFormService {
      * @return 结果
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int insertFForm(FForm fForm) {
         fForm.setCreateTime(DateUtils.getNowDate());
         fForm.setUpdateTime(DateUtils.getNowDate());
-        return fFormMapper.insertFForm(fForm);
+        int result = fFormMapper.insertFForm(fForm);
+        /** 建立问诊单和表单关联关系 */
+        FVisitForm visitForm = new FVisitForm();
+        visitForm.setFormId(fForm.getId());
+        visitForm.setVisitId(fForm.getVisitId());
+        visitFormService.insertFVisitForm(visitForm);
+        return result;
     }
 
     /**

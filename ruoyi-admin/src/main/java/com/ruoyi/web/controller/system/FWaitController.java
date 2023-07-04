@@ -145,7 +145,7 @@ public class FWaitController extends BaseController
         fWait.setUpdateBy(getUserId().toString());
         fWait.setReceptionDocId(getUserId());
         fWait.setReceptionDocName(getUsername());
-        return toAjax(fWaitService.call(fWait));
+        return success(fWaitService.call(fWait));
     }
 
     /**

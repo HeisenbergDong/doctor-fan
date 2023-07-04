@@ -72,7 +72,7 @@ public interface IFWaitService {
      * @param fWait 排队
      * @return 结果
      */
-    int call(FWait fWait);
+    Long call(FWait fWait);
 
     /**
      * 批量删除排队
