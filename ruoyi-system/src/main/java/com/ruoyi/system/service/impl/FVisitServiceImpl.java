@@ -1,12 +1,18 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.FForm;
+import com.ruoyi.system.domain.FVisitForm;
+import com.ruoyi.system.service.IFFormService;
+import com.ruoyi.system.service.IFVisitFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.FVisitMapper;
 import com.ruoyi.system.domain.FVisit;
 import com.ruoyi.system.service.IFVisitService;
+import org.springframework.util.CollectionUtils;
 
 /**
  * 就诊Service业务层处理
@@ -19,6 +25,12 @@ public class FVisitServiceImpl implements IFVisitService
 {
     @Autowired
     private FVisitMapper fVisitMapper;
+
+    @Autowired
+    private IFVisitFormService visitFormService;
+
+    @Autowired
+    private IFFormService formService;
 
     /**
      * 查询就诊
@@ -39,9 +51,27 @@ public class FVisitServiceImpl implements IFVisitService
      * @return 就诊
      */
     @Override
-    public List<FVisit> selectFVisitList(FVisit fVisit)
-    {
-        return fVisitMapper.selectFVisitList(fVisit);
+    public List<FVisit> selectFVisitList(FVisit fVisit){
+        List<FVisit> visitList = fVisitMapper.selectFVisitList(fVisit);
+        if(CollectionUtils.isEmpty(visitList)){
+            return visitList;
+        }
+        /** 查询就诊记录的表单内容 TODO：循环查询容易导致数据库连接数沾满，后期可以优化成in语句 */
+        List<FForm> fFormList = new ArrayList<>();
+        for(FVisit visit:visitList){
+            FVisitForm visitForm = new FVisitForm();
+            visitForm.setVisitId(visit.getId());
+            List<FVisitForm> visitFormList = visitFormService.selectFVisitFormList(visitForm);
+            if(CollectionUtils.isEmpty(visitFormList)){
+                continue;
+            }
+            for(FVisitForm vf:visitFormList){
+                FForm form = formService.selectFFormById(vf.getFormId());
+                fFormList.add(form);
+            }
+            visit.setFFormList(fFormList);
+        }
+        return visitList;
     }
 
     /**

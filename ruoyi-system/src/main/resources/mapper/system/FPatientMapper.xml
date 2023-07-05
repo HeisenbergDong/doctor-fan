@@ -14,6 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="address"    column="address"    />
         <result property="black"    column="black"    />
         <result property="newPatient"    column="new_patient"    />
+        <result property="releaseId"    column="release_id"    />
+        <result property="releaseTag"    column="release_tag"    />
         <result property="delFlag"    column="del_flag"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
@@ -23,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectFPatientVo">
-        select id, name, phone, id_card, age, sex, address, black, new_patient, del_flag, create_by, create_time, update_by, update_time, remark from f_patient
+        select id, name, phone, id_card, age, sex, address, black, new_patient, release_id, release_tag, del_flag, create_by, create_time, update_by, update_time, remark from f_patient
     </sql>
 
     <select id="selectFPatientList" parameterType="FPatient" resultMap="FPatientResult">
@@ -58,6 +60,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="address != null">address,</if>
             <if test="black != null and black != ''">black,</if>
             <if test="newPatient != null and newPatient != ''">new_patient,</if>
+            <if test="releaseId != null">release_id,</if>
+            <if test="releaseTag != null">release_tag,</if>
             <if test="delFlag != null">del_flag,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
@@ -75,6 +79,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="address != null">#{address},</if>
             <if test="black != null and black != ''">#{black},</if>
             <if test="newPatient != null and newPatient != ''">#{newPatient},</if>
+            <if test="releaseId != null">#{releaseId},</if>
+            <if test="releaseTag != null">#{releaseTag},</if>
             <if test="delFlag != null">#{delFlag},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -95,6 +101,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="address != null">address = #{address},</if>
             <if test="black != null and black != ''">black = #{black},</if>
             <if test="newPatient != null and newPatient != ''">new_patient = #{newPatient},</if>
+            <if test="releaseId != null">release_id = #{releaseId},</if>
+            <if test="releaseTag != null">release_tag = #{releaseTag},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>

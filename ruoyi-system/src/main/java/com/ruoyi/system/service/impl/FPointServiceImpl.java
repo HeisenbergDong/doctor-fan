@@ -73,11 +73,20 @@ public class FPointServiceImpl implements IFPointService {
 
     private void calculatePoint(FPoint fPoint) {
         /** 0-折扣:9-0.25*片数 1-积分:片数*250  */
+        FPoint point = new FPoint();
+        point.setPointPatientId(fPoint.getPointPatientId());
+        point.setPointType(fPoint.getPointType());
         if(PointType.ZERO.getCode().equals(fPoint.getPointType())){
+            List<FPoint> pointList = fPointMapper.selectFPointList(point);
+            BigDecimal coefficient = new BigDecimal("9");
+            coefficient = CollectionUtils.isEmpty(pointList)?coefficient:pointList.get(0).getPointNum();
             BigDecimal b = new BigDecimal("0.25").multiply(new BigDecimal(fPoint.getGlassesNum()));
-            fPoint.setPointNum(new BigDecimal("9").subtract(b).setScale(2,BigDecimal.ROUND_HALF_DOWN));
+            fPoint.setPointNum(coefficient.subtract(b).setScale(2,BigDecimal.ROUND_HALF_DOWN));
         }else{
-            fPoint.setPointScore(new BigDecimal("250").multiply(new BigDecimal(fPoint.getGlassesNum())).setScale(2,BigDecimal.ROUND_HALF_DOWN));
+            List<FPoint> pointList = fPointMapper.selectFPointList(point);
+            BigDecimal coefficient = new BigDecimal("250");
+            coefficient = CollectionUtils.isEmpty(pointList)?coefficient:pointList.get(0).getPointScore();
+            fPoint.setPointScore(coefficient.multiply(new BigDecimal(fPoint.getGlassesNum())).setScale(2,BigDecimal.ROUND_HALF_DOWN));
         }
     }
 

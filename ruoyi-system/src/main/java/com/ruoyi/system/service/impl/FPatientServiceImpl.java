@@ -1,5 +1,6 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.FPatientMapper;
 import com.ruoyi.system.domain.FPatient;
 import com.ruoyi.system.service.IFPatientService;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 /**
  * 患者信息Service业务层处理
@@ -39,9 +42,19 @@ public class FPatientServiceImpl implements IFPatientService
      * @return 患者信息
      */
     @Override
-    public List<FPatient> selectFPatientList(FPatient fPatient)
-    {
-        return fPatientMapper.selectFPatientList(fPatient);
+    public List<FPatient> selectFPatientList(FPatient fPatient) {
+        List<FPatient> patientList = fPatientMapper.selectFPatientList(fPatient);
+        /** 通过releaseId查询所有亲属信息 */
+        for(FPatient p : patientList){
+            List<FPatient> fReleaseList = new ArrayList<>();
+            String[] releaseIds = p.getReleaseId().split(",");
+            for(String r: releaseIds){
+                FPatient patient = fPatientMapper.selectFPatientById(Long.parseLong(r));
+                fReleaseList.add(patient);
+            }
+            p.setFReleaseList(fReleaseList);
+        }
+        return patientList;
     }
 
     /**
@@ -64,8 +77,25 @@ public class FPatientServiceImpl implements IFPatientService
      * @return 结果
      */
     @Override
-    public int updateFPatient(FPatient fPatient)
-    {
+    public int updateFPatient(FPatient fPatient) {
+        /** 如果是新增亲属关系，绑定releaseId、releaseTag,同时将亲属信息新增或更新到表 */
+        if(!CollectionUtils.isEmpty(fPatient.getFReleaseList())){
+            StringBuilder releaseId = new StringBuilder();
+            StringBuilder releaseTag = new StringBuilder();
+            for(FPatient release : fPatient.getFReleaseList()){
+                if(ObjectUtils.isEmpty(release.getId())){
+                    fPatientMapper.insertFPatient(release);
+                }else{
+                    fPatientMapper.updateFPatient(release);
+                }
+                releaseId.append(",");
+                releaseTag.append(",");
+                releaseId.append(release.getId());
+                releaseTag.append(release.getReleaseTag());
+            }
+            fPatient.setReleaseId(releaseId.toString());
+            fPatient.setReleaseTag(releaseTag.toString());
+        }
         fPatient.setUpdateTime(DateUtils.getNowDate());
         return fPatientMapper.updateFPatient(fPatient);
     }

@@ -46,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="newPatientPhone != null  and newPatientPhone != ''"> and new_patient_phone = #{newPatientPhone}</if>
             <if test="newPatientIdCard != null  and newPatientIdCard != ''"> and new_patient_id_card = #{newPatientIdCard}</if>
         </where>
+        order by create_time desc
     </select>
     
     <select id="selectFPointById" parameterType="Long" resultMap="FPointResult">

@@ -1,10 +1,8 @@
 package com.ruoyi.system.domain;
 
-import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.List;
+
 import lombok.Data;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
@@ -63,4 +61,6 @@ public class FVisit extends BaseEntity {
 
     /** 删除标志（0代表存在 */
     private String delFlag;
+
+    private List<FForm> fFormList;
 }
