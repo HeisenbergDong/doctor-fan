@@ -46,6 +46,9 @@ public class FPatientServiceImpl implements IFPatientService
         List<FPatient> patientList = fPatientMapper.selectFPatientList(fPatient);
         /** 通过releaseId查询所有亲属信息 */
         for(FPatient p : patientList){
+            if(ObjectUtils.isEmpty(p.getReleaseId())){
+                continue;
+            }
             List<FPatient> fReleaseList = new ArrayList<>();
             String[] releaseIds = p.getReleaseId().split(",");
             for(String r: releaseIds){
@@ -96,6 +99,7 @@ public class FPatientServiceImpl implements IFPatientService
             fPatient.setReleaseId(releaseId.toString());
             fPatient.setReleaseTag(releaseTag.toString());
         }
+
         fPatient.setUpdateTime(DateUtils.getNowDate());
         return fPatientMapper.updateFPatient(fPatient);
     }
