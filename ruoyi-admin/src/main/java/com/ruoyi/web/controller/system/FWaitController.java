@@ -125,6 +125,7 @@ public class FWaitController extends BaseController
     @PostMapping("/dispatch")
     public AjaxResult dispatch(@RequestBody @Validated FWait fWait){
         fWait.setCreateBy(getUserId().toString());
+        fWait.setCreateName(getUsername());
         fWait.setUpdateBy(getUserId().toString());
         fWait.setAssignDocId(getUserId());
         fWait.setAssignDocName(getUsername());

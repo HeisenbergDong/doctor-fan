@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="assignContent != null  and assignContent != ''"> and assign_content = #{assignContent}</if>
             <if test="parentId != null "> and parent_id = #{parentId}</if>
         </where>
-        order by id
+        order by wait_time
     </select>
 
     <select id="findFWaitList" parameterType="FWait" resultMap="FWaitResult">
@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="assignContent != null  and assignContent != ''"> and assign_content = #{assignContent}</if>
             <if test="parentId != null "> and parent_id = #{parentId}</if>
         </where>
-        order by id
+        order by wait_time
     </select>
 
     <select id="getFWaitList" parameterType="FWait" resultMap="FWaitResult">
@@ -101,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="assignContent != null  and assignContent != ''"> and assign_content = #{assignContent}</if>
             <if test="parentId != null "> and parent_id = #{parentId}</if>
         </where>
-        order by id
+        order by wait_time
     </select>
     
     <select id="selectFWaitById" parameterType="Long" resultMap="FWaitResult">

@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import java.util.List;
 
+import cn.hutool.core.date.DateUtil;
 import com.ruoyi.common.enums.DipatchStatus;
 import com.ruoyi.common.enums.RoomNo;
 import com.ruoyi.common.enums.YesOrNo;
@@ -133,6 +134,12 @@ public class FWaitServiceImpl implements IFWaitService
         fWait.setCreateTime(DateUtils.getNowDate());
         fWait.setUpdateTime(DateUtils.getNowDate());
         fWait.setPatientStatus(DipatchStatus.ZERO.getCode());
+        if(!ObjectUtils.isEmpty(fWait.getAssignContent())){
+            fWait.setAssignContent(fWait.getCreateName()+":"+fWait.getAssignContent()+";");
+        }
+        if(!ObjectUtils.isEmpty(fWait.getFirst()) && fWait.getFirst() == 1){
+            fWait.setWaitTime(DateUtils.getDate()+" 00:00:00");
+        }
         fWait.setId(null);
         int result = fWaitMapper.insertFWait(fWait);
         if(0 != result){
