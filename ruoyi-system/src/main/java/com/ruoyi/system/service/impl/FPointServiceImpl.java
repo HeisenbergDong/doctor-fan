@@ -71,13 +71,14 @@ public class FPointServiceImpl implements IFPointService {
     public int insertFPoint(FPoint fPoint) {
         /** 检查推荐人和被推荐人信息 前端输入推荐人信息，查询是否存在，如果不存在，前端直接调用患者新增接口插入患者信息，如果存在，直接返回推荐人信息*/
         checkPatient(fPoint);
-        List<FPoint> fPointList = fPointMapper.selectFPointList(fPoint);
+
         /** 计算折扣or积分 */
         calculatePoint(fPoint);
 
-        fPoint.setUpdateTime(DateUtils.getNowDate());
-        fPoint.setCreateTime(DateUtils.getNowDate());
-        int result = fPointMapper.insertFPoint(fPoint);
+        /** 将历史数据弄到历史表，从原表删除 */
+        FPoint point = new FPoint();
+        point.setPointPatientId(fPoint.getPointPatientId());
+        List<FPoint> fPointList = fPointMapper.selectFPointList(point);
         if(!CollectionUtils.isEmpty(fPointList)){
             FPointHistory pointHistory = new FPointHistory();
             BeanUtils.copyProperties(fPointList.get(0),pointHistory);
@@ -85,7 +86,10 @@ public class FPointServiceImpl implements IFPointService {
             pointHistoryService.insertFPointHistory(pointHistory);
             fPointMapper.deleteFPointById(fPointList.get(0).getId());
         }
-        return result;
+
+        fPoint.setUpdateTime(DateUtils.getNowDate());
+        fPoint.setCreateTime(DateUtils.getNowDate());
+        return fPointMapper.insertFPoint(fPoint);
     }
 
     private void calculatePoint(FPoint fPoint) {
