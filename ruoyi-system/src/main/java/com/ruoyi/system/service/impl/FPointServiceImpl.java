@@ -7,11 +7,15 @@ import com.ruoyi.common.enums.PointType;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.FPatient;
+import com.ruoyi.system.domain.FPointHistory;
+import com.ruoyi.system.service.IFPointHistoryService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.FPointMapper;
 import com.ruoyi.system.domain.FPoint;
 import com.ruoyi.system.service.IFPointService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
@@ -25,6 +29,9 @@ import org.springframework.util.ObjectUtils;
 public class FPointServiceImpl implements IFPointService {
     @Autowired
     private FPointMapper fPointMapper;
+
+    @Autowired
+    private IFPointHistoryService pointHistoryService;
 
     @Autowired
     private FPatientServiceImpl patientService;
@@ -60,15 +67,25 @@ public class FPointServiceImpl implements IFPointService {
      * @return 结果
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int insertFPoint(FPoint fPoint) {
         /** 检查推荐人和被推荐人信息 前端输入推荐人信息，查询是否存在，如果不存在，前端直接调用患者新增接口插入患者信息，如果存在，直接返回推荐人信息*/
         checkPatient(fPoint);
+        List<FPoint> fPointList = fPointMapper.selectFPointList(fPoint);
         /** 计算折扣or积分 */
         calculatePoint(fPoint);
 
         fPoint.setUpdateTime(DateUtils.getNowDate());
         fPoint.setCreateTime(DateUtils.getNowDate());
-        return fPointMapper.insertFPoint(fPoint);
+        int result = fPointMapper.insertFPoint(fPoint);
+        if(!CollectionUtils.isEmpty(fPointList)){
+            FPointHistory pointHistory = new FPointHistory();
+            BeanUtils.copyProperties(fPointList.get(0),pointHistory);
+            pointHistory.setId(null);
+            pointHistoryService.insertFPointHistory(pointHistory);
+            fPointMapper.deleteFPointById(fPointList.get(0).getId());
+        }
+        return result;
     }
 
     private void calculatePoint(FPoint fPoint) {

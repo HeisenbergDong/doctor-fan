@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FPointHistoryMapper">
+    
+    <resultMap type="FPointHistory" id="FPointHistoryResult">
+        <result property="id"    column="id"    />
+        <result property="pointPatientId"    column="point_patient_id"    />
+        <result property="pointPatientName"    column="point_patient_name"    />
+        <result property="pointPatientPhone"    column="point_patient_phone"    />
+        <result property="pointPatientIdCard"    column="point_patient_id_card"    />
+        <result property="pointType"    column="point_type"    />
+        <result property="glassesNum"    column="glasses_num"    />
+        <result property="pointNum"    column="point_num"    />
+        <result property="pointScore"    column="point_score"    />
+        <result property="newPatientId"    column="new_patient_id"    />
+        <result property="newPatientName"    column="new_patient_name"    />
+        <result property="newPatientPhone"    column="new_patient_phone"    />
+        <result property="newPatientIdCard"    column="new_patient_id_card"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFPointHistoryVo">
+        select id, point_patient_id, point_patient_name, point_patient_phone, point_patient_id_card, point_type, glasses_num, point_num, point_score, new_patient_id, new_patient_name, new_patient_phone, new_patient_id_card, del_flag, create_by, create_time, update_by, update_time, remark from f_point_history
+    </sql>
+
+    <select id="selectFPointHistoryList" parameterType="FPointHistory" resultMap="FPointHistoryResult">
+        <include refid="selectFPointHistoryVo"/>
+        <where>  
+            <if test="pointPatientId != null "> and point_patient_id = #{pointPatientId}</if>
+            <if test="pointPatientName != null  and pointPatientName != ''"> and point_patient_name like concat('%', #{pointPatientName}, '%')</if>
+            <if test="pointPatientPhone != null  and pointPatientPhone != ''"> and point_patient_phone = #{pointPatientPhone}</if>
+            <if test="pointPatientIdCard != null  and pointPatientIdCard != ''"> and point_patient_id_card = #{pointPatientIdCard}</if>
+            <if test="pointType != null  and pointType != ''"> and point_type = #{pointType}</if>
+            <if test="glassesNum != null "> and glasses_num = #{glassesNum}</if>
+            <if test="pointNum != null "> and point_num = #{pointNum}</if>
+            <if test="pointScore != null "> and point_score = #{pointScore}</if>
+            <if test="newPatientId != null "> and new_patient_id = #{newPatientId}</if>
+            <if test="newPatientName != null  and newPatientName != ''"> and new_patient_name like concat('%', #{newPatientName}, '%')</if>
+            <if test="newPatientPhone != null  and newPatientPhone != ''"> and new_patient_phone = #{newPatientPhone}</if>
+            <if test="newPatientIdCard != null  and newPatientIdCard != ''"> and new_patient_id_card = #{newPatientIdCard}</if>
+        </where>
+    </select>
+    
+    <select id="selectFPointHistoryById" parameterType="Long" resultMap="FPointHistoryResult">
+        <include refid="selectFPointHistoryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFPointHistory" parameterType="FPointHistory" useGeneratedKeys="true" keyProperty="id">
+        insert into f_point_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pointPatientId != null">point_patient_id,</if>
+            <if test="pointPatientName != null">point_patient_name,</if>
+            <if test="pointPatientPhone != null">point_patient_phone,</if>
+            <if test="pointPatientIdCard != null">point_patient_id_card,</if>
+            <if test="pointType != null and pointType != ''">point_type,</if>
+            <if test="glassesNum != null">glasses_num,</if>
+            <if test="pointNum != null">point_num,</if>
+            <if test="pointScore != null">point_score,</if>
+            <if test="newPatientId != null">new_patient_id,</if>
+            <if test="newPatientName != null">new_patient_name,</if>
+            <if test="newPatientPhone != null">new_patient_phone,</if>
+            <if test="newPatientIdCard != null">new_patient_id_card,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pointPatientId != null">#{pointPatientId},</if>
+            <if test="pointPatientName != null">#{pointPatientName},</if>
+            <if test="pointPatientPhone != null">#{pointPatientPhone},</if>
+            <if test="pointPatientIdCard != null">#{pointPatientIdCard},</if>
+            <if test="pointType != null and pointType != ''">#{pointType},</if>
+            <if test="glassesNum != null">#{glassesNum},</if>
+            <if test="pointNum != null">#{pointNum},</if>
+            <if test="pointScore != null">#{pointScore},</if>
+            <if test="newPatientId != null">#{newPatientId},</if>
+            <if test="newPatientName != null">#{newPatientName},</if>
+            <if test="newPatientPhone != null">#{newPatientPhone},</if>
+            <if test="newPatientIdCard != null">#{newPatientIdCard},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFPointHistory" parameterType="FPointHistory">
+        update f_point_history
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pointPatientId != null">point_patient_id = #{pointPatientId},</if>
+            <if test="pointPatientName != null">point_patient_name = #{pointPatientName},</if>
+            <if test="pointPatientPhone != null">point_patient_phone = #{pointPatientPhone},</if>
+            <if test="pointPatientIdCard != null">point_patient_id_card = #{pointPatientIdCard},</if>
+            <if test="pointType != null and pointType != ''">point_type = #{pointType},</if>
+            <if test="glassesNum != null">glasses_num = #{glassesNum},</if>
+            <if test="pointNum != null">point_num = #{pointNum},</if>
+            <if test="pointScore != null">point_score = #{pointScore},</if>
+            <if test="newPatientId != null">new_patient_id = #{newPatientId},</if>
+            <if test="newPatientName != null">new_patient_name = #{newPatientName},</if>
+            <if test="newPatientPhone != null">new_patient_phone = #{newPatientPhone},</if>
+            <if test="newPatientIdCard != null">new_patient_id_card = #{newPatientIdCard},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFPointHistoryById" parameterType="Long">
+        delete from f_point_history where id = #{id}
+    </delete>
+
+    <delete id="deleteFPointHistoryByIds" parameterType="String">
+        delete from f_point_history where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
