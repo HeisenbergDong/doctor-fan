@@ -78,6 +78,7 @@ public class FPointServiceImpl implements IFPointService {
         /** 将历史数据弄到历史表，从原表删除 */
         FPoint point = new FPoint();
         point.setPointPatientId(fPoint.getPointPatientId());
+        point.setPointType(fPoint.getPointType());
         List<FPoint> fPointList = fPointMapper.selectFPointList(point);
         if(!CollectionUtils.isEmpty(fPointList)){
             FPointHistory pointHistory = new FPointHistory();
