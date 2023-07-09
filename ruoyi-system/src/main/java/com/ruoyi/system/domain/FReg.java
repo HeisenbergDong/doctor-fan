@@ -34,6 +34,10 @@ public class FReg extends BaseEntity {
     @NotBlank(message = "挂号号码不能为空")
     private String regNo;
 
+    /** 病志类型 */
+    @Excel(name = "病志类型")
+    private String logType;
+
     /** 患者姓名 */
     @Excel(name = "患者姓名")
     @Length(max = 12,message = "姓名超过长度限制，最长12个字符")

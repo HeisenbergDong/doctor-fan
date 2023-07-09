@@ -35,6 +35,8 @@ public interface IFPatientService
      */
     int insertFPatient(FPatient fPatient);
 
+    int addFPatient(FPatient fPatient);
+
     /**
      * 修改患者信息
      * 
@@ -58,4 +60,6 @@ public interface IFPatientService
      * @return 结果
      */
     int deleteFPatientById(Long id);
+
+    FPatient selectPatientMaxNo();
 }

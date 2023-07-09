@@ -58,4 +58,6 @@ public interface FPatientMapper
      * @return 结果
      */
     int deleteFPatientByIds(Long[] ids);
+
+    FPatient selectPatientMaxNo();
 }

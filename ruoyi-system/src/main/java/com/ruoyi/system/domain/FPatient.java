@@ -22,6 +22,14 @@ public class FPatient extends BaseEntity
     /** 患者id */
     private Long id;
 
+    /** 病志编号 */
+    @Excel(name = "病志编号")
+    private String logNo;
+
+    /** 病志类型 */
+    @Excel(name = "病志类型")
+    private String logType;
+
     /** 患者姓名 */
     @Excel(name = "患者姓名")
     private String name;

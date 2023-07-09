@@ -82,7 +82,21 @@ public class FPatientServiceImpl implements IFPatientService
     public int insertFPatient(FPatient fPatient) {
         fPatient.setCreateTime(DateUtils.getNowDate());
         fPatient.setUpdateTime(DateUtils.getNowDate());
+        fPatient.setLogNo(generatorLogNo(fPatient.getLogNo()));
         return fPatientMapper.insertFPatient(fPatient);
+    }
+
+    @Override
+    public int addFPatient(FPatient fPatient) {
+        fPatient.setCreateTime(DateUtils.getNowDate());
+        fPatient.setUpdateTime(DateUtils.getNowDate());
+        return fPatientMapper.insertFPatient(fPatient);
+    }
+
+    private String generatorLogNo(String no){
+        FPatient fPatient = fPatientMapper.selectPatientMaxNo();
+        String regNo = fPatient==null||ObjectUtils.isEmpty(fPatient.getLogNo())?(DateUtils.getDate()+"00001").replace("-",""):DateUtils.getDate() + String.format("%05d",Long.parseLong(fPatient.getLogNo().substring(8,13)) + 1);
+        return regNo + no;
     }
 
     /**
@@ -144,5 +158,10 @@ public class FPatientServiceImpl implements IFPatientService
     public int deleteFPatientById(Long id)
     {
         return fPatientMapper.deleteFPatientById(id);
+    }
+
+    @Override
+    public FPatient selectPatientMaxNo() {
+        return fPatientMapper.selectPatientMaxNo();
     }
 }

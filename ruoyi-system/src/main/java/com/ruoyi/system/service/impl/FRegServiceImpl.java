@@ -3,6 +3,7 @@ package com.ruoyi.system.service.impl;
 import java.text.ParseException;
 import java.util.List;
 
+import cn.hutool.core.date.DateUtil;
 import com.ruoyi.common.enums.DipatchStatus;
 import com.ruoyi.common.enums.RoomNo;
 import com.ruoyi.common.enums.YesOrNo;
@@ -21,6 +22,7 @@ import com.ruoyi.system.domain.FReg;
 import com.ruoyi.system.service.IFRegService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 /**
  * 挂号Service业务层处理
@@ -82,6 +84,9 @@ public class FRegServiceImpl implements IFRegService
         List<FPatient> patients = fPatientService.selectFPatientList(patient);
         /** 如果是空，表示是新患者，插入患者信息 ；如果不是空，说明是再次就诊，更新患者新消息为不是新患者*/
         if (CollectionUtils.isEmpty(patients)) {
+            /** 生成病志向号 日期+5位顺序号+abc */
+            patient.setLogNo(generatorRegNo(fReg.getRegNo()));
+            patient.setLogType(fReg.getLogType());
             patient.setNewPatient(YesOrNo.YES.getCode());
             patient.setIdCard(fReg.getIdCard());
             patient.setBlack(YesOrNo.NO.getCode());
@@ -89,9 +94,10 @@ public class FRegServiceImpl implements IFRegService
             patient.setCreateBy(fReg.getCreateBy());
             patient.setUpdateTime(DateUtils.getNowDate());
             patient.setUpdateBy(fReg.getUpdateBy());
-            fPatientService.insertFPatient(patient);
+            fPatientService.addFPatient(patient);
         }else{
             patient = patients.get(0);
+            patient.setLogType(fReg.getLogType());
             patient.setNewPatient(YesOrNo.NO.getCode());
             patient.setUpdateBy(fReg.getUpdateBy());
             fPatientService.updateFPatient(patient);
@@ -110,8 +116,9 @@ public class FRegServiceImpl implements IFRegService
                 });
             }
         }
-        /** 生成编号 日期+5位顺序号 + 前端输入的内容 */
-        fReg.setRegNo(generatorRegNo(fReg.getRegNo()));
+        /** 生成编号 就是一个顺序号 */
+        fReg.setRegNo(generatorNo());
+
         fReg.setRegDate(DateUtils.getNowDate());
         fReg.setCreateTime(DateUtils.getNowDate());
         fReg.setUpdateTime(DateUtils.getNowDate());
@@ -145,9 +152,18 @@ public class FRegServiceImpl implements IFRegService
      * @return
      */
     private String generatorRegNo(String no){
-        FReg fReg = fRegMapper.selectRegByMaxNo();
-        String regNo = fReg==null||fReg.getRegNo()==null?DateUtils.getDate()+"00001".replace("-",""):DateUtils.getDate() + String.format("%05d",Long.parseLong(fReg.getRegNo().substring(8,13)) + 1);
+        FPatient fPatient = fPatientService.selectPatientMaxNo();
+        String regNo = fPatient==null|| ObjectUtils.isEmpty(fPatient.getLogNo())?(DateUtils.getDate()+"00001").replace("-",""):DateUtils.getDate() + String.format("%05d",Long.parseLong(fPatient.getLogNo().substring(8,13)) + 1);
         return regNo + no;
+    }
+
+    private String generatorNo(){
+        FReg reg = new FReg();
+        reg.setStart(DateUtil.parseDate(DateUtils.getDate()+" 00:00:00"));
+        reg.setEnd(DateUtil.offsetDay(reg.getStart(),+1));
+        FReg fReg = fRegMapper.selectRegByMaxNo(reg);
+        String regNo = fReg==null||fReg.getRegNo()==null?"00001":String.format("%05d",(Long.parseLong(fReg.getRegNo()) + 1));
+        return regNo;
     }
 
     /**

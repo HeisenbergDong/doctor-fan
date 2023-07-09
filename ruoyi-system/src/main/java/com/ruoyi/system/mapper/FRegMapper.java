@@ -63,5 +63,5 @@ public interface FRegMapper
      * 获取编码NO最大的用户
      * @return
      */
-    FReg selectRegByMaxNo();
+    FReg selectRegByMaxNo(FReg fReg);
 }

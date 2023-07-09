@@ -3,9 +3,11 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.FPatientMapper">
-    
+
     <resultMap type="FPatient" id="FPatientResult">
         <result property="id"    column="id"    />
+        <result property="logNo"    column="log_no"    />
+        <result property="logType"    column="log_type"    />
         <result property="name"    column="name"    />
         <result property="phone"    column="phone"    />
         <result property="idCard"    column="id_card"    />
@@ -28,12 +30,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectFPatientVo">
-        select id, name, phone, id_card, first_date, born, age, sex, address, vip_type, black, new_patient, release_id, release_tag, del_flag, create_by, create_time, update_by, update_time, remark from f_patient
+        select id, log_no, log_type, name, phone, id_card, first_date, born, age, sex, address, vip_type, black, new_patient, release_id, release_tag, del_flag, create_by, create_time, update_by, update_time, remark from f_patient
     </sql>
 
     <select id="selectFPatientList" parameterType="FPatient" resultMap="FPatientResult">
         <include refid="selectFPatientVo"/>
-        <where>  
+        <where>
+            <if test="logNo != null  and logNo != ''"> and log_no = #{logNo}</if>
+            <if test="logType != null  and logType != ''"> and log_type = #{logType}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
             <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
@@ -57,6 +61,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertFPatient" parameterType="FPatient" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into f_patient
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="logNo != null and logNo != ''">log_no,</if>
+            <if test="logType != null">log_type,</if>
             <if test="name != null and name != ''">name,</if>
             <if test="phone != null and phone != ''">phone,</if>
             <if test="idCard != null">id_card,</if>
@@ -78,6 +84,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">remark,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="logNo != null and logNo != ''">#{logNo},</if>
+            <if test="logType != null">#{logType},</if>
             <if test="name != null and name != ''">#{name},</if>
             <if test="phone != null and phone != ''">#{phone},</if>
             <if test="idCard != null">#{idCard},</if>
@@ -103,6 +111,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateFPatient" parameterType="FPatient" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         update f_patient
         <trim prefix="SET" suffixOverrides=",">
+            <if test="logNo != null and logNo != ''">log_no = #{logNo},</if>
+            <if test="logType != null">log_type = #{logType},</if>
             <if test="name != null and name != ''">name = #{name},</if>
             <if test="phone != null and phone != ''">phone = #{phone},</if>
             <if test="idCard != null">id_card = #{idCard},</if>
@@ -136,4 +146,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <select id="selectPatientMaxNo" resultMap="FPatientResult">
+        select log_no from f_patient order by id limit 1;
+    </select>
 </mapper>

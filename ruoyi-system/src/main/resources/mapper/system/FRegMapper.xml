@@ -111,7 +111,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
-    <select id="selectRegByMaxNo" resultMap="FRegResult">
-        select reg_no from f_reg order by id desc limit 1
+    <select id="selectRegByMaxNo" parameterType="FReg" resultMap="FRegResult">
+        select reg_no from f_reg
+        <where>
+            <if test="start != null and end != null "> and reg_date BETWEEN #{start} and #{end}</if>
+        </where>
+        order by id desc limit 1
     </select>
 </mapper>
