@@ -1,7 +1,9 @@
 package com.ruoyi.system.domain;
 
+import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
@@ -64,7 +66,9 @@ public class FVisit extends BaseEntity {
 
     private List<FForm> fFormList;
 
-    private Data start;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date start;
 
-    private Data end;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date end;
 }

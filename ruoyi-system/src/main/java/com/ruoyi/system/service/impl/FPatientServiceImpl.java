@@ -34,7 +34,7 @@ public class FPatientServiceImpl implements IFPatientService
     public FPatient selectFPatientById(Long id) {
         FPatient fPatient = fPatientMapper.selectFPatientById(id);
         /** 通过releaseId查询所有亲属信息 */
-        if(ObjectUtils.isEmpty(fPatient)){
+        if(ObjectUtils.isEmpty(fPatient.getReleaseId())){
             return fPatient;
         }
         List<FPatient> fReleaseList = new ArrayList<>();
