@@ -1,10 +1,15 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.FPatient;
 import com.ruoyi.system.domain.FVisitForm;
 import com.ruoyi.system.mapper.FVisitFormMapper;
+import com.ruoyi.system.service.IFPatientService;
 import com.ruoyi.system.service.IFVisitFormService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.FFormMapper;
@@ -25,6 +30,9 @@ public class FFormServiceImpl implements IFFormService {
 
     @Autowired
     private IFVisitFormService visitFormService;
+
+    @Autowired
+    private IFPatientService patientService;
 
     /**
      * 查询单
@@ -61,6 +69,14 @@ public class FFormServiceImpl implements IFFormService {
     public int insertFForm(FForm fForm) {
         fForm.setCreateTime(DateUtils.getNowDate());
         fForm.setUpdateTime(DateUtils.getNowDate());
+        FPatient patient = new FPatient();
+        patient.setId(fForm.getPatientId());
+        List<FPatient> patientList = patientService.selectFPatientList(patient);
+        if(CollectionUtils.isEmpty(patientList)){
+            throw new ServiceException("患者信息不存在，请确认后提交表单！");
+        }else{
+            fForm.setPatientIdCard(patientList.get(0).getIdCard());
+        }
         int result = fFormMapper.insertFForm(fForm);
         /** 建立问诊单和表单关联关系 */
         FVisitForm visitForm = new FVisitForm();
