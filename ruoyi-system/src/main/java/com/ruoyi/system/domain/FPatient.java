@@ -34,6 +34,14 @@ public class FPatient extends BaseEntity
     @Excel(name = "患者身份证")
     private String idCard;
 
+    /** 首日日期 */
+    @Excel(name = "首日日期")
+    private String firstDate;
+
+    /** 患者出生日期 */
+    @Excel(name = "患者出生日期")
+    private String born;
+
     @Excel(name = "患者年龄")
     private Long age;
 
@@ -44,6 +52,10 @@ public class FPatient extends BaseEntity
     /** 准者住址 */
     @Excel(name = "准者住址")
     private String address;
+
+    /** 会员类型 */
+    @Excel(name = "会员类型")
+    private String vipType;
 
     /** 是否黑名单0-否1-是 */
     @Excel(name = "是否黑名单0-否1-是")

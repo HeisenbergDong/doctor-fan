@@ -9,9 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="name"    column="name"    />
         <result property="phone"    column="phone"    />
         <result property="idCard"    column="id_card"    />
+        <result property="firstDate"    column="first_date"    />
+        <result property="born"    column="born"    />
         <result property="age"    column="age"    />
         <result property="sex"    column="sex"    />
         <result property="address"    column="address"    />
+        <result property="vipType"    column="vip_type"    />
         <result property="black"    column="black"    />
         <result property="newPatient"    column="new_patient"    />
         <result property="releaseId"    column="release_id"    />
@@ -25,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectFPatientVo">
-        select id, name, phone, id_card, age, sex, address, black, new_patient, release_id, release_tag, del_flag, create_by, create_time, update_by, update_time, remark from f_patient
+        select id, name, phone, id_card, first_date, born, age, sex, address, vip_type, black, new_patient, release_id, release_tag, del_flag, create_by, create_time, update_by, update_time, remark from f_patient
     </sql>
 
     <select id="selectFPatientList" parameterType="FPatient" resultMap="FPatientResult">
@@ -34,9 +37,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
             <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="firstDate != null  and firstDate != ''"> and first_date = #{firstDate}</if>
+            <if test="born != null  and born != ''"> and born = #{born}</if>
             <if test="age != null "> and age = #{age}</if>
             <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
             <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="vipType != null  and vipType != ''"> and vip_type = #{vipType}</if>
             <if test="black != null  and black != ''"> and black = #{black}</if>
             <if test="newPatient != null  and newPatient != ''"> and new_patient = #{newPatient}</if>
             <if test="start != null and end != null "> and create_time BETWEEN #{start} and #{end}</if>
@@ -51,13 +57,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertFPatient" parameterType="FPatient" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into f_patient
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
             <if test="name != null and name != ''">name,</if>
             <if test="phone != null and phone != ''">phone,</if>
             <if test="idCard != null">id_card,</if>
+            <if test="firstDate != null">first_date,</if>
+            <if test="born != null">born,</if>
             <if test="age != null">age,</if>
             <if test="sex != null">sex,</if>
             <if test="address != null">address,</if>
+            <if test="vipType != null">vip_type,</if>
             <if test="black != null and black != ''">black,</if>
             <if test="newPatient != null and newPatient != ''">new_patient,</if>
             <if test="releaseId != null">release_id,</if>
@@ -68,15 +76,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="remark != null">remark,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
             <if test="name != null and name != ''">#{name},</if>
             <if test="phone != null and phone != ''">#{phone},</if>
             <if test="idCard != null">#{idCard},</if>
+            <if test="firstDate != null">#{firstDate},</if>
+            <if test="born != null">#{born},</if>
             <if test="age != null">#{age},</if>
             <if test="sex != null">#{sex},</if>
             <if test="address != null">#{address},</if>
+            <if test="vipType != null">#{vipType},</if>
             <if test="black != null and black != ''">#{black},</if>
             <if test="newPatient != null and newPatient != ''">#{newPatient},</if>
             <if test="releaseId != null">#{releaseId},</if>
@@ -87,7 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="remark != null">#{remark},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateFPatient" parameterType="FPatient" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
@@ -96,9 +106,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null and name != ''">name = #{name},</if>
             <if test="phone != null and phone != ''">phone = #{phone},</if>
             <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="firstDate != null">first_date = #{firstDate},</if>
+            <if test="born != null">born = #{born},</if>
             <if test="age != null">age = #{age},</if>
             <if test="sex != null">sex = #{sex},</if>
             <if test="address != null">address = #{address},</if>
+            <if test="vipType != null">vip_type = #{vipType},</if>
             <if test="black != null and black != ''">black = #{black},</if>
             <if test="newPatient != null and newPatient != ''">new_patient = #{newPatient},</if>
             <if test="releaseId != null">release_id = #{releaseId},</if>
