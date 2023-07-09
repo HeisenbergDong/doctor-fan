@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FFormPhyMapper">
+    
+    <resultMap type="FFormPhy" id="FFormPhyResult">
+        <result property="id"    column="id"    />
+        <result property="patientId"    column="patient_id"    />
+        <result property="formTime"    column="form_time"    />
+        <result property="r"    column="r"    />
+        <result property="l"    column="l"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFFormPhyVo">
+        select id, patient_id, form_time, r, l, del_flag, create_by, create_time, update_by, update_time, remark from f_form_phy
+    </sql>
+
+    <select id="selectFFormPhyList" parameterType="FFormPhy" resultMap="FFormPhyResult">
+        <include refid="selectFFormPhyVo"/>
+        <where>  
+            <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="formTime != null "> and form_time = #{formTime}</if>
+            <if test="r != null "> and r = #{r}</if>
+            <if test="l != null "> and l = #{l}</if>
+        </where>
+    </select>
+
+    <select id="selectDateList" parameterType="FFormPhy" resultMap="FFormPhyResult">
+       select form_date from f_form_phy
+        <where>
+            <if test="patientId != null "> and patient_id = #{patientId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFFormPhyById" parameterType="Long" resultMap="FFormPhyResult">
+        <include refid="selectFFormPhyVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFFormPhy" parameterType="FFormPhy" useGeneratedKeys="true" keyProperty="id">
+        insert into f_form_phy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="patientId != null">patient_id,</if>
+            <if test="formTime != null">form_time,</if>
+            <if test="r != null">r,</if>
+            <if test="l != null">l,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="patientId != null">#{patientId},</if>
+            <if test="formTime != null">#{formTime},</if>
+            <if test="r != null">#{r},</if>
+            <if test="l != null">#{l},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFFormPhy" parameterType="FFormPhy">
+        update f_form_phy
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="patientId != null">patient_id = #{patientId},</if>
+            <if test="formTime != null">form_time = #{formTime},</if>
+            <if test="r != null">r = #{r},</if>
+            <if test="l != null">l = #{l},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFFormPhyById" parameterType="Long">
+        delete from f_form_phy where id = #{id}
+    </delete>
+
+    <delete id="deleteFFormPhyByIds" parameterType="String">
+        delete from f_form_phy where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
