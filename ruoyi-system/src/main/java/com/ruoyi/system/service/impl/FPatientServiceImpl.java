@@ -1,6 +1,7 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,8 +88,14 @@ public class FPatientServiceImpl implements IFPatientService
             StringBuilder releaseTag = new StringBuilder();
             for(FPatient release : fPatient.getFReleaseList()){
                 if(ObjectUtils.isEmpty(release.getId())){
+                    release.setCreateTime(DateUtils.getNowDate());
+                    release.setUpdateTime(DateUtils.getNowDate());
+                    release.setCreateBy(fPatient.getCreateBy());
+                    release.setUpdateBy(fPatient.getUpdateBy());
                     fPatientMapper.insertFPatient(release);
                 }else{
+                    release.setUpdateTime(DateUtils.getNowDate());
+                    release.setUpdateBy(fPatient.getUpdateBy());
                     fPatientMapper.updateFPatient(release);
                 }
                 releaseId.append(",");

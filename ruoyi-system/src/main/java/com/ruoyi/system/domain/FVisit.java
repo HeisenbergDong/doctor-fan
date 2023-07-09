@@ -63,4 +63,8 @@ public class FVisit extends BaseEntity {
     private String delFlag;
 
     private List<FForm> fFormList;
+
+    private Data start;
+
+    private Data end;
 }

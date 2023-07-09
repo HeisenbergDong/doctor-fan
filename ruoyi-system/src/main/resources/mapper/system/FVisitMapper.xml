@@ -41,6 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="newPatient != null  and newPatient != ''"> and new_patient = #{newPatient}</if>
             <if test="regNo != null  and regNo != ''"> and reg_no = #{regNo}</if>
             <if test="visitTime != null "> and visit_time like concat(#{visitTime}, '%')</if>
+            <if test="start != null and end != null "> and update_time BETWEEN #{start} and #{end}</if>
         </where>
     </select>
     
