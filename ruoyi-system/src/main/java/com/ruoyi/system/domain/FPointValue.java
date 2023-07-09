@@ -7,12 +7,12 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 推荐人折扣积分对象 f_point_history
+ * 推荐人折扣积分对象 f_point_value
  * 
  * @author ruoyi
- * @date 2023-07-07
+ * @date 2023-07-09
  */
-public class FPointHistory extends BaseEntity
+public class FPointValue extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -35,10 +35,6 @@ public class FPointHistory extends BaseEntity
     @Excel(name = "推荐人身份证")
     private String pointPatientIdCard;
 
-    /** 折扣类型0-折扣1-积分 */
-    @Excel(name = "折扣类型0-折扣1-积分")
-    private String pointType;
-
     /** 眼睛片数 */
     @Excel(name = "眼睛片数")
     private Integer glassesNum;
@@ -50,22 +46,6 @@ public class FPointHistory extends BaseEntity
     /** 积分 */
     @Excel(name = "积分")
     private BigDecimal pointScore;
-
-    /** 被推荐人id */
-    @Excel(name = "被推荐人id")
-    private Long newPatientId;
-
-    /** 被推荐人姓名 */
-    @Excel(name = "被推荐人姓名")
-    private String newPatientName;
-
-    /** 被推荐人电话 */
-    @Excel(name = "被推荐人电话")
-    private String newPatientPhone;
-
-    /** 被推荐人身份证 */
-    @Excel(name = "被推荐人身份证")
-    private String newPatientIdCard;
 
     /** 删除标志（0代表存在 */
     private String delFlag;
@@ -115,15 +95,6 @@ public class FPointHistory extends BaseEntity
     {
         return pointPatientIdCard;
     }
-    public void setPointType(String pointType) 
-    {
-        this.pointType = pointType;
-    }
-
-    public String getPointType() 
-    {
-        return pointType;
-    }
     public void setGlassesNum(Integer glassesNum) 
     {
         this.glassesNum = glassesNum;
@@ -151,42 +122,6 @@ public class FPointHistory extends BaseEntity
     {
         return pointScore;
     }
-    public void setNewPatientId(Long newPatientId) 
-    {
-        this.newPatientId = newPatientId;
-    }
-
-    public Long getNewPatientId() 
-    {
-        return newPatientId;
-    }
-    public void setNewPatientName(String newPatientName) 
-    {
-        this.newPatientName = newPatientName;
-    }
-
-    public String getNewPatientName() 
-    {
-        return newPatientName;
-    }
-    public void setNewPatientPhone(String newPatientPhone) 
-    {
-        this.newPatientPhone = newPatientPhone;
-    }
-
-    public String getNewPatientPhone() 
-    {
-        return newPatientPhone;
-    }
-    public void setNewPatientIdCard(String newPatientIdCard) 
-    {
-        this.newPatientIdCard = newPatientIdCard;
-    }
-
-    public String getNewPatientIdCard() 
-    {
-        return newPatientIdCard;
-    }
     public void setDelFlag(String delFlag) 
     {
         this.delFlag = delFlag;
@@ -205,14 +140,9 @@ public class FPointHistory extends BaseEntity
             .append("pointPatientName", getPointPatientName())
             .append("pointPatientPhone", getPointPatientPhone())
             .append("pointPatientIdCard", getPointPatientIdCard())
-            .append("pointType", getPointType())
             .append("glassesNum", getGlassesNum())
             .append("pointNum", getPointNum())
             .append("pointScore", getPointScore())
-            .append("newPatientId", getNewPatientId())
-            .append("newPatientName", getNewPatientName())
-            .append("newPatientPhone", getNewPatientPhone())
-            .append("newPatientIdCard", getNewPatientIdCard())
             .append("delFlag", getDelFlag())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())

@@ -1,15 +1,15 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.system.domain.FPointHistory;
+import com.ruoyi.system.domain.FPointValue;
 
 /**
  * 推荐人折扣积分Service接口
  * 
  * @author ruoyi
- * @date 2023-07-07
+ * @date 2023-07-09
  */
-public interface IFPointHistoryService 
+public interface IFPointValueService
 {
     /**
      * 查询推荐人折扣积分
@@ -17,31 +17,31 @@ public interface IFPointHistoryService
      * @param id 推荐人折扣积分主键
      * @return 推荐人折扣积分
      */
-    public FPointHistory selectFPointHistoryById(Long id);
+    FPointValue selectFPointValueById(Long id);
 
     /**
      * 查询推荐人折扣积分列表
      * 
-     * @param fPointHistory 推荐人折扣积分
+     * @param fPointValue 推荐人折扣积分
      * @return 推荐人折扣积分集合
      */
-    public List<FPointHistory> selectFPointHistoryList(FPointHistory fPointHistory);
+    List<FPointValue> selectFPointValueList(FPointValue fPointValue);
 
     /**
      * 新增推荐人折扣积分
      * 
-     * @param fPointHistory 推荐人折扣积分
+     * @param fPointValue 推荐人折扣积分
      * @return 结果
      */
-    public int insertFPointHistory(FPointHistory fPointHistory);
+    int insertFPointValue(FPointValue fPointValue);
 
     /**
      * 修改推荐人折扣积分
      * 
-     * @param fPointHistory 推荐人折扣积分
+     * @param fPointValue 推荐人折扣积分
      * @return 结果
      */
-    public int updateFPointHistory(FPointHistory fPointHistory);
+    int updateFPointValue(FPointValue fPointValue);
 
     /**
      * 批量删除推荐人折扣积分
@@ -49,7 +49,7 @@ public interface IFPointHistoryService
      * @param ids 需要删除的推荐人折扣积分主键集合
      * @return 结果
      */
-    public int deleteFPointHistoryByIds(Long[] ids);
+    int deleteFPointValueByIds(Long[] ids);
 
     /**
      * 删除推荐人折扣积分信息
@@ -57,5 +57,5 @@ public interface IFPointHistoryService
      * @param id 推荐人折扣积分主键
      * @return 结果
      */
-    public int deleteFPointHistoryById(Long id);
+    int deleteFPointValueById(Long id);
 }

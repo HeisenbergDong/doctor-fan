@@ -7,8 +7,8 @@ import com.ruoyi.common.enums.PointType;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.FPatient;
-import com.ruoyi.system.domain.FPointHistory;
-import com.ruoyi.system.service.IFPointHistoryService;
+import com.ruoyi.system.domain.FPointValue;
+import com.ruoyi.system.service.IFPointValueService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class FPointServiceImpl implements IFPointService {
     private FPointMapper fPointMapper;
 
     @Autowired
-    private IFPointHistoryService pointHistoryService;
+    private IFPointValueService pointValueService;
 
     @Autowired
     private FPatientServiceImpl patientService;
@@ -55,8 +55,7 @@ public class FPointServiceImpl implements IFPointService {
      * @return 推荐人折扣积分
      */
     @Override
-    public List<FPoint> selectFPointList(FPoint fPoint)
-    {
+    public List<FPoint> selectFPointList(FPoint fPoint){
         return fPointMapper.selectFPointList(fPoint);
     }
 
@@ -75,22 +74,50 @@ public class FPointServiceImpl implements IFPointService {
         /** 计算折扣or积分 */
         calculatePoint(fPoint);
 
-        /** 将历史数据弄到历史表，从原表删除 */
-        FPoint point = new FPoint();
-        point.setPointPatientId(fPoint.getPointPatientId());
-        point.setPointType(fPoint.getPointType());
-        List<FPoint> fPointList = fPointMapper.selectFPointList(point);
-        if(!CollectionUtils.isEmpty(fPointList)){
-            FPointHistory pointHistory = new FPointHistory();
-            BeanUtils.copyProperties(fPointList.get(0),pointHistory);
-            pointHistory.setId(null);
-            pointHistoryService.insertFPointHistory(pointHistory);
-            fPointMapper.deleteFPointById(fPointList.get(0).getId());
-        }
-
         fPoint.setUpdateTime(DateUtils.getNowDate());
         fPoint.setCreateTime(DateUtils.getNowDate());
-        return fPointMapper.insertFPoint(fPoint);
+        int result = fPointMapper.insertFPoint(fPoint);
+
+        /** 计算总镜片数量，同时将最终折扣、积分、镜片数量写入结果表 */
+        int glassesNum = 0;
+        BigDecimal pointNum = new BigDecimal("0");
+        BigDecimal pointScore = new BigDecimal("0");
+        FPoint point = new FPoint();
+        point.setPointPatientId(fPoint.getPointPatientId());
+
+        point.setPointType(PointType.ZERO.getCode());
+        List<FPoint> fPointZeroList = fPointMapper.selectFPointList(point);
+        if(!CollectionUtils.isEmpty(fPointZeroList)){
+            for(FPoint p:fPointZeroList){
+                glassesNum = glassesNum + p.getGlassesNum();
+            }
+            pointNum = fPointZeroList.get(0).getPointNum();
+        }
+
+        point.setPointType(PointType.ONE.getCode());
+        List<FPoint> fPointOneList = fPointMapper.selectFPointList(point);
+        if(!CollectionUtils.isEmpty(fPointOneList)){
+            for(FPoint p:fPointOneList){
+                glassesNum = glassesNum + p.getGlassesNum();
+            }
+            pointScore = fPointOneList.get(0).getPointScore();
+        }
+
+        FPointValue pointValue = new FPointValue();
+        pointValue.setPointPatientId(fPoint.getPointPatientId());
+        List<FPointValue> pointValueList = pointValueService.selectFPointValueList(pointValue);
+        if(!CollectionUtils.isEmpty(pointValueList)){
+            for(FPointValue fPointValue : pointValueList){
+                pointValueService.deleteFPointValueById(fPointValue.getId());
+            }
+        }
+        BeanUtils.copyProperties(fPoint,pointValue);
+        pointValue.setGlassesNum(glassesNum);
+        pointValue.setPointNum(pointNum);
+        pointValue.setPointScore(pointScore);
+        pointValueService.insertFPointValue(pointValue);
+
+        return result;
     }
 
     private void calculatePoint(FPoint fPoint) {
