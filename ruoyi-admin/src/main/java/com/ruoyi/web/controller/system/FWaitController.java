@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.system;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
@@ -49,7 +50,7 @@ public class FWaitController extends BaseController
     }
 
     /**
-     * 分诊室之外的医生查询队列
+     * 分诊室的医生查询队列
      */
     //@PreAuthorize("@ss.hasPermi('doc:wait:list')")
     @GetMapping("/dispatch/list")
@@ -68,13 +69,18 @@ public class FWaitController extends BaseController
         if(ObjectUtils.isEmpty(fWait.getRoom())){
             throw new ServiceException("诊室不能为空！");
         }
-        /** 不能查询指派给其他医生的患者 */
-        if(ObjectUtils.isNotEmpty(fWait.getReceptionDocId()) && !fWait.getReceptionDocId().equals(getUserId())){
-            fWait.setReceptionDocId(null);
-        }
         startPage();
         List<FWait> list = fWaitService.getFWaitList(fWait);
-        return getDataTable(list);
+        List<FWait> result = new ArrayList<>();
+        /** 不能查询指派给其他医生的患者 */
+        for(FWait w : list){
+            if(ObjectUtils.isNotEmpty(w.getReceptionDocId()) && !w.getReceptionDocId().equals(getUserId())){
+                continue;
+            }
+            result.add(w);
+        }
+
+        return getDataTable(result);
     }
 
     /**
