@@ -99,4 +99,6 @@ public class FWait extends BaseEntity {
     private String createName;
 
     private int first;
+
+    private Long visitId;
 }

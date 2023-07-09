@@ -65,6 +65,19 @@ public class FWaitServiceImpl implements IFWaitService
     @Override
     public List<FWait> selectFWaitList(FWait fWait) {
         List<FWait> waits = fWaitMapper.selectFWaitList(fWait);
+        if(CollectionUtils.isEmpty(waits)){
+            return waits;
+        }
+        for(FWait wait:waits){
+            FVisit fVisit = new FVisit();
+            fVisit.setPatientId(wait.getPatientId());
+            fVisit.setVisitTime(DateUtils.getDate());
+            List<FVisit> visitList = visitService.selectFVisitList(fVisit);
+            if(CollectionUtils.isEmpty(visitList)){
+                continue;
+            }
+            wait.setVisitId(visitList.get(0).getId());
+        }
         return waits;
     }
 
@@ -76,6 +89,19 @@ public class FWaitServiceImpl implements IFWaitService
     @Override
     public List<FWait> findFWaitList(FWait fWait) {
         List<FWait> waits = fWaitMapper.findFWaitList(fWait);
+        if(CollectionUtils.isEmpty(waits)){
+            return waits;
+        }
+        for(FWait wait:waits){
+            FVisit fVisit = new FVisit();
+            fVisit.setPatientId(wait.getPatientId());
+            fVisit.setVisitTime(DateUtils.getDate());
+            List<FVisit> visitList = visitService.selectFVisitList(fVisit);
+            if(CollectionUtils.isEmpty(visitList)){
+                continue;
+            }
+            wait.setVisitId(visitList.get(0).getId());
+        }
         return waits;
     }
 
@@ -87,6 +113,19 @@ public class FWaitServiceImpl implements IFWaitService
     @Override
     public List<FWait> getFWaitList(FWait fWait) {
         List<FWait> waits = fWaitMapper.getFWaitList(fWait);
+        if(CollectionUtils.isEmpty(waits)){
+            return waits;
+        }
+        for(FWait wait:waits){
+            FVisit fVisit = new FVisit();
+            fVisit.setPatientId(wait.getPatientId());
+            fVisit.setVisitTime(DateUtils.getDate());
+            List<FVisit> visitList = visitService.selectFVisitList(fVisit);
+            if(CollectionUtils.isEmpty(visitList)){
+                continue;
+            }
+            wait.setVisitId(visitList.get(0).getId());
+        }
         return waits;
     }
 
