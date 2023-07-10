@@ -35,6 +35,14 @@ public class FWait extends BaseEntity {
     @NotNull(message = "患者ID不能为空")
     private Long patientId;
 
+    /** 病志编号 */
+    @Excel(name = "病志编号")
+    private String patientLogNo;
+
+    /** 病志类型 */
+    @Excel(name = "病志类型")
+    private String patientLogType;
+
     /** 患者姓名 */
     @Excel(name = "患者姓名")
     @NotBlank(message = "患者姓名不能为空")
@@ -44,9 +52,25 @@ public class FWait extends BaseEntity {
     @Excel(name = "患者电话")
     private String patientPhone;
 
+    /** 患者出生日期 */
+    @Excel(name = "患者出生日期")
+    private String patientBorn;
+
+    /** 患者年龄 */
+    @Excel(name = "患者年龄")
+    private Long patientAge;
+
+    /** 患者性别 */
+    @Excel(name = "患者性别")
+    private String patientSex;
+
     /** 患者排队状态0-排队中 1-进行中 2-已完成 */
     @Excel(name = "患者排队状态0-排队中 1-进行中 2-已完成")
     private String patientStatus;
+
+    /** 患者vip类型 */
+    @Excel(name = "患者vip类型")
+    private String patientVipType;
 
     /** 进入队列时间 */
     @Excel(name = "进入队列时间", width = 30)

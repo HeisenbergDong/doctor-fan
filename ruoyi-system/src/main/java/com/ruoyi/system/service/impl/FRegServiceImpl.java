@@ -136,6 +136,12 @@ public class FRegServiceImpl implements IFRegService
         if(!CollectionUtils.isEmpty(waitList)){
             throw new ServiceException("不能重复挂号！");
         }
+        fWait.setPatientLogNo(patient.getLogNo());
+        fWait.setPatientLogType(patient.getLogType());
+        fWait.setPatientBorn(patient.getBorn());
+        fWait.setPatientAge(patient.getAge());
+        fWait.setPatientSex(patient.getSex());
+        fWait.setPatientVipType(patient.getVipType());
         fWait.setRegNo(fReg.getRegNo());
         fWait.setAssignDocId(Long.parseLong(reg.getCreateBy()));
         fWait.setWaitTime(DateUtils.getTime());

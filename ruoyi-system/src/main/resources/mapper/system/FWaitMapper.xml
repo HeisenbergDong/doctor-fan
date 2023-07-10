@@ -3,14 +3,20 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.FWaitMapper">
-    
+
     <resultMap type="FWait" id="FWaitResult">
         <result property="id"    column="id"    />
         <result property="regNo"    column="reg_no"    />
         <result property="patientId"    column="patient_id"    />
+        <result property="patientLogNo"    column="patient_log_no"    />
+        <result property="patientLogType"    column="patient_log_type"    />
         <result property="patientName"    column="patient_name"    />
         <result property="patientPhone"    column="patient_phone"    />
+        <result property="patientBorn"    column="patient_born"    />
+        <result property="patientAge"    column="patient_age"    />
+        <result property="patientSex"    column="patient_sex"    />
         <result property="patientStatus"    column="patient_status"    />
+        <result property="patientVipType"    column="patient_vip_type"    />
         <result property="waitTime"    column="wait_time"    />
         <result property="room"    column="room"    />
         <result property="adjustTime"    column="adjust_time"    />
@@ -31,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectFWaitVo">
-        select id, reg_no, patient_id, patient_name, patient_phone, patient_status, wait_time, room, adjust_time, adjust_doc_id, adjust_doc_name, reception_doc_id, reception_doc_name, assign_doc_id, assign_doc_name, assign_content, parent_id, del_flag, create_by, create_time, update_by, update_time, remark from f_wait
+        select id, reg_no, patient_id, patient_log_no, patient_log_type, patient_name, patient_phone, patient_born, patient_age, patient_sex, patient_status, patient_vip_type, wait_time, room, adjust_time, adjust_doc_id, adjust_doc_name, reception_doc_id, reception_doc_name, assign_doc_id, assign_doc_name, assign_content, parent_id, del_flag, create_by, create_time, update_by, update_time, remark from f_wait
     </sql>
 
     <select id="selectFWaitList" parameterType="FWait" resultMap="FWaitResult">
@@ -39,9 +45,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>
             <if test="regNo != null  and regNo != ''"> and reg_no = #{regNo}</if>
             <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="patientLogNo != null  and patientLogNo != ''"> and patient_log_no = #{patientLogNo}</if>
+            <if test="patientLogType != null  and patientLogType != ''"> and patient_log_type = #{patientLogType}</if>
             <if test="patientName != null  and patientName != ''"> and patient_name like concat('%', #{patientName}, '%')</if>
             <if test="patientPhone != null  and patientPhone != ''"> and patient_phone = #{patientPhone}</if>
+            <if test="patientBorn != null  and patientBorn != ''"> and patient_born = #{patientBorn}</if>
+            <if test="patientAge != null "> and patient_age = #{patientAge}</if>
+            <if test="patientSex != null  and patientSex != ''"> and patient_sex = #{patientSex}</if>
             <if test="patientStatus != null  and patientStatus != ''"> and patient_status = #{patientStatus}</if>
+            <if test="patientVipType != null  and patientVipType != ''"> and patient_vip_type = #{patientVipType}</if>
             <if test="waitTime != null "> and wait_time like concat(#{waitTime}, '%')</if>
             <if test="room != null  and room != ''"> and room = #{room}</if>
             <if test="adjustTime != null "> and adjust_time like concat(#{adjustTime}, '%')</if>
@@ -63,8 +75,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             patient_status != 2  and room != '结束'
             <if test="regNo != null  and regNo != ''"> and reg_no = #{regNo}</if>
             <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="patientLogNo != null  and patientLogNo != ''"> and patient_log_no = #{patientLogNo}</if>
+            <if test="patientLogType != null  and patientLogType != ''"> and patient_log_type = #{patientLogType}</if>
             <if test="patientName != null  and patientName != ''"> and patient_name like concat('%', #{patientName}, '%')</if>
             <if test="patientPhone != null  and patientPhone != ''"> and patient_phone = #{patientPhone}</if>
+            <if test="patientBorn != null  and patientBorn != ''"> and patient_born = #{patientBorn}</if>
+            <if test="patientAge != null "> and patient_age = #{patientAge}</if>
+            <if test="patientSex != null  and patientSex != ''"> and patient_sex = #{patientSex}</if>
+            <if test="patientVipType != null  and patientVipType != ''"> and patient_vip_type = #{patientVipType}</if>
             <if test="waitTime != null "> and wait_time like concat(#{waitTime}, '%')</if>
             <if test="room != null  and room != ''"> and room = #{room}</if>
             <if test="adjustTime != null "> and adjust_time like concat(#{adjustTime}, '%')</if>
@@ -89,8 +107,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="waitTime != null "> and wait_time like concat(#{waitTime}, '%')</if>
             <if test="regNo != null  and regNo != ''"> and reg_no = #{regNo}</if>
             <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="patientLogNo != null  and patientLogNo != ''"> and patient_log_no = #{patientLogNo}</if>
+            <if test="patientLogType != null  and patientLogType != ''"> and patient_log_type = #{patientLogType}</if>
             <if test="patientName != null  and patientName != ''"> and patient_name like concat('%', #{patientName}, '%')</if>
             <if test="patientPhone != null  and patientPhone != ''"> and patient_phone = #{patientPhone}</if>
+            <if test="patientBorn != null  and patientBorn != ''"> and patient_born = #{patientBorn}</if>
+            <if test="patientAge != null "> and patient_age = #{patientAge}</if>
+            <if test="patientSex != null  and patientSex != ''"> and patient_sex = #{patientSex}</if>
+            <if test="patientVipType != null  and patientVipType != ''"> and patient_vip_type = #{patientVipType}</if>
             <if test="patientStatus != null  and patientStatus != ''"> and patient_status = #{patientStatus}</if>
             <if test="adjustTime != null "> and adjust_time like concat(#{adjustTime}, '%')</if>
             <if test="adjustDocId != null "> and adjust_doc_id = #{adjustDocId}</if>
@@ -108,17 +132,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectFWaitVo"/>
         where id = #{id}
     </select>
-        
-    <insert id="insertFWait" parameterType="FWait" keyProperty="id" useGeneratedKeys="true" keyColumn="id">
+
+    <insert id="insertFWait" parameterType="FWait" useGeneratedKeys="true" keyProperty="id">
         insert into f_wait
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="regNo != null and regNo != ''">reg_no,</if>
-            <if test="id != null">id,</if>
             <if test="patientId != null">patient_id,</if>
+            <if test="patientLogNo != null">patient_log_no,</if>
+            <if test="patientLogType != null">patient_log_type,</if>
             <if test="patientName != null">patient_name,</if>
             <if test="patientPhone != null">patient_phone,</if>
+            <if test="patientBorn != null">patient_born,</if>
+            <if test="patientAge != null">patient_age,</if>
+            <if test="patientSex != null">patient_sex,</if>
             <if test="patientStatus != null and patientStatus != ''">patient_status,</if>
-            <if test="waitTime != null">wait_time,</if>
+            <if test="patientVipType != null">patient_vip_type,</if>
+            <if test="waitTime != null and waitTime != ''">wait_time,</if>
             <if test="room != null and room != ''">room,</if>
             <if test="adjustTime != null">adjust_time,</if>
             <if test="adjustDocId != null">adjust_doc_id,</if>
@@ -135,15 +164,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="remark != null">remark,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="regNo != null and regNo != ''">#{regNo},</if>
-            <if test="id != null">#{id},</if>
             <if test="patientId != null">#{patientId},</if>
+            <if test="patientLogNo != null">#{patientLogNo},</if>
+            <if test="patientLogType != null">#{patientLogType},</if>
             <if test="patientName != null">#{patientName},</if>
             <if test="patientPhone != null">#{patientPhone},</if>
+            <if test="patientBorn != null">#{patientBorn},</if>
+            <if test="patientAge != null">#{patientAge},</if>
+            <if test="patientSex != null">#{patientSex},</if>
             <if test="patientStatus != null and patientStatus != ''">#{patientStatus},</if>
-            <if test="waitTime != null">#{waitTime},</if>
+            <if test="patientVipType != null">#{patientVipType},</if>
+            <if test="waitTime != null and waitTime != ''">#{waitTime},</if>
             <if test="room != null and room != ''">#{room},</if>
             <if test="adjustTime != null">#{adjustTime},</if>
             <if test="adjustDocId != null">#{adjustDocId},</if>
@@ -160,7 +194,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="remark != null">#{remark},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateFWait" parameterType="FWait">
@@ -168,10 +202,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="regNo != null and regNo != ''">reg_no = #{regNo},</if>
             <if test="patientId != null">patient_id = #{patientId},</if>
+            <if test="patientLogNo != null">patient_log_no = #{patientLogNo},</if>
+            <if test="patientLogType != null">patient_log_type = #{patientLogType},</if>
             <if test="patientName != null">patient_name = #{patientName},</if>
             <if test="patientPhone != null">patient_phone = #{patientPhone},</if>
+            <if test="patientBorn != null">patient_born = #{patientBorn},</if>
+            <if test="patientAge != null">patient_age = #{patientAge},</if>
+            <if test="patientSex != null">patient_sex = #{patientSex},</if>
             <if test="patientStatus != null and patientStatus != ''">patient_status = #{patientStatus},</if>
-            <if test="waitTime != null">wait_time = #{waitTime},</if>
+            <if test="patientVipType != null">patient_vip_type = #{patientVipType},</if>
+            <if test="waitTime != null and waitTime != ''">wait_time = #{waitTime},</if>
             <if test="room != null and room != ''">room = #{room},</if>
             <if test="adjustTime != null">adjust_time = #{adjustTime},</if>
             <if test="adjustDocId != null">adjust_doc_id = #{adjustDocId},</if>
