@@ -3,16 +3,22 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.FVisitMapper">
-    
+
     <resultMap type="FVisit" id="FVisitResult">
         <result property="id"    column="id"    />
         <result property="docId"    column="doc_id"    />
         <result property="docName"    column="doc_name"    />
         <result property="room"    column="room"    />
         <result property="patientId"    column="patient_id"    />
+        <result property="patientLogNo"    column="patient_log_no"    />
+        <result property="patientLogType"    column="patient_log_type"    />
         <result property="patientName"    column="patient_name"    />
         <result property="patientPhone"    column="patient_phone"    />
+        <result property="patientBorn"    column="patient_born"    />
+        <result property="patientAge"    column="patient_age"    />
+        <result property="patientSex"    column="patient_sex"    />
         <result property="patientIdCard"    column="patient_id_card"    />
+        <result property="patientVipType"    column="patient_vip_type"    />
         <result property="newPatient"    column="new_patient"    />
         <result property="regNo"    column="reg_no"    />
         <result property="visitTime"    column="visit_time"    />
@@ -25,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectFVisitVo">
-        select id, doc_id, doc_name, room, patient_id, patient_name, patient_phone, patient_id_card, new_patient, reg_no, visit_time, del_flag, create_by, create_time, update_by, update_time, remark from f_visit
+        select id, doc_id, doc_name, room, patient_id, patient_log_no, patient_log_type, patient_name, patient_phone, patient_born, patient_age, patient_sex, patient_id_card, patient_vip_type, new_patient, reg_no, visit_time, del_flag, create_by, create_time, update_by, update_time, remark from f_visit
     </sql>
 
     <select id="selectFVisitList" parameterType="FVisit" resultMap="FVisitResult">
@@ -35,9 +41,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="docName != null  and docName != ''"> and doc_name like concat('%', #{docName}, '%')</if>
             <if test="room != null  and room != ''"> and room = #{room}</if>
             <if test="patientId != null "> and patient_id = #{patientId}</if>
+            <if test="patientLogNo != null  and patientLogNo != ''"> and patient_log_no = #{patientLogNo}</if>
+            <if test="patientLogType != null  and patientLogType != ''"> and patient_log_type = #{patientLogType}</if>
             <if test="patientName != null  and patientName != ''"> and patient_name like concat('%', #{patientName}, '%')</if>
             <if test="patientPhone != null  and patientPhone != ''"> and patient_phone = #{patientPhone}</if>
             <if test="patientIdCard != null  and patientIdCard != ''"> and patient_id_card = #{patientIdCard}</if>
+            <if test="patientBorn != null  and patientBorn != ''"> and patient_born = #{patientBorn}</if>
+            <if test="patientAge != null "> and patient_age = #{patientAge}</if>
+            <if test="patientSex != null  and patientSex != ''"> and patient_sex = #{patientSex}</if>
+            <if test="patientVipType != null  and patientVipType != ''"> and patient_vip_type = #{patientVipType}</if>
             <if test="newPatient != null  and newPatient != ''"> and new_patient = #{newPatient}</if>
             <if test="regNo != null  and regNo != ''"> and reg_no = #{regNo}</if>
             <if test="visitTime != null "> and visit_time like concat(#{visitTime}, '%')</if>
@@ -53,43 +65,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertFVisit" parameterType="FVisit" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         insert into f_visit
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
             <if test="docId != null">doc_id,</if>
             <if test="docName != null">doc_name,</if>
             <if test="room != null">room,</if>
             <if test="patientId != null">patient_id,</if>
+            <if test="patientLogNo != null">patient_log_no,</if>
+            <if test="patientLogType != null">patient_log_type,</if>
             <if test="patientName != null">patient_name,</if>
             <if test="patientPhone != null">patient_phone,</if>
+            <if test="patientBorn != null">patient_born,</if>
+            <if test="patientAge != null">patient_age,</if>
+            <if test="patientSex != null">patient_sex,</if>
             <if test="patientIdCard != null">patient_id_card,</if>
+            <if test="patientVipType != null">patient_vip_type,</if>
             <if test="newPatient != null and newPatient != ''">new_patient,</if>
             <if test="regNo != null and regNo != ''">reg_no,</if>
-            <if test="visitTime != null">visit_time,</if>
+            <if test="visitTime != null and visitTime != ''">visit_time,</if>
             <if test="delFlag != null">del_flag,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="remark != null">remark,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
             <if test="docId != null">#{docId},</if>
             <if test="docName != null">#{docName},</if>
             <if test="room != null">#{room},</if>
             <if test="patientId != null">#{patientId},</if>
+            <if test="patientLogNo != null">#{patientLogNo},</if>
+            <if test="patientLogType != null">#{patientLogType},</if>
             <if test="patientName != null">#{patientName},</if>
             <if test="patientPhone != null">#{patientPhone},</if>
+            <if test="patientBorn != null">#{patientBorn},</if>
+            <if test="patientAge != null">#{patientAge},</if>
+            <if test="patientSex != null">#{patientSex},</if>
             <if test="patientIdCard != null">#{patientIdCard},</if>
+            <if test="patientVipType != null">#{patientVipType},</if>
             <if test="newPatient != null and newPatient != ''">#{newPatient},</if>
             <if test="regNo != null and regNo != ''">#{regNo},</if>
-            <if test="visitTime != null">#{visitTime},</if>
+            <if test="visitTime != null and visitTime != ''">#{visitTime},</if>
             <if test="delFlag != null">#{delFlag},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="remark != null">#{remark},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateFVisit" parameterType="FVisit">
@@ -99,12 +121,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="docName != null">doc_name = #{docName},</if>
             <if test="room != null">room = #{room},</if>
             <if test="patientId != null">patient_id = #{patientId},</if>
+            <if test="patientLogNo != null">patient_log_no = #{patientLogNo},</if>
+            <if test="patientLogType != null">patient_log_type = #{patientLogType},</if>
             <if test="patientName != null">patient_name = #{patientName},</if>
             <if test="patientPhone != null">patient_phone = #{patientPhone},</if>
+            <if test="patientBorn != null">patient_born = #{patientBorn},</if>
+            <if test="patientAge != null">patient_age = #{patientAge},</if>
+            <if test="patientSex != null">patient_sex = #{patientSex},</if>
             <if test="patientIdCard != null">patient_id_card = #{patientIdCard},</if>
+            <if test="patientVipType != null">patient_vip_type = #{patientVipType},</if>
             <if test="newPatient != null and newPatient != ''">new_patient = #{newPatient},</if>
             <if test="regNo != null and regNo != ''">reg_no = #{regNo},</if>
-            <if test="visitTime != null">visit_time = #{visitTime},</if>
+            <if test="visitTime != null and visitTime != ''">visit_time = #{visitTime},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>

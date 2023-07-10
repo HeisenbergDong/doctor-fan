@@ -229,6 +229,12 @@ public class FWaitServiceImpl implements IFWaitService
             fVisit.setDocId(fWait.getReceptionDocId());
             fVisit.setDocName(fWait.getReceptionDocName());
             fVisit.setNewPatient(fPatient.getNewPatient());
+            fVisit.setPatientLogNo(fPatient.getLogNo());
+            fVisit.setPatientLogType(fPatient.getLogType());
+            fVisit.setPatientBorn(fPatient.getBorn());
+            fVisit.setPatientAge(fPatient.getAge());
+            fVisit.setPatientSex(fPatient.getSex());
+            fVisit.setPatientVipType(fPatient.getVipType());
             fVisit.setPatientName(fPatient.getName());
             fVisit.setPatientIdCard(fPatient.getIdCard());
             fVisit.setPatientPhone(fPatient.getPhone());

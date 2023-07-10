@@ -37,6 +37,14 @@ public class FVisit extends BaseEntity {
     @Excel(name = "患者id")
     private Long patientId;
 
+    /** 病志编号 */
+    @Excel(name = "病志编号")
+    private String patientLogNo;
+
+    /** 病志类型 */
+    @Excel(name = "病志类型")
+    private String patientLogType;
+
     /** 患者姓名 */
     @Excel(name = "患者姓名")
     private String patientName;
@@ -45,9 +53,25 @@ public class FVisit extends BaseEntity {
     @Excel(name = "患者电话")
     private String patientPhone;
 
+    /** 患者出生日期 */
+    @Excel(name = "患者出生日期")
+    private String patientBorn;
+
+    /** 患者年龄 */
+    @Excel(name = "患者年龄")
+    private Long patientAge;
+
+    /** 患者性别 */
+    @Excel(name = "患者性别")
+    private String patientSex;
+
     /** 患者身份证号 */
     @Excel(name = "患者身份证号")
     private String patientIdCard;
+
+    /** 患者vip类型 */
+    @Excel(name = "患者vip类型")
+    private String patientVipType;
 
     /** 是否新患者 */
     @Excel(name = "是否新患者")
