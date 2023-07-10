@@ -57,9 +57,9 @@ public class FFormPhyServiceImpl implements IFFormPhyService
      * @return 结果
      */
     @Override
-    public int insertFFormPhy(FFormPhy fFormPhy)
-    {
+    public int insertFFormPhy(FFormPhy fFormPhy) {
         fFormPhy.setCreateTime(DateUtils.getNowDate());
+        fFormPhy.setUpdateTime(DateUtils.getNowDate());
         return fFormPhyMapper.insertFFormPhy(fFormPhy);
     }
 

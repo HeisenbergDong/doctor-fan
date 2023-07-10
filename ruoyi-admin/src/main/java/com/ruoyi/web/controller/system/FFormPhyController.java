@@ -84,8 +84,9 @@ public class FFormPhyController extends BaseController
     //@PreAuthorize("@ss.hasPermi('system:phy:add')")
     @Log(title = "生物测量仪", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody @Validated FFormPhy fFormPhy)
-    {
+    public AjaxResult add(@RequestBody @Validated FFormPhy fFormPhy) {
+        fFormPhy.setCreateBy(getUserId().toString());
+        fFormPhy.setUpdateBy(getUserId().toString());
         return toAjax(fFormPhyService.insertFFormPhy(fFormPhy));
     }
 
@@ -95,8 +96,8 @@ public class FFormPhyController extends BaseController
     //@PreAuthorize("@ss.hasPermi('system:phy:edit')")
     @Log(title = "生物测量仪", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody @Validated FFormPhy fFormPhy)
-    {
+    public AjaxResult edit(@RequestBody @Validated FFormPhy fFormPhy) {
+        fFormPhy.setUpdateBy(getUserId().toString());
         return toAjax(fFormPhyService.updateFFormPhy(fFormPhy));
     }
 
