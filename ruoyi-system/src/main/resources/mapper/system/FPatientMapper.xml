@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="age"    column="age"    />
         <result property="sex"    column="sex"    />
         <result property="address"    column="address"    />
+        <result property="career"    column="career"    />
         <result property="vipType"    column="vip_type"    />
         <result property="black"    column="black"    />
         <result property="newPatient"    column="new_patient"    />
@@ -30,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectFPatientVo">
-        select id, log_no, log_type, name, phone, id_card, first_date, born, age, sex, address, vip_type, black, new_patient, release_id, release_tag, del_flag, create_by, create_time, update_by, update_time, remark from f_patient
+        select id, log_no, log_type, name, phone, id_card, first_date, born, age, sex, address, career, vip_type, black, new_patient, release_id, release_tag, del_flag, create_by, create_time, update_by, update_time, remark from f_patient
     </sql>
 
     <select id="selectFPatientList" parameterType="FPatient" resultMap="FPatientResult">
@@ -46,6 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="age != null "> and age = #{age}</if>
             <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
             <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="career != null  and career != ''"> and career = #{career}</if>
             <if test="vipType != null  and vipType != ''"> and vip_type = #{vipType}</if>
             <if test="black != null  and black != ''"> and black = #{black}</if>
             <if test="newPatient != null  and newPatient != ''"> and new_patient = #{newPatient}</if>
@@ -71,6 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="age != null">age,</if>
             <if test="sex != null">sex,</if>
             <if test="address != null">address,</if>
+            <if test="career != null">career,</if>
             <if test="vipType != null">vip_type,</if>
             <if test="black != null and black != ''">black,</if>
             <if test="newPatient != null and newPatient != ''">new_patient,</if>
@@ -94,6 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="age != null">#{age},</if>
             <if test="sex != null">#{sex},</if>
             <if test="address != null">#{address},</if>
+            <if test="career != null">#{career},</if>
             <if test="vipType != null">#{vipType},</if>
             <if test="black != null and black != ''">#{black},</if>
             <if test="newPatient != null and newPatient != ''">#{newPatient},</if>
@@ -111,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateFPatient" parameterType="FPatient" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         update f_patient
         <trim prefix="SET" suffixOverrides=",">
-            <if test="logNo != null and logNo != ''">log_no = #{logNo},</if>
+            <if test="logNo != null">log_no = #{logNo},</if>
             <if test="logType != null">log_type = #{logType},</if>
             <if test="name != null and name != ''">name = #{name},</if>
             <if test="phone != null and phone != ''">phone = #{phone},</if>
@@ -121,6 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="age != null">age = #{age},</if>
             <if test="sex != null">sex = #{sex},</if>
             <if test="address != null">address = #{address},</if>
+            <if test="career != null">career = #{career},</if>
             <if test="vipType != null">vip_type = #{vipType},</if>
             <if test="black != null and black != ''">black = #{black},</if>
             <if test="newPatient != null and newPatient != ''">new_patient = #{newPatient},</if>

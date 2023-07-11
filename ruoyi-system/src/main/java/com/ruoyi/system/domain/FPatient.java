@@ -61,6 +61,10 @@ public class FPatient extends BaseEntity
     @Excel(name = "准者住址")
     private String address;
 
+    /** 职业 */
+    @Excel(name = "职业")
+    private String career;
+
     /** 会员类型 */
     @Excel(name = "会员类型")
     private String vipType;
