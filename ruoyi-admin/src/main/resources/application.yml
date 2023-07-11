@@ -137,4 +137,49 @@ fdfs:
   connectTimeout: 2000
   trackerList: 47.93.58.109:22122
 
+#支付宝支付参数配置
+alipay:
+  #应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
+  appId: 2021003125631214
+  #商户私钥，您的PKCS8格式RSA2私钥
+  privateKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQChgsGegBm+mycTT1LN1ogbaNUgqt1z0VGwCMf6AnZ7SWL4ZY+D2HS9zydzAuYtgoXQz4aCjys2eTBVfdmTOYPBMTAbCwULVal2fYIJHQCWPCGWcatTZj00dFY1BQDt60757qS0VooUJKrrRdzl/YrbmMxmBtv2HXMp7VgY26vXqjUIxUKWVmkRRI5l+rn5Zk0ZdqPhowvPz01nuTE6zCObQVojKDlgLSQJOHkuX3d/ARTPkm7+OfwHb93LZ1FIJx3ah5fSKnqprQaKvS3o5NYXITxZPwZiOaaw+2b1dAVTWa+ZPz0BX5PMe8Dz7/erFMNG6hLw/eN1AY+unjwlMLhZAgMBAAECggEAN6n0ByeJN+sLRZlyJWUJ1cCEq9SXrEH5EF2GZoEQyp7ZUFjYZI1mdsB9jSLzp72zVusfJcIoF4cfBGfyY85PvXaxaLCclXJ5jE/nUDLBsAWbYdldPcof0ANEbtOBpX4S4wq/kzO8NQMKMToLzuxaPiLkV0mH58PwnAOj+DVFfXcsNndAchOWNn1jKWb6sv05j/zFA3A+KD2tLko7LMJV4GuVEUT2DU1ocar6Lu0e1AJEh1BGyM0MeHnSvAvxlFKJCEuIELSMTeBcwRI5jrA+iwcM/2VDTpOTFsvVJtRNsJDItybkSl8IyqTXsVelEx7RWkuTErgZKBeA23GbLBx//QKBgQDfWesrUnojmlkt1NHUJY2WvQagOHwEAIs4ibeqIhCYQsx4s5FS9cQNJ6KzMIfMMrKALdxSVNFH/23CRp+TVeLfQnCUZBVVsO8cNRJGtdkBgI0RDQX7TllEpxW0kkyshLM0UO6Z3lzNciuLUoElhMO+FPZgeyF/2c4GJzfxH1se7wKBgQC5HrCqkZmC1kbKHHa6FC3NKZ+ph+JocuKAsuX1UcVF4eu+3ngdB++Xn2mkA3MGwvjsf0rYqDturyh1jpxE6HYfB+1M5N3nEnZeSZMScH1k3ciFN12Kvr+ey7hWxHkjXn7X8xl1Y9N3DYHcFxwIcST7hqbCEF0H5q2PI8qjC6QdNwKBgFdrR1t+faW/vNXubW4+gIuWUqiVUxzx5Yvsg0GI8bvWsVcw2VmCLgkEEW9XOF+ZHDqFOK3U2tD2TcxzffPZ8uF1jMDX523RwdTlhNC+TkCDQzOASG4TPWdcimdRt8bybX21i54X5XTYEekHEttPepnEdKZQq0zyP+wyn3e10SFrAoGBAIrvyMJLwr5a2gho8obYDEQWAFn5vWiNCQh0vHixZXD8jbXUPKv1P9I5d8z8NcGWZcMCCoevQ+PfnGsWnJxvJ/BEP8rdXtpFlgdQCwzk1of0mMG6+v7eCO1Ckti0XwK3slWbg7kCMj0BKzynL4f6ezo4JkIyi9AZRpvOzhAu9X5jAoGBAIOci2ShUMl2dRr/1aGEiSU7LHkcwGh5eIuFnQG39F2ShrfHZ5CT8DoFvp6u93EYqPKRkP4iU2o4t1x0V//N5VGhK2f45pSvouKpCqsVEooSSPWClB6OJygZSYGZPmeLIjZLNJ4wyQAwHiZD6KflB6LiKxPwO3E4GQDJqFT/3Jun
+  #支付宝公钥,查看地址：https://openhome.alipay.com/platform/keyManage.htm 对应APPID下的支付宝公钥。
+  #  publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqVx4HRM+NYWJIICWi7OU3OcUR5ACcyZ24oSxbXNVQlr3it++wLybRzgVWR9n1vNTiqS34nZm9h9bxnlwqnKu/btWFux9QZJlzd+JEr3Q+VhoXvFRjHJE1EEgn7RkZ8lIUeMAuJ9iO/r9+VwqEL4IbFIaj/ADoCtnYUiXOMlaxHFBh+ckFi8k/xQAJYblwSdjPA0gGbbQbBngNAzjjzGbWobuKdiMDqC/Z91KjLsDvFRpXWYHYtzsDE13OnZvSCuPUbqgQs+4E1/t2qnBhwC9Kao7Ib1hc4hZTf5goBPNTnvb5OCH0jiEjmFnWerB8FMTcji1ikOt1D68bsnR+HWT/QIDAQAB
+  publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoYLBnoAZvpsnE09SzdaIG2jVIKrdc9FRsAjH+gJ2e0li+GWPg9h0vc8ncwLmLYKF0M+Ggo8rNnkwVX3ZkzmDwTEwGwsFC1Wpdn2CCR0AljwhlnGrU2Y9NHRWNQUA7etO+e6ktFaKFCSq60Xc5f2K25jMZgbb9h1zKe1YGNur16o1CMVCllZpEUSOZfq5+WZNGXaj4aMLz89NZ7kxOswjm0FaIyg5YC0kCTh5Ll93fwEUz5Ju/jn8B2/dy2dRSCcd2oeX0ip6qa0Gir0t6OTWFyE8WT8GYjmmsPtm9XQFU1mvmT89AV+TzHvA8+/3qxTDRuoS8P3jdQGPrp48JTC4WQIDAQAB
+  #  MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnMtseNzwyIzSq4Zh/y37QYDxSoZNgH3nTizEylXjKYnAv2k5ZfYjbiJtZzYwhw3RnZbBy3Gbgu1BOrU4Yyh1TYcyFh95CHUwxWpg8rilcUaJ8EclzcTmxmnZJsHZSRYvMBbO7iM6Da5m19fS8ORtLlUp3zSRpxza3srP4Zy+7ibEXNVfLzJVOvG74D6LhrL3XCvwV4rUnOgkmW4w0MSqnFwRIko1M4ne+QahsOhn7q2obufU5j7TWFGxFauSI+197e0kdSjAYf1tW9JP2Kxiqc/65fPUGl0Xdw850cHQQipFRzuAf+t27IKY8Ul0IlyRX+LiNCl+6mrTi4DbggBYQQIDAQAB
+  #服支付宝网关
+  gatewayUrl: https://openapi.alipay.com/gateway.do
+  #服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+  notifyUrl: /prod-api/pay/ali/callback/notify
+  #页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+  refundUrl: /prod-api/pay/ali/callback/refund
+
+  #正式支付宝网关
+  certPath: /home/ruoyi/alipay/appCertPublicKey_2021003125631214.crt
+  publicCertPath: /home/ruoyi/alipay/alipayCertPublicKey_RSA2.crt
+  rootCertPath: /home/ruoyi/alipay/alipayRootCert.crt
+  #本地支付宝网关
+#  certPath: D:\alipay\appCertPublicKey_2021003125631214.crt
+#  publicCertPath: D:\alipay\alipayCertPublicKey_RSA2.crt
+#  rootCertPath: D:\alipay\alipayRootCert.crt
+
+wxpay:
+  #公众号appid
+  appId: aaaaa
+  #商户id
+  mchId: 11111111111111
+  #支付api安全密钥
+  mchKey: 111111111111111111111111111111111
+  #  沙箱环境密钥
+  #  mchKey: 6ceb9909538b84500dc45774a67c83f2
+  signType: MD5
+  #支付结果异步回调地址
+  notifyUrl: /pay/wx/callback/notify
+  #支付结果同步回调地址
+  returnUrl: /pay/wx/callback/sync
+  #根目录下的证书名称
+  certName: apiient_cert.p12cl
+  #证书路径
+  certPath: classpath:config
+
 

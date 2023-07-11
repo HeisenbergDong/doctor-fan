@@ -33,6 +33,9 @@ public class RuoYiConfig
     /** 验证码类型 */
     private static String captchaType;
 
+    /** 支付回调 */
+    private static String payCallback;
+
     public String getName()
     {
         return name;
@@ -131,5 +134,13 @@ public class RuoYiConfig
     public static String getUploadPath()
     {
         return getProfile() + "/upload";
+    }
+
+    public static String getPayCallback() {
+        return payCallback;
+    }
+
+    public void setPayCallback(String payCallback) {
+        RuoYiConfig.payCallback = payCallback;
     }
 }
