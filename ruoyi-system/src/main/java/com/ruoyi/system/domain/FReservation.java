@@ -73,4 +73,8 @@ public class FReservation extends BaseEntity {
 
     private String logNo;
 
+    private Date start;
+
+    private Date end;
+
 }

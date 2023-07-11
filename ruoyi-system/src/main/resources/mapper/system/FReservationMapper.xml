@@ -37,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="patientIdCard != null  and patientIdCard != ''"> and patient_id_card = #{patientIdCard}</if>
             <if test="docId != null "> and doc_id = #{docId}</if>
             <if test="docName != null  and docName != ''"> and doc_name like concat('%', #{docName}, '%')</if>
+            <if test="start != null and end != null "> and create_time BETWEEN #{start} and #{end}</if>
         </where>
     </select>
     
