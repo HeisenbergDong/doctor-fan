@@ -55,6 +55,26 @@ public class FReg extends BaseEntity {
     @IdentityCardNumber(message = "身份证信息有误,请核对后提交")
     private String idCard;
 
+    /** 患者年龄 */
+    @Excel(name = "患者年龄")
+    private Long age;
+
+    /** 患者出生日期 */
+    @Excel(name = "患者出生日期")
+    private String born;
+
+    /** 患者性别 */
+    @Excel(name = "患者性别")
+    private String sex;
+
+    /** 准者住址 */
+    @Excel(name = "准者住址")
+    private String address;
+
+    /** 会员类型 */
+    @Excel(name = "会员类型")
+    private String vipType;
+
     /** 挂号日期 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Excel(name = "挂号日期", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")

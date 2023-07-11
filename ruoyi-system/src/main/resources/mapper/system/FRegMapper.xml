@@ -3,13 +3,18 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.FRegMapper">
-    
+
     <resultMap type="FReg" id="FRegResult">
         <result property="id"    column="id"    />
         <result property="regNo"    column="reg_no"    />
         <result property="name"    column="name"    />
         <result property="phone"    column="phone"    />
         <result property="idCard"    column="id_card"    />
+        <result property="age"    column="age"    />
+        <result property="born"    column="born"    />
+        <result property="sex"    column="sex"    />
+        <result property="address"    column="address"    />
+        <result property="vipType"    column="vip_type"    />
         <result property="regDate"    column="reg_date"    />
         <result property="regFee"    column="reg_fee"    />
         <result property="checkFee"    column="check_fee"    />
@@ -22,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectFRegVo">
-        select id, reg_no, name, phone, id_card, reg_date, reg_fee, check_fee, del_flag, create_by, create_time, update_by, update_time, remark from f_reg
+        select id, reg_no, name, phone, id_card, age, born, sex, address, vip_type, reg_date, reg_fee, check_fee, del_flag, create_by, create_time, update_by, update_time, remark from f_reg
     </sql>
 
     <select id="selectFRegList" parameterType="FReg" resultMap="FRegResult">
@@ -32,6 +37,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
             <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="age != null "> and age = #{age}</if>
+            <if test="born != null  and born != ''"> and born = #{born}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="vipType != null  and vipType != ''"> and vip_type = #{vipType}</if>
             <if test="regDate != null "> and reg_date = #{regDate}</if>
             <if test="regFee != null "> and reg_fee = #{regFee}</if>
             <if test="checkFee != null "> and check_fee = #{checkFee}</if>
@@ -52,6 +62,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null and name != ''">name,</if>
             <if test="phone != null and phone != ''">phone,</if>
             <if test="idCard != null">id_card,</if>
+            <if test="age != null">age,</if>
+            <if test="born != null">born,</if>
+            <if test="sex != null">sex,</if>
+            <if test="address != null">address,</if>
+            <if test="vipType != null">vip_type,</if>
             <if test="regDate != null">reg_date,</if>
             <if test="regFee != null">reg_fee,</if>
             <if test="checkFee != null">check_fee,</if>
@@ -68,6 +83,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null and name != ''">#{name},</if>
             <if test="phone != null and phone != ''">#{phone},</if>
             <if test="idCard != null">#{idCard},</if>
+            <if test="age != null">#{age},</if>
+            <if test="born != null">#{born},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="address != null">#{address},</if>
+            <if test="vipType != null">#{vipType},</if>
             <if test="regDate != null">#{regDate},</if>
             <if test="regFee != null">#{regFee},</if>
             <if test="checkFee != null">#{checkFee},</if>
@@ -87,6 +107,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null and name != ''">name = #{name},</if>
             <if test="phone != null and phone != ''">phone = #{phone},</if>
             <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="born != null">born = #{born},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="vipType != null">vip_type = #{vipType},</if>
             <if test="regDate != null">reg_date = #{regDate},</if>
             <if test="regFee != null">reg_fee = #{regFee},</if>
             <if test="checkFee != null">check_fee = #{checkFee},</if>
