@@ -113,6 +113,7 @@ public class FPatientServiceImpl implements IFPatientService
             StringBuilder releaseTag = new StringBuilder();
             for(FPatient release : fPatient.getFReleaseList()){
                 if(ObjectUtils.isEmpty(release.getId())){
+                    release.setDelFlag("1");
                     release.setCreateTime(DateUtils.getNowDate());
                     release.setUpdateTime(DateUtils.getNowDate());
                     release.setCreateBy(fPatient.getCreateBy());
