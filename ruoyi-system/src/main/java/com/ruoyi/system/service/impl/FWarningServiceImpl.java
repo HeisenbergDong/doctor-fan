@@ -76,6 +76,7 @@ public class FWarningServiceImpl implements IFWarningService {
             fWarning.setWarningDate(DateUtil.offsetDay(fWarning.getStartDate(),i));
             List<FWarning> warningList = fWarningMapper.selectFWarningList(fWarning);
             if(CollectionUtils.isEmpty(warningList)){
+                fWarning.setId(null);
                 fWarning.setCreateTime(DateUtils.getNowDate());
                 fWarning.setUpdateTime(DateUtils.getNowDate());
                 fWarningMapper.insertFWarning(fWarning);
