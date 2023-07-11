@@ -153,6 +153,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <select id="selectPatientMaxNo" resultMap="FPatientResult">
-        select log_no from f_patient where log_no != null order by id desc limit 1;
+        select log_no from f_patient where log_no is not null order by id desc limit 1;
     </select>
 </mapper>
