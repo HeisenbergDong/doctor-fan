@@ -9,6 +9,7 @@ import com.ruoyi.common.enums.RoomNo;
 import com.ruoyi.common.enums.YesOrNo;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.IdCardUtil;
 import com.ruoyi.system.domain.FPatient;
 import com.ruoyi.system.domain.FReservation;
 import com.ruoyi.system.domain.FWait;
@@ -80,6 +81,12 @@ public class FRegServiceImpl implements IFRegService
     @Transactional(rollbackFor = Exception.class)
     @Override
     public FReg insertFReg(FReg fReg){
+        /** 通过身份证获取年龄出生日期性别 */
+        if(!ObjectUtils.isEmpty(fReg.getIdCard())){
+            fReg.setAge((long) IdCardUtil.getAgeForIdcard(fReg.getIdCard()));
+            fReg.setSex(IdCardUtil.getSexFromIdCard(fReg.getIdCard())==1?"男":"女");
+            fReg.setBorn(IdCardUtil.getBirthFromIdCard(fReg.getIdCard()));
+        }
         FPatient patient = new FPatient();
         patient.setPhone(fReg.getPhone());
         patient.setName(fReg.getName());
