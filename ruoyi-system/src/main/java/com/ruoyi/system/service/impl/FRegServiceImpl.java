@@ -181,7 +181,7 @@ public class FRegServiceImpl implements IFRegService
         reg.setStart(DateUtil.parseDate(DateUtils.getDate()+" 00:00:00"));
         reg.setEnd(DateUtil.offsetDay(reg.getStart(),+1));
         FReg fReg = fRegMapper.selectRegByMaxNo(reg);
-        String regNo = fReg==null||fReg.getRegNo()==null?"001":String.format("%0d",(Long.parseLong(fReg.getRegNo()) + 1));
+        String regNo = fReg==null||fReg.getRegNo()==null?"001":String.format("%03d",(Long.parseLong(fReg.getRegNo()) + 1));
         return regNo;
     }
 

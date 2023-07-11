@@ -95,7 +95,7 @@ public class FPatientServiceImpl implements IFPatientService
 
     private String generatorLogNo(String no){
         FPatient fPatient = fPatientMapper.selectPatientMaxNo();
-        String regNo = fPatient==null||ObjectUtils.isEmpty(fPatient.getLogNo())?(DateUtils.getDate()+"00001").replace("-",""):DateUtils.getDate() + String.format("%05d",Long.parseLong(fPatient.getLogNo().substring(8,13)) + 1);
+        String regNo = fPatient==null||ObjectUtils.isEmpty(fPatient.getLogNo())?(DateUtils.getDate()+"00001").replace("-",""):DateUtils.getDate().replace("-","") + String.format("%03d",Long.parseLong(fPatient.getLogNo().substring(8,13)) + 1);
         return regNo + no;
     }
 
