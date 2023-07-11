@@ -169,7 +169,6 @@ public class FWaitServiceImpl implements IFWaitService
             fWaitMapper.updateFWait(wait);
         }
         /** 插入新的队列一条数据 状态为0-排队中 */
-        BeanUtils.copyProperties(wait,fWait);
         fWait.setParentId(fWait.getId());
         fWait.setCreateTime(DateUtils.getNowDate());
         fWait.setUpdateTime(DateUtils.getNowDate());
