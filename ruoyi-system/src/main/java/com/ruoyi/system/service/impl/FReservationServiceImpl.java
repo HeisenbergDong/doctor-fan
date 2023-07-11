@@ -5,7 +5,6 @@ import java.util.List;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.FPatient;
-import com.ruoyi.system.domain.FRemind;
 import com.ruoyi.system.service.IFPatientService;
 import com.ruoyi.system.service.ISocketMessageService;
 import com.ruoyi.system.service.ISysUserService;
