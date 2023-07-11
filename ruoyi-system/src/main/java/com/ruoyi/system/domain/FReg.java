@@ -30,7 +30,7 @@ public class FReg extends BaseEntity {
 
     /** 挂号号码 */
     @Excel(name = "挂号号码")
-    @Length(max = 12,message = "挂号号码超过长度限制，最长12个字符")
+//    @Length(max = 12,message = "挂号号码超过长度限制，最长12个字符")
     @NotBlank(message = "挂号号码不能为空")
     private String regNo;
 

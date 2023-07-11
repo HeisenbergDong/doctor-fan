@@ -172,7 +172,7 @@ public class FRegServiceImpl implements IFRegService
      */
     private String generatorRegNo(String no){
         FPatient fPatient = fPatientService.selectPatientMaxNo();
-        String regNo = fPatient==null|| ObjectUtils.isEmpty(fPatient.getLogNo())?(DateUtils.getDate()+"00001").replace("-",""):DateUtils.getDate().replace("-","") + String.format("%05d",Long.parseLong(fPatient.getLogNo().substring(8,13)) + 1);
+        String regNo = fPatient==null||ObjectUtils.isEmpty(fPatient.getLogNo())?(DateUtils.getDate()+"00001").replace("-",""):DateUtils.getDate().replace("-","") + String.format("%05d",Long.parseLong(fPatient.getLogNo().substring(8,13)) + 1);
         return regNo + no;
     }
 
