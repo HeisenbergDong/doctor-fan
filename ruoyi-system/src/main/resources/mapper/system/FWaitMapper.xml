@@ -101,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getFWaitList" parameterType="FWait" resultMap="FWaitResult">
         <include refid="selectFWaitVo"/>
         <where>
-            patient_status != 2
+            patient_status != 2  and room != '结束'
             <if test="room != null and room != ''"> and room = #{room}</if>
             <if test="receptionDocId != null "> and (reception_doc_id = #{receptionDocId} or reception_doc_id is null)</if>
             <if test="waitTime != null "> and wait_time like concat(#{waitTime}, '%')</if>
