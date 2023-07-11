@@ -172,7 +172,7 @@ public class FRegServiceImpl implements IFRegService
      */
     private String generatorRegNo(String no){
         FPatient fPatient = fPatientService.selectPatientMaxNo();
-        String regNo = fPatient==null|| ObjectUtils.isEmpty(fPatient.getLogNo())?(DateUtils.getDate()+"00001").replace("-",""):DateUtils.getDate() + String.format("%05d",Long.parseLong(fPatient.getLogNo().substring(8,13)) + 1);
+        String regNo = fPatient==null|| ObjectUtils.isEmpty(fPatient.getLogNo())?(DateUtils.getDate()+"00001").replace("-",""):DateUtils.getDate().replace("-","") + String.format("%05d",Long.parseLong(fPatient.getLogNo().substring(8,13)) + 1);
         return regNo + no;
     }
 
@@ -181,7 +181,7 @@ public class FRegServiceImpl implements IFRegService
         reg.setStart(DateUtil.parseDate(DateUtils.getDate()+" 00:00:00"));
         reg.setEnd(DateUtil.offsetDay(reg.getStart(),+1));
         FReg fReg = fRegMapper.selectRegByMaxNo(reg);
-        String regNo = fReg==null||fReg.getRegNo()==null?"00001":String.format("%05d",(Long.parseLong(fReg.getRegNo()) + 1));
+        String regNo = fReg==null||fReg.getRegNo()==null?"001":String.format("%0d",(Long.parseLong(fReg.getRegNo()) + 1));
         return regNo;
     }
 
