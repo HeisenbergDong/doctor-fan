@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.FPatient;
 import com.ruoyi.system.domain.FReservation;
 import com.ruoyi.system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +45,11 @@ public class FRemindServiceImpl implements IFRemindService {
      * @return 提醒
      */
     @Override
-    public FRemind selectFRemindById(Long id)
-    {
-        return fRemindMapper.selectFRemindById(id);
+    public FRemind selectFRemindById(Long id) {
+        FRemind fRemind = fRemindMapper.selectFRemindById(id);
+        FPatient patient = patientService.selectFPatientById(fRemind.getPatientId());
+        fRemind.setLogNo(patient.getLogNo());
+        return fRemind;
     }
 
     /**
@@ -56,9 +59,16 @@ public class FRemindServiceImpl implements IFRemindService {
      * @return 提醒
      */
     @Override
-    public List<FRemind> selectFRemindList(FRemind fRemind)
-    {
-        return fRemindMapper.selectFRemindList(fRemind);
+    public List<FRemind> selectFRemindList(FRemind fRemind) {
+        List<FRemind> remindList = fRemindMapper.selectFRemindList(fRemind);
+        if(CollectionUtils.isEmpty(remindList)){
+            return remindList;
+        }
+        for(FRemind remind: remindList){
+            FPatient patient = patientService.selectFPatientById(remind.getPatientId());
+            remind.setLogNo(patient.getLogNo());
+        }
+        return remindList;
     }
 
     @Override

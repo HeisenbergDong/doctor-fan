@@ -1,10 +1,11 @@
 package com.ruoyi.system.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.FPatient;
+import com.ruoyi.system.domain.FRemind;
 import com.ruoyi.system.service.IFPatientService;
 import com.ruoyi.system.service.ISocketMessageService;
 import com.ruoyi.system.service.ISysUserService;
@@ -44,9 +45,11 @@ public class FReservationServiceImpl implements IFReservationService
      * @return 预约
      */
     @Override
-    public FReservation selectFReservationById(Long id)
-    {
-        return fReservationMapper.selectFReservationById(id);
+    public FReservation selectFReservationById(Long id) {
+        FReservation fReservation = fReservationMapper.selectFReservationById(id);
+        FPatient patient = patientService.selectFPatientById(fReservation.getPatientId());
+        fReservation.setLogNo(patient.getLogNo());
+        return fReservation;
     }
 
     /**
@@ -56,9 +59,16 @@ public class FReservationServiceImpl implements IFReservationService
      * @return 预约
      */
     @Override
-    public List<FReservation> selectFReservationList(FReservation fReservation)
-    {
-        return fReservationMapper.selectFReservationList(fReservation);
+    public List<FReservation> selectFReservationList(FReservation fReservation) {
+        List<FReservation> reservationList = fReservationMapper.selectFReservationList(fReservation);
+        if(CollectionUtils.isEmpty(reservationList)){
+            return reservationList;
+        }
+        for(FReservation reservation: reservationList){
+            FPatient patient = patientService.selectFPatientById(reservation.getPatientId());
+            reservation.setLogNo(patient.getLogNo());
+        }
+        return reservationList;
     }
 
     /**

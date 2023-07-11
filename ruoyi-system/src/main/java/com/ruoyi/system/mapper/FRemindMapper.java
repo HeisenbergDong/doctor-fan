@@ -9,7 +9,7 @@ import com.ruoyi.system.domain.FRemind;
  * @author ruoyi
  * @date 2023-05-23
  */
-public interface FRemindMapper 
+public interface FRemindMapper
 {
     /**
      * 查询提醒
@@ -17,7 +17,7 @@ public interface FRemindMapper
      * @param id 提醒主键
      * @return 提醒
      */
-    public FRemind selectFRemindById(Long id);
+    FRemind selectFRemindById(Long id);
 
     /**
      * 查询提醒列表
@@ -25,7 +25,7 @@ public interface FRemindMapper
      * @param fRemind 提醒
      * @return 提醒集合
      */
-    public List<FRemind> selectFRemindList(FRemind fRemind);
+    List<FRemind> selectFRemindList(FRemind fRemind);
 
     /**
      * 新增提醒
@@ -33,7 +33,7 @@ public interface FRemindMapper
      * @param fRemind 提醒
      * @return 结果
      */
-    public int insertFRemind(FRemind fRemind);
+    int insertFRemind(FRemind fRemind);
 
     /**
      * 修改提醒
@@ -41,7 +41,7 @@ public interface FRemindMapper
      * @param fRemind 提醒
      * @return 结果
      */
-    public int updateFRemind(FRemind fRemind);
+    int updateFRemind(FRemind fRemind);
 
     /**
      * 删除提醒
@@ -49,7 +49,7 @@ public interface FRemindMapper
      * @param id 提醒主键
      * @return 结果
      */
-    public int deleteFRemindById(Long id);
+    int deleteFRemindById(Long id);
 
     /**
      * 批量删除提醒
@@ -57,5 +57,5 @@ public interface FRemindMapper
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteFRemindByIds(Long[] ids);
+    int deleteFRemindByIds(Long[] ids);
 }

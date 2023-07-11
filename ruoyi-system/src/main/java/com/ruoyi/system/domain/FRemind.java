@@ -3,6 +3,7 @@ package com.ruoyi.system.domain;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.annotation.IdentityCardNumber;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -19,6 +20,7 @@ import javax.validation.constraints.Pattern;
  * @author ruoyi
  * @date 2023-05-23
  */
+@Data
 public class FRemind extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -70,115 +72,6 @@ public class FRemind extends BaseEntity
     /** 删除标志（0代表存在 */
     private String delFlag;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
+    private String logNo;
 
-    public Long getId() 
-    {
-        return id;
-    }
-    public void setRemindDate(Date remindDate) 
-    {
-        this.remindDate = remindDate;
-    }
-
-    public Date getRemindDate() 
-    {
-        return remindDate;
-    }
-    public void setRemindContent(String remindContent) 
-    {
-        this.remindContent = remindContent;
-    }
-
-    public String getRemindContent() 
-    {
-        return remindContent;
-    }
-    public void setPatientId(Long patientId) 
-    {
-        this.patientId = patientId;
-    }
-
-    public Long getPatientId() 
-    {
-        return patientId;
-    }
-    public void setPatientName(String patientName) 
-    {
-        this.patientName = patientName;
-    }
-
-    public String getPatientName() 
-    {
-        return patientName;
-    }
-    public void setPatientPhone(String patientPhone) 
-    {
-        this.patientPhone = patientPhone;
-    }
-
-    public String getPatientPhone() 
-    {
-        return patientPhone;
-    }
-    public void setPatientIdCard(String patientIdCard) 
-    {
-        this.patientIdCard = patientIdCard;
-    }
-
-    public String getPatientIdCard() 
-    {
-        return patientIdCard;
-    }
-    public void setDocId(Long docId) 
-    {
-        this.docId = docId;
-    }
-
-    public Long getDocId() 
-    {
-        return docId;
-    }
-    public void setDocName(String docName) 
-    {
-        this.docName = docName;
-    }
-
-    public String getDocName() 
-    {
-        return docName;
-    }
-    public void setDelFlag(String delFlag) 
-    {
-        this.delFlag = delFlag;
-    }
-
-    public String getDelFlag() 
-    {
-        return delFlag;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("remindDate", getRemindDate())
-            .append("remindContent", getRemindContent())
-            .append("patientId", getPatientId())
-            .append("patientName", getPatientName())
-            .append("patientPhone", getPatientPhone())
-            .append("patientIdCard", getPatientIdCard())
-            .append("docId", getDocId())
-            .append("docName", getDocName())
-            .append("delFlag", getDelFlag())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("remark", getRemark())
-            .toString();
-    }
 }
