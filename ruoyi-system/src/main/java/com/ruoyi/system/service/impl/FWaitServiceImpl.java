@@ -174,7 +174,8 @@ public class FWaitServiceImpl implements IFWaitService
         fWait.setUpdateTime(DateUtils.getNowDate());
         fWait.setPatientStatus(DipatchStatus.ZERO.getCode());
         if(!ObjectUtils.isEmpty(fWait.getAssignContent())){
-            fWait.setAssignContent(fWait.getCreateName()+":"+fWait.getAssignContent()+";");
+            String assignContent = (ObjectUtils.isEmpty(wait)||ObjectUtils.isEmpty(wait.getAssignContent()))?"":(wait.getAssignContent()+";");
+            fWait.setAssignContent(assignContent + fWait.getCreateName() + ":" + fWait.getAssignContent() + ";");
         }
         if(!ObjectUtils.isEmpty(fWait.getFirst()) && fWait.getFirst() == 1){
             fWait.setWaitTime(DateUtils.getDate()+" 00:00:00");
